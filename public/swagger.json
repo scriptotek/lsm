@@ -1,0 +1,138 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Simple Catalogue Search",
+        "version": "0.1"
+    },
+    "host": "scs.biblionaut.net",
+    "basePath": "/",
+    "schemes": [
+        "https"
+    ],
+    "paths": {
+        "/documents": {
+            "get": {
+                "tags": [
+                    "Documents"
+                ],
+                "summary": "Search for documents",
+                "description": "Returns simplified representations of Primo PNX records for easy processing, based on either a free text search using `query`, or a controlled subject search using `vocabulary` and `subject` in combination. Pagination: If there's no more results, `next` will be null. Otherwise `next` will hold the value to be used with `first` to get the next batch of results.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "query",
+                        "in": "query",
+                        "description": "Query string",
+                        "type": "string"
+                    },
+                    {
+                        "name": "subject",
+                        "in": "query",
+                        "description": "Subject term",
+                        "type": "string"
+                    },
+                    {
+                        "name": "vocabulary",
+                        "in": "query",
+                        "description": "Subject vocabulary",
+                        "type": "string",
+                        "enum": [
+                            "realfagstermer",
+                            "humord",
+                            "tekord",
+                            "mrtermer"
+                        ]
+                    },
+                    {
+                        "name": "format",
+                        "in": "query",
+                        "description": "Limit to a given physical form (print or electronic). By default, all forms are included.",
+                        "type": "string",
+                        "enum": [
+                            "print-books",
+                            "e-books"
+                        ]
+                    },
+                    {
+                        "name": "library",
+                        "in": "query",
+                        "description": "Limit to one or more library codes. Supports truncation with `*`, so `ureal*` will include 'urealinf' as well. Boolean logic is supported, example: `ureal* OR ubonett` ('ubonett' is the library code used for all e-books at UBO).",
+                        "type": "string"
+                    },
+                    {
+                        "name": "start",
+                        "in": "query",
+                        "description": "First document to retrieve, starts at 1.",
+                        "type": "integer"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Number of documents to retrieve, defaults to 10, maximum is 50.",
+                        "type": "integer"
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Sort field, defaults to popularity.",
+                        "type": "string",
+                        "default": "popularity",
+                        "enum": [
+                            "popularity",
+                            "date",
+                            "author",
+                            "title"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A list of documents"
+                    }
+                }
+            }
+        },
+        "/documents/{id}": {
+            "get": {
+                "tags": [
+                    "Documents"
+                ],
+                "summary": "Get details about a single document",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Document ID (TODO: Specify what kind of ID)",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A single document"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Document": {
+            "properties": {
+                "name": {
+                    "description": "The product name",
+                    "type": "string"
+                }
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Documents"
+        }
+    ]
+}

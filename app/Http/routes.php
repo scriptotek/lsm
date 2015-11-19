@@ -1,5 +1,20 @@
 <?php
 
+/**
+ * @SWG\Swagger(
+ *   schemes={"https"},
+ *   host="scs.biblionaut.net",
+ *   basePath="/",
+ *   @SWG\Info(
+ *     title="Simple Catalogue Search",
+ *     version="0.1"
+ *   )
+ * )
+ * @SWG\Tag(
+ *   name="Documents"
+ * )
+ */
+
 /*
 |--------------------------------------------------------------------------
 | Application Routes
@@ -12,5 +27,10 @@
 */
 
 $app->get('/', function () use ($app) {
-    return $app->welcome();
+    return view('welcome');
 });
+
+
+$app->get('/documents', 'DocumentsController@search');
+$app->get('/documents/{id}', 'DocumentsController@show');
+//$app->get('/documents/work/{id}', 'DocumentsController@work');

@@ -1,3 +1,4 @@
 /vendor
+/public/vendor
 .env
 composer.lock
