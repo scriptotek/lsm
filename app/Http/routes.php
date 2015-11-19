@@ -30,7 +30,11 @@ $app->get('/', function () use ($app) {
     return view('welcome');
 });
 
+$app->get('/primo/search', 'PrimoController@search');
+// Returns a list of PrimoRecord and PrimoRecordGroup
 
-$app->get('/documents', 'DocumentsController@search');
-$app->get('/documents/{id}', 'DocumentsController@show');
-//$app->get('/documents/work/{id}', 'DocumentsController@work');
+$app->get('/primo/groups/{id}', 'PrimoController@getGroup');
+// Returns a list of PrimoRecord belonging to a PrimoRecordGroup
+
+$app->get('/primo/records/{id}', 'PrimoController@getRecord');
+// Returns a single PrimoRecord

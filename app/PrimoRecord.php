@@ -6,7 +6,7 @@ use BCLib\PrimoServices\DeepLink;
 use BCLib\PrimoServices\QueryTerm;
 use Danmichaelo\QuiteSimpleXMLElement\QuiteSimpleXMLElement;
 
-class PnxDocument implements \JsonSerializable
+class PrimoRecord implements \JsonSerializable
 {
     public $orderedMaterialList = ['e-books', 'print-books'];
     protected $brief;
@@ -14,19 +14,27 @@ class PnxDocument implements \JsonSerializable
     protected $doc;
     protected $deeplinkProvider;
 
+    static function make(QuiteSimpleXMLElement $doc, DeepLink $deeplinkProvider, $expanded=false)
+    {
+        $is_group = $doc->text('./p:PrimoNMBib/p:record/p:facets/p:frbrtype') != '6';
+
+        if ($is_group && !$expanded) {
+            $item = new PrimoRecordGroup($doc, $deeplinkProvider);
+        } else {
+            $item = new PrimoRecord($doc, $deeplinkProvider);
+        }
+        return $item->process();
+    }
+
     public function __get($property) {
         return isset($this->brief[$property]) ? $this->brief[$property] : (isset($this->full[$property]) ? $this->full[$property] : null);
     }
-
-    // public function __set($property, $value) {
-    //     $this->data[$property] = $value;
-    // }
 
     function __construct(QuiteSimpleXMLElement $doc, DeepLink $deeplinkProvider)
     {
         $this->doc = $doc;
         $this->deeplinkProvider = $deeplinkProvider;
-        $this->brief = [];
+        $this->brief = ['type' => 'record'];
         $this->full = [];
     }
 
@@ -42,12 +50,11 @@ class PnxDocument implements \JsonSerializable
 
     public function process()
     {
-        $this->brief = [];
-        $this->full = [];
-
         $record = $this->doc->first('./p:PrimoNMBib/p:record');
         $sear_links = $this->doc->first('./sear:LINKS');
         $facets = $record->first('./p:facets');
+
+        $this->brief['id'] = $record->text('./p:control/p:recordid');
 
         $this->brief['title'] = $record->text('./p:display/p:title') ?: null;
         // $this->brief['creator'] = $record->text('./p:display/p:creator') ?: $record->text('./p:display/p:contributor');
@@ -57,9 +64,6 @@ class PnxDocument implements \JsonSerializable
         $this->brief['date'] = $record->text('./p:display/p:creationdate') ?: null;
         $this->brief['date'] = preg_replace('/[^0-9-]/', '', $this->brief['date']);
 
-        $this->brief['type'] = $record->text('./p:display/p:type') ?: null;
-        $this->full['format'] = $record->text('./p:display/p:format') ?: null;
-
         $this->brief['publisher'] = $record->text('./p:addata/p:pub') ?: null;
         $this->full['abstract'] = $record->text('./p:addata/p:abstract') ?: null;
 
@@ -67,17 +71,21 @@ class PnxDocument implements \JsonSerializable
 //        $this->issns = $this->extractArray($record, './p:search/p:issn');
         $this->full['descriptions'] = $this->extractArray($record, './p:display/p:description');
 
-        $this->brief['frbr_group_id'] = $record->text('./p:facets/p:frbrgroupid');
-        $this->brief['multiple_editions'] = ($record->text('./p:facets/p:frbrtype') != '6');
+        $this->brief['material'] = $this->preferredResourceType($this->extractArray($facets, './p:rsrctype'));
+        $this->brief['material_type'] = $record->text('./p:display/p:type') ?: null;
+        $this->full['format'] = $record->text('./p:display/p:format') ?: null;
 
-        if (!$this->brief['multiple_editions']) {
-            //$this->creators = $this->extractArray($facets, './p:creatorcontrib');
-            $this->brief['material'] = $this->preferredResourceType($this->extractArray($facets, './p:rsrctype'));
-            $this->brief['id'] = $record->text('./p:control/p:recordid');
-        } else {
-            $this->brief['material'] = null;
-            $this->brief['id'] = null;
-        }
+        $this->full['frbr_type'] = $facets->text('./p:frbrtype');
+        $this->full['frbr_group_id'] = $facets->text('./p:frbrgroupid');
+
+        // if (!$this->brief['multiple_editions']) {
+        //     //$this->creators = $this->extractArray($facets, './p:creatorcontrib');
+        //     $this->brief['material'] = $this->preferredResourceType($this->extractArray($facets, './p:rsrctype'));
+        //     //$this->brief['id'] = $record->text('./p:control/p:recordid');
+        // } else {
+        //     $this->brief['material'] = null;
+        //     //$this->brief['id'] = null;
+        // }
 
         // Series stuff:
         $this->full['series'] = $record->text('./p:addata/p:seriestitle') ?: null;
@@ -142,9 +150,14 @@ class PnxDocument implements \JsonSerializable
         }
     }
 
-    public function selfLink()
+    public function link()
     {
-        return url('documents/' .$this->id);
+        return url('primo/records/' .$this->id);
+    }
+
+    public function groupLink()
+    {
+        return ($this->full['frbr_type'] != '6') ? url('primo/groups/' .$this->full['frbr_group_id']) : null;
     }
 
     public function jsonSerialize()
@@ -155,9 +168,12 @@ class PnxDocument implements \JsonSerializable
     public function toArray($expanded=false)
     {
         $data = $this->brief;
-        // $data['self'] = $this->selfLink();
+        $data['links'] = [
+            'self' => $this->link(),
+        ];
         if ($expanded) {
-            $data['primo_link'] = $this->primoLink();
+            $data['links']['primo'] = $this->primoLink();
+            $data['links']['group'] = $this->groupLink();
         }
 
         if ($expanded) {

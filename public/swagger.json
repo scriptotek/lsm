@@ -10,13 +10,12 @@
         "https"
     ],
     "paths": {
-        "/documents": {
+        "/primo/search": {
             "get": {
                 "tags": [
-                    "Documents"
+                    "Primo"
                 ],
-                "summary": "Search for documents",
-                "description": "Returns simplified representations of Primo PNX records for easy processing, based on either a free text search using `query`, or a controlled subject search using `vocabulary` and `subject` in combination. Pagination: If there's no more results, `next` will be null. Otherwise `next` will hold the value to be used with `first` to get the next batch of results.",
+                "description": "Search using either a free text query with `query`, or a controlled subject query using `vocabulary` and `subject` in combination. Pagination: If there's no more results, `next` will be null. Otherwise `next` will hold the value to be used with `first` to get the next batch of results.",
                 "produces": [
                     "application/json"
                 ],
@@ -44,12 +43,6 @@
                             "tekord",
                             "mrtermer"
                         ]
-                    },
-                    {
-                        "name": "frbr_group_id",
-                        "in": "query",
-                        "description": "FRBR group ID. Use to expand a group of documents. Should normally not be used together with other search parameters.",
-                        "type": "string"
                     },
                     {
                         "name": "format",
@@ -95,17 +88,17 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "A list of documents"
+                        "description": "A list of Primo records (`type: record`) and groups of Primo records (`type: group`). Groups can be expanded using the `/primo/group` endpoint."
                     }
                 }
             }
         },
-        "/documents/{id}": {
+        "/primo/records/{id}": {
             "get": {
                 "tags": [
-                    "Documents"
+                    "Primo"
                 ],
-                "summary": "Get details about a single document",
+                "description": "Get details about a single record",
                 "produces": [
                     "application/json"
                 ],
@@ -113,14 +106,39 @@
                     {
                         "name": "id",
                         "in": "path",
-                        "description": "Document ID (TODO: Specify what kind of ID)",
+                        "description": "Primo PNX ID",
                         "required": true,
                         "type": "string"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "A single document"
+                        "description": "A PrimoRecord"
+                    }
+                }
+            }
+        },
+        "/primo/groups/{id}": {
+            "get": {
+                "tags": [
+                    "Primo"
+                ],
+                "description": "Get a list of records belonging to a record group.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "FRBR group id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A PrimoRecordGroup"
                     }
                 }
             }
