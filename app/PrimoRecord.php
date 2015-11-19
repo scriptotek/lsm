@@ -57,6 +57,7 @@ class PrimoRecord implements \JsonSerializable
         $this->brief['id'] = $record->text('./p:control/p:recordid');
 
         $this->brief['title'] = $record->text('./p:display/p:title') ?: null;
+
         // $this->brief['creator'] = $record->text('./p:display/p:creator') ?: $record->text('./p:display/p:contributor');
 
         $this->brief['creators'] = $this->extractArray($facets, './p:creatorcontrib');
@@ -72,27 +73,17 @@ class PrimoRecord implements \JsonSerializable
         $this->full['descriptions'] = $this->extractArray($record, './p:display/p:description');
 
         $this->brief['material'] = $this->preferredResourceType($this->extractArray($facets, './p:rsrctype'));
-        $this->brief['material_type'] = $record->text('./p:display/p:type') ?: null;
-        $this->full['format'] = $record->text('./p:display/p:format') ?: null;
+        $this->full['format'] = $record->text('./p:display/p:type') ?: null;
+        $this->full['bib_format'] = $record->text('./p:display/p:format') ?: null;
 
         $this->full['frbr_type'] = $facets->text('./p:frbrtype');
         $this->full['frbr_group_id'] = $facets->text('./p:frbrgroupid');
-
-        // if (!$this->brief['multiple_editions']) {
-        //     //$this->creators = $this->extractArray($facets, './p:creatorcontrib');
-        //     $this->brief['material'] = $this->preferredResourceType($this->extractArray($facets, './p:rsrctype'));
-        //     //$this->brief['id'] = $record->text('./p:control/p:recordid');
-        // } else {
-        //     $this->brief['material'] = null;
-        //     //$this->brief['id'] = null;
-        // }
 
         // Series stuff:
         $this->full['series'] = $record->text('./p:addata/p:seriestitle') ?: null;
         // $this->relation = $record->text('./p:display/p:relation') ?: null;
 
         $this->full['availability'] = $this->extractMarcArray($record, './p:display/p:availlibrary');
-
 
         // @TODO get indices from config
         $this->full['subjects']['realfagstermer'] = $this->extractArray($record, './p:search/p:lsr20');

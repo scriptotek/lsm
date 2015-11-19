@@ -63,9 +63,9 @@ class PrimoController extends Controller
      *     enum={"realfagstermer", "humord", "tekord", "mrtermer"}
      *   ),
      *   @SWG\Parameter(
-     *     name="format",
+     *     name="material",
      *     in="query",
-     *     description="Limit to a given physical form (print or electronic). By default, all forms are included.",
+     *     description="Limit to a given material type (print or electronic). By default, all material types are included.",
      *     type="string",
      *     enum={"print-books", "e-books"}
      *   ),

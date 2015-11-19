@@ -43,9 +43,9 @@ class PrimoSearch {
             $queryObj->addTerm($queryTerm);
         }
 
-        if ($options->has('format')) {
+        if ($options->has('material')) {
             $queryTerm = new QueryTerm();
-            $queryTerm->set('facet_rtype', QueryTerm::EXACT, $options->get('format'));
+            $queryTerm->set('facet_rtype', QueryTerm::EXACT, $options->get('material'));
             $queryObj->addterm($queryTerm);
         }
 
