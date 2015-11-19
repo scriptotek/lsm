@@ -41,6 +41,12 @@ class DocumentsController extends Controller
      *     enum={"realfagstermer", "humord", "tekord", "mrtermer"}
      *   ),
      *   @SWG\Parameter(
+     *     name="frbr_group_id",
+     *     in="query",
+     *     description="FRBR group ID. Use to expand a group of documents. Should normally not be used together with other search parameters.",
+     *     type="string"
+     *   ),
+     *   @SWG\Parameter(
      *     name="format",
      *     in="query",
      *     description="Limit to a given physical form (print or electronic). By default, all forms are included.",

@@ -261,13 +261,11 @@ class SimpleSearch {
             $queryObj->addTerm($queryTerm);
         }
 
-        // if ($input->has('subject')) {
-        //     $vocabulary = $input->get('vocabulary');
-        //     $queryTerm = new QueryTerm();
-        //     $index = isset($this->indices[$vocabulary]) ? 'lsr' . $this->indices[$vocabulary] : 'sub';
-        //     $queryTerm->set($index, QueryTerm::EXACT, $input->get('subject'));
-        //     $queryObj->addTerm($queryTerm);
-        // }
+        if ($input->has('frbr_group_id')) {
+            $queryTerm = new QueryTerm();
+            $queryTerm->set('facet_frbrgroupid', QueryTerm::EXACT, $input->get('frbr_group_id'));
+            $queryObj->addTerm($queryTerm);
+        }
 
         if ($input->has('library')) {
             $library = $input->get('library');
