@@ -23,14 +23,25 @@ class PrimoController extends Controller
     }
 
     /**
+     * @SWG\Definition(
+     *    definition="PrimoSearchErrorResponse",
+     *    required={"error"},
+     *    @SWG\Property(property="error", type="string", description="Error message."),
+     *    @SWG\Property(property="source", type="string", description="URL for the Primo Brief Search API call.")
+     * ),
      * @SWG\Get(
      *   path="/primo/search",
-     *   description="Search using either a free text query with `query`, or a controlled subject query using `vocabulary` and `subject` in combination. Pagination: If there's no more results, `next` will be null. Otherwise `next` will hold the value to be used with `first` to get the next batch of results.",
+     *   description="Search using either a free text query with `query`, or a controlled subject query using `vocabulary` and `subject` in combination. Pagination: If there's no more results, `next` will be null. Otherwise `next` will hold the value to be used with `first` to get the next batch of results. Returns: a list of Primo records (`type: record`) and groups of Primo records (`type: group`). Groups can be expanded using the `/primo/group` endpoint.",
      *   tags={"Primo"},
      *   produces={"application/json"},
      *   @SWG\Response(
      *     response=200,
-     *     description="A list of Primo records (`type: record`) and groups of Primo records (`type: group`). Groups can be expanded using the `/primo/group` endpoint."
+     *     description="success"
+     *   ),
+     *   @SWG\Response(
+     *     response=400,
+     *     description="error",
+     *     @SWG\Schema(ref="#/definitions/PrimoSearchErrorResponse")
      *   ),
      *   @SWG\Parameter(
      *     name="query",
