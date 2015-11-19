@@ -58,6 +58,7 @@ class PrimoRecord implements \JsonSerializable
 
         $this->brief['title'] = $record->text('./p:display/p:title') ?: null;
 
+        $this->brief['edition'] = $record->text('./p:display/p:edition') ?: null;
         // $this->brief['creator'] = $record->text('./p:display/p:creator') ?: $record->text('./p:display/p:contributor');
 
         $this->brief['creators'] = $this->extractArray($facets, './p:creatorcontrib');
