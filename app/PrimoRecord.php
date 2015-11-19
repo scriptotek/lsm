@@ -89,40 +89,6 @@ class PrimoRecord implements \JsonSerializable
         // @TODO get indices from config
         $this->full['subjects']['realfagstermer'] = $this->extractArray($record, './p:search/p:lsr20');
 
-
-    //     return array(
-    //         'id' => $document->id,
-    //         // 'description' => $document->abstract ?: $document->description,
-    //         'cover' => $cover, // $document->cover_images,  // ) ? $document->cover_images[0] : null,
-    //         //'fulltext' => $document->fulltext,
-    //         //'openurl' => $document->openurl,
-    //         //'openurl_fulltext' => $document->openurl,
-    //         'title' => $document->title,
-    //         //'type' => $document->type,
-    //         'creators' => $document->creator_facet,
-    //         'subjects' => $document->subjects,
-    //         'material_category' => $this->preferredResourceType($document->resourcetype_facet),
-    //         //'rtypes' => $document->resourcetype_facet,
-    //         'frbr_group' => $document->frbr_group_id,
-    //         'sources' => $sources,
-    //         'date' => preg_replace('/[^0-9]/', '', $document->date),
-    //         'isbns' => $document->isbn,
-    //         'deeplink' => $deeplink,
-
-
-    //         // 'components' => $document->components,
-    //         // 'getit' => count($document->getit) ? $document->getit[0]->getit_1 : null,
-    //     );
-    // }
-
-        // $bib->display_subject = $this->extractField($display, 'subject');
-        // $bib->format = $this->extractField($display, 'format');
-        // $bib->description = $this->extractArray($display, 'description');
-        // $bib->subjects = $this->extractArray($facets, 'topic');
-        // $bib->genres = $this->extractArray($facets, 'genre');
-        // $bib->languages = $this->extractArray($facets, 'language');
-        // $bib->contributors = $this->extractArray($display, 'contributor');
-        // $bib->cover_images = $this->extractArray($doc->{$this->_sear . 'LINKS'}, $this->_sear . 'thumbnail');
         return $this;
     }
 
