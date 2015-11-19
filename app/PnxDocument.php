@@ -67,16 +67,16 @@ class PnxDocument implements \JsonSerializable
 //        $this->issns = $this->extractArray($record, './p:search/p:issn');
         $this->full['descriptions'] = $this->extractArray($record, './p:display/p:description');
 
-        $this->brief['group_id'] = $record->text('./p:facets/p:frbrgroupid');
+        $this->brief['frbr_group_id'] = $record->text('./p:facets/p:frbrgroupid');
         $this->brief['multiple_editions'] = ($record->text('./p:facets/p:frbrtype') != '6');
 
         if (!$this->brief['multiple_editions']) {
             //$this->creators = $this->extractArray($facets, './p:creatorcontrib');
             $this->brief['material'] = $this->preferredResourceType($this->extractArray($facets, './p:rsrctype'));
-            $this->brief['pnx_id'] = $record->text('./p:control/p:recordid') ?: null;
+            $this->brief['id'] = $record->text('./p:control/p:recordid');
         } else {
             $this->brief['material'] = null;
-            $this->brief['pnx_id'] = $record->text('./p:control/p:recordid') ?: null;
+            $this->brief['id'] = null;
         }
 
         // Series stuff:
@@ -155,7 +155,7 @@ class PnxDocument implements \JsonSerializable
     public function toArray($expanded=false)
     {
         $data = $this->brief;
-        $data['self'] = $this->selfLink();
+        // $data['self'] = $this->selfLink();
         if ($expanded) {
             $data['primo_link'] = $this->primoLink();
         }

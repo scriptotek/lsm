@@ -261,6 +261,14 @@ class SimpleSearch {
             $queryObj->addTerm($queryTerm);
         }
 
+        // if ($input->has('subject')) {
+        //     $vocabulary = $input->get('vocabulary');
+        //     $queryTerm = new QueryTerm();
+        //     $index = isset($this->indices[$vocabulary]) ? 'lsr' . $this->indices[$vocabulary] : 'sub';
+        //     $queryTerm->set($index, QueryTerm::EXACT, $input->get('subject'));
+        //     $queryObj->addTerm($queryTerm);
+        // }
+
         if ($input->has('library')) {
             $library = $input->get('library');
             $queryTerm = new QueryTerm();
@@ -281,50 +289,39 @@ class SimpleSearch {
         return $this->processQuery($queryObj, $input);
     }
 
-    // public function lookup($docId, $options=[])
-    // {
-    //     $institution = $options->get('institution', config('app.primo.institution'));
-    //     $scope = $options->get('scope', config('app.primo.default_scope'));
-    //     $queryObj = new Query($institution);
-    //     $queryObj->local($scope);
-    //     $queryObj->onCampus(true);
-
-    //     $url = str_replace('json=true&', '', $this->primo->url('full', $queryObj));
-    //     $url = str_replace('&indx=1&bulkSize=10', '', $url);
-    //     $url .= '&docId=' . $docId . '&getDelivery=true';
-
-    //     $client = new HttpClient();
-    //     $request = $client->get($url);
-    //     $body = $request->send()->getBody();
-
-    //     $root = new QuiteSimpleXMLElement(strval($body));
-    //     $root->registerXPathNamespace('s', 'http://www.exlibrisgroup.com/xsd/jaguar/search');
-    //     $root->registerXPathNamespace('p', 'http://www.exlibrisgroup.com/xsd/primo/primo_nm_bib');
-
-    //     $deeplinkProvider = $this->primo->createDeepLink();
-
-    //     $doc = $root->first('//s:DOC');
-    //     $out = (new PnxDocument($doc, $deeplinkProvider))->process()->toArray('full');
-
-    //     return [
-    //         'meta' => [
-    //             'source' => $url,
-    //         ],
-    //         'error' => null,
-    //         'document' => $out,
-    //     ];
-
-    // }
-
-    public function lookupWork($frbrGroupId, $options=[])
+    public function lookupDocument($docId, $options=[])
     {
-        $queryObj = $this->prepareQuery($options);
+        $institution = $options->get('institution', config('app.primo.institution'));
+        $scope = $options->get('scope', config('app.primo.default_scope'));
+        $queryObj = new Query($institution);
+        $queryObj->local($scope);
+        $queryObj->onCampus(true);
 
-        $queryTerm = new QueryTerm();
-        $queryTerm->set('facet_frbrgroupid', QueryTerm::EXACT, $frbrGroupId);
-        $queryObj->addTerm($queryTerm);
+        $url = str_replace('json=true&', '', $this->primo->url('full', $queryObj));
+        $url = str_replace('&indx=1&bulkSize=10', '', $url);
+        $url .= '&docId=' . $docId . '&getDelivery=true';
 
-        return $this->processQuery($queryObj, $options, true);
+        $client = new HttpClient();
+        $request = $client->get($url);
+        $body = $request->send()->getBody();
+
+        $root = new QuiteSimpleXMLElement(strval($body));
+        $root->registerXPathNamespace('s', 'http://www.exlibrisgroup.com/xsd/jaguar/search');
+        $root->registerXPathNamespace('p', 'http://www.exlibrisgroup.com/xsd/primo/primo_nm_bib');
+
+        $deeplinkProvider = $this->primo->createDeepLink();
+
+        $doc = $root->first('//s:DOC');
+        $out = (new PnxDocument($doc, $deeplinkProvider))->process()->toArray('full');
+
+        return [
+            'meta' => [
+                'source' => $url,
+            ],
+            'error' => null,
+            'document' => $out,
+        ];
+
     }
 
 }

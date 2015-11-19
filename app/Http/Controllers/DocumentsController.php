@@ -115,7 +115,7 @@ class DocumentsController extends Controller
      */
     public function show(Request $request, SimpleSearch $search, $id)
     {
-        $data = $search->lookupWork($id, $request);
+        $data = $search->lookupDocument($id, $request);
         return response()->json($data);
     }
 
