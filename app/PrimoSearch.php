@@ -44,8 +44,8 @@ class PrimoSearch {
         }
 
         if ($options->has('material')) {
-            $queryTerm = new Queryterm();
-            $queryTerm->set('rtype', QueryTerm::EXACT, $options->get('material'));
+            $queryTerm = new QueryTerm();
+            $queryTerm->set('rtype', QueryTerm::EXACT, explode(',', $options->get('material')));
             $queryObj->includeTerm($queryTerm);
         }
 
