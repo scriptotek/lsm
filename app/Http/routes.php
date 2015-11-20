@@ -6,7 +6,7 @@
  *   host="scs.biblionaut.net",
  *   basePath="/",
  *   @SWG\Info(
- *     title="Simple Catalogue Search",
+ *     title="University of Oslo Library Simple Catalogue Search (SCS)",
  *     version="0.1"
  *   )
  * )
