@@ -73,9 +73,9 @@ $app->singleton(
 //     // Laravel\Lumen\Http\Middleware\VerifyCsrfToken::class,
 // ]);
 
-// $app->routeMiddleware([
-
-// ]);
+$app->routeMiddleware([
+	'cors' => 'palanik\lumen\Middleware\LumenCors',
+]);
 
 /*
 |--------------------------------------------------------------------------
