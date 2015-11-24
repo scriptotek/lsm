@@ -71,9 +71,8 @@ class PrimoController extends Controller
      *   @SWG\Parameter(
      *     name="material",
      *     in="query",
-     *     description="Limit to a given material type (print or electronic). By default, all material types are included.",
-     *     type="string",
-     *     enum={"print-books", "e-books"}
+     *     description="Comma-separated lisf of material types (example: `print-books,print-journals` or `e-books,e-journals`). By default, all material types are included. No truncation is supported.",
+     *     type="string"
      *   ),
      *   @SWG\Parameter(
      *     name="library",

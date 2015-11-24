@@ -61,6 +61,7 @@ class PrimoRecord implements \JsonSerializable
         $this->brief['edition'] = $record->text('./p:display/p:edition') ?: null;
         // $this->brief['creator'] = $record->text('./p:display/p:creator') ?: $record->text('./p:display/p:contributor');
 
+        $this->brief['creator_string'] = $record->text('./p:display/p:creator');
         $this->brief['creators'] = $this->extractArray($facets, './p:creatorcontrib');
 
         $this->brief['date'] = $record->text('./p:display/p:creationdate') ?: null;
@@ -73,7 +74,8 @@ class PrimoRecord implements \JsonSerializable
 //        $this->issns = $this->extractArray($record, './p:search/p:issn');
         $this->full['descriptions'] = $this->extractArray($record, './p:display/p:description');
 
-        $this->brief['material'] = $this->preferredResourceType($this->extractArray($facets, './p:rsrctype'));
+        //$this->brief['material'] = $this->preferredResourceType($this->extractArray($facets, './p:rsrctype'));
+        $this->brief['material'] = $this->extractArray($facets, './p:rsrctype');
         $this->full['format'] = $record->text('./p:display/p:type') ?: null;
         $this->full['bib_format'] = $record->text('./p:display/p:format') ?: null;
 
