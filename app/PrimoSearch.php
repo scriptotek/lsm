@@ -60,7 +60,7 @@ class PrimoSearch {
         return $queryObj;
     }
 
-    protected function processQuery(Query $queryObj, $expanded)
+    protected function processQuery(Query $queryObj, $expanded, $fullRepr)
     {
         $url = str_replace('json=true&', '', $this->primo->url('brief', $queryObj));
 
@@ -85,7 +85,7 @@ class PrimoSearch {
 
         $out = [];
         foreach ($root->xpath('//s:DOC') as $doc) {
-            $out[] = PrimoRecord::make($doc, $deeplinkProvider, $expanded)->toArray();
+            $out[] = PrimoRecord::make($doc, $deeplinkProvider, $expanded)->toArray($fullRepr);
         }
 
         $docset = $root->first('//s:DOCSET');
@@ -128,7 +128,9 @@ class PrimoSearch {
             $queryObj->addTerm($queryTerm);
         }
 
-        return $this->processQuery($queryObj, false);
+        $fullRepr = $input->get('repr') == 'full';
+
+        return $this->processQuery($queryObj, false, $fullRepr);
     }
 
     public function getGroup($groupId, $options=[])
@@ -145,7 +147,7 @@ class PrimoSearch {
         $queryTerm->set('facet_frbrgroupid', QueryTerm::EXACT, $groupId);
         $queryObj->addTerm($queryTerm);
 
-        $res = $this->processQuery($queryObj, true);
+        $res = $this->processQuery($queryObj, true, true);
         return [
             'source' => $res['source'],
             'error' => null,

@@ -125,18 +125,18 @@ class PrimoRecord implements \JsonSerializable
         return toArray('full');
     }
 
-    public function toArray($expanded=false)
+    public function toArray($fullRepr=false)
     {
         $data = $this->brief;
         $data['links'] = [
             'self' => $this->link(),
         ];
-        if ($expanded) {
+        if ($fullRepr) {
             $data['links']['primo'] = $this->primoLink();
             $data['links']['group'] = $this->groupLink();
         }
 
-        if ($expanded) {
+        if ($fullRepr) {
             $data = array_merge($data, $this->full);
             $data['cover'] = count($data['isbns']) ? 'https://emnesok.biblionaut.net/?action=cover&isbn=' . $data['isbns'][0] : null;
         }

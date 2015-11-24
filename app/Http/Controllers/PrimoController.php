@@ -99,6 +99,14 @@ class PrimoController extends Controller
      *     type="string",
      *     default="popularity",
      *     enum={"popularity", "date", "author", "title"}
+     *   ),
+     *   @SWG\Parameter(
+     *     name="repr",
+     *     in="query",
+     *     description="Result representation format. `compact=repr` returns a more simplifed representation, suitable for e.g. limited bandwidth. `compact=full` includes more information. This parameter has no effect on groups, only records.",
+     *     type="string",
+     *     default="compact",
+     *     enum={"compact", "full"}
      *   )
      * )
      *
