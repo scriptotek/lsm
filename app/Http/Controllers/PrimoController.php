@@ -75,9 +75,15 @@ class PrimoController extends Controller
      *     type="string"
      *   ),
      *   @SWG\Parameter(
+     *     name="institution",
+     *     in="query",
+     *     description="Limit to a institution. Example: `UBO`. Case insensitive.",
+     *     type="string"
+     *   ),
+     *   @SWG\Parameter(
      *     name="library",
      *     in="query",
-     *     description="Limit to one or more library codes. Supports truncation with `*`, so `ureal*` will include 'urealinf' as well. Boolean logic is supported, example: `ureal* OR ubonett` ('ubonett' is the library code used for all e-books at UBO).",
+     *     description="Limit to one or more comma-separated library codes. Examples: `ubo1030310,ubo1030317` for Realfagsbiblioteket and Informatikkbiblioteket. Case insensitive. Warning: ebooks will be excluded when setting `library` since ebooks are not linked to a library code anymore (except for a few thousand errors…).",
      *     type="string"
      *   ),
      *   @SWG\Parameter(

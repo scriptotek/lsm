@@ -32,15 +32,17 @@ class PrimoSearch {
         $queryObj->local($scope);
         $queryObj->onCampus(true);
 
-        if ($options->has('library')) {
-            $library = $options->get('library');
+        if ($options->has('institution')) {
             $queryTerm = new QueryTerm();
-
-            // @TODO: Move to config
-            $index = 'lsr04';
-
-            $queryTerm->set($index, QueryTerm::CONTAINS, $options->get('library'));
+            $queryTerm->set('facet_local4', QueryTerm::EXACT, $options->get('institution'));
             $queryObj->addTerm($queryTerm);
+        }
+
+        if ($options->has('library')) {
+            $library = explode(',', $options->get('library'));
+            $queryTerm = new QueryTerm();
+            $queryTerm->set('facet_library', QueryTerm::EXACT, $library);
+            $queryObj->includeTerm($queryTerm);
         }
 
         if ($options->has('material')) {
