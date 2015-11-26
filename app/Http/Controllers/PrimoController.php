@@ -64,9 +64,9 @@ class PrimoController extends Controller
      *   @SWG\Parameter(
      *     name="vocabulary",
      *     in="query",
-     *     description="Subject vocabulary",
+     *     description="Subject vocabulary. Use 'geo' for geographic names.",
      *     type="string",
-     *     enum={"realfagstermer", "humord", "tekord", "mrtermer"}
+     *     enum={"realfagstermer", "humord", "tekord", "mrtermer", "geo"}
      *   ),
      *   @SWG\Parameter(
      *     name="material",

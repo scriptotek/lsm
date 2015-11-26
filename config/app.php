@@ -16,7 +16,7 @@ return [
             'dewey' => '10',
             'tekord' => '12',
             'humord' => '14',
-            'stedsnavn' => '17',
+            'geo' => '17',
             'menneskerettighstermer' => '19',
             'realfagstermer' => '20',
             'avdeling' => '41',
