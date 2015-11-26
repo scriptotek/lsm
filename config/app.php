@@ -17,7 +17,7 @@ return [
             'tekord' => '12',
             'humord' => '14',
             'geo' => '17',
-            'menneskerettighstermer' => '19',
+            'mrtermer' => '19',
             'realfagstermer' => '20',
             'avdeling' => '41',
             'avdelingsamling' => '51',
