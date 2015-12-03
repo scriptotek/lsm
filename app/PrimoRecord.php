@@ -13,15 +13,17 @@ class PrimoRecord implements \JsonSerializable
     protected $full;
     protected $doc;
     protected $deeplinkProvider;
+    protected $primoInst;  // E.g. 'UBO'
+    protected $almaInst;  // E.g. '47BIBSYS_UBO'
 
-    static function make(QuiteSimpleXMLElement $doc, DeepLink $deeplinkProvider, $expanded=false)
+    static function make(QuiteSimpleXMLElement $doc, DeepLink $deeplinkProvider, $expanded=false, $options)
     {
         $is_group = $doc->text('./p:PrimoNMBib/p:record/p:facets/p:frbrtype') != '6';
 
         if ($is_group && !$expanded) {
-            $item = new PrimoRecordGroup($doc, $deeplinkProvider);
+            $item = new PrimoRecordGroup($doc, $deeplinkProvider, $options);
         } else {
-            $item = new PrimoRecord($doc, $deeplinkProvider);
+            $item = new PrimoRecord($doc, $deeplinkProvider, $options);
         }
         return $item->process();
     }
@@ -30,12 +32,14 @@ class PrimoRecord implements \JsonSerializable
         return isset($this->brief[$property]) ? $this->brief[$property] : (isset($this->full[$property]) ? $this->full[$property] : null);
     }
 
-    function __construct(QuiteSimpleXMLElement $doc, DeepLink $deeplinkProvider)
+    function __construct(QuiteSimpleXMLElement $doc, DeepLink $deeplinkProvider, $options)
     {
         $this->doc = $doc;
         $this->deeplinkProvider = $deeplinkProvider;
         $this->brief = ['type' => 'record'];
         $this->full = [];
+        $this->primoInst = strtoupper(array_get($options, 'primo_inst', null));
+        $this->almaInst = strtoupper(array_get($options, 'alma_inst', null));
     }
 
     protected function preferredResourceType($rtypes)
@@ -52,6 +56,7 @@ class PrimoRecord implements \JsonSerializable
     {
         $record = $this->doc->first('./p:PrimoNMBib/p:record');
         $sear_links = $this->doc->first('./sear:LINKS');
+        $getits = $this->doc->all('./sear:GETIT');
         $facets = $record->first('./p:facets');
 
         $this->brief['id'] = $record->text('./p:control/p:recordid');
@@ -86,15 +91,33 @@ class PrimoRecord implements \JsonSerializable
         $this->full['series'] = $record->text('./p:addata/p:seriestitle') ?: null;
         // $this->relation = $record->text('./p:display/p:relation') ?: null;
 
-        $this->full['availability'] = $this->extractMarcArray($record, './p:display/p:availlibrary');
+        $this->full['components'] = $this->extractComponents($record, $getits, 'UBO', '47BIBSYS_UBO');
 
         // @TODO get indices from config
         $this->full['subjects']['realfagstermer'] = $this->extractArray($record, './p:search/p:lsr20');
         $this->full['subjects']['humord'] = $this->extractArray($record, './p:search/p:lsr14');
         $this->full['subjects']['tekord'] = $this->extractArray($record, './p:search/p:lsr12');
-        $this->full['subjects']['mrtermer'] = $this->extractArray($record, './p:search/p:lsr19');
+
+        $this->brief['status'] = [
+            'print' => $this->hasPrint($this->full),
+            'electronic' => $this->hasElectronic($this->full),
+        ];
 
         return $this;
+    }
+
+    function extractGetIts($getits)
+    {
+        $out = [];
+        foreach ($getits as $node) {
+            $out[] = [
+                'category' => $node->attr('deliveryCategory'),
+                'url1' => $node->attr('GetIt1'),
+                'url2' => $node->attr('GetIt2'),
+            ];
+        }
+
+        return $out;
     }
 
     public function primoLink()
@@ -123,6 +146,11 @@ class PrimoRecord implements \JsonSerializable
         return ($this->full['frbr_type'] != '6') ? url('primo/groups/' .$this->full['frbr_group_id']) : null;
     }
 
+    public function coverLink()
+    {
+        return url('primo/records/' .$this->id . '/cover');
+    }
+
     public function jsonSerialize()
     {
         return toArray('full');
@@ -137,34 +165,106 @@ class PrimoRecord implements \JsonSerializable
         if ($fullRepr) {
             $data['links']['primo'] = $this->primoLink();
             $data['links']['group'] = $this->groupLink();
+            $data['links']['cover'] = $this->coverLink();
+            // $this->addLocations();
         }
 
         if ($fullRepr) {
             $data = array_merge($data, $this->full);
-            $data['cover'] = count($data['isbns']) ? 'https://emnesok.biblionaut.net/?action=cover&isbn=' . $data['isbns'][0] : null;
         }
         return $data;
     }
 
-
-    private function extractGetIts($sear_getit)
+    public function & getComponent(&$components, $id)
     {
-        if (!is_array($sear_getit)) {
-            $sear_getit = array($sear_getit);
+        if (count($components) == 1) {
+            return $components[0];
         }
-
-        $result = \array_map(array($this, 'extractGetIt'), $sear_getit);
-
-        return $result;
+        foreach ($components as &$component) {
+            if ($component['fid'] == $id) {
+                return $component;
+            }
+        }
     }
 
-    private function extractGetIt($sear_getit)
+    public function hasPrint($x)
     {
-        $getit = new GetIt();
-        $getit->getit_1 = $sear_getit->{'@GetIt1'};
-        $getit->getit_2 = $sear_getit->{'@GetIt2'};
-        $getit->category = $sear_getit->{'@deliveryCategory'};
-        return $getit;
+        return array_reduce($x['components'], function ($carry, $item) {
+            $x = array_get($item, 'category') == 'Alma-P' && array_get($item, 'alma_id');
+            return $carry || $x;
+        }, false);
+    }
+
+    public function hasElectronic($x)
+    {
+        return array_reduce($x['components'], function ($carry, $item) {
+            $x = in_array(array_get($item, 'category'), ['Alma-E', 'Online Resource']) && array_get($item, 'alma_id');
+            return $carry || $x;
+        }, false);
+    }
+
+    public function extractComponents($record, $getits)
+    {
+
+        // Get components
+        $components = array_map(function($x) use ($record){
+            return [
+                'id' => $x['V'],
+                'fid' => array_get($x, 'id'),
+            ];
+        }, $this->extractMarcArray($record, './p:control/p:sourcerecordid'));
+
+        // Add delivery
+        foreach ($this->extractMarcArray($record, './p:delivery/p:delcategory') as $k) {
+            $component =& $this->getComponent($components, array_get($k, 'id'));
+            if (array_get($k, 'institution', $this->primoInst) == $this->primoInst) {
+                array_set($component, 'category', $k['V']);
+            }
+        }
+
+        // Add Alma IDs
+        $alma_ids = [];
+        foreach ($this->extractMarcArray($record, './p:control/p:almaid') as $k) {
+            $component =& $this->getComponent($components, array_get($k, 'id'));
+            list($inst, $id) = explode(':', $k['V']);
+            if ($inst == $this->almaInst) {
+                $component['alma_id'] = $id;
+            }
+        }
+
+        // Add availability
+        foreach ($this->extractMarcArray($record, './p:display/p:availlibrary') as $k) {
+            $component =& $this->getComponent($components, array_get($k, 'id'));
+            if ($k['institution'] == $this->primoInst) {
+
+                $b = 'holdings.' . $k['library'];
+                $holdings = array_get($component, $b, []);
+                $holding = [
+                    'collection_name' => $k['collection'],
+                    'collection_code' => $k['collectionCode'],
+                    'callcode' => array_get($k, 'callcode'),
+                    'status' => $k['status'],
+                    'alma_instance' => $k['institutionCode'],
+                ];
+                if (isset($alma_ids[$k['institutionCode']])) {
+                    $holding['alma_id'] = $alma_ids[$k['institutionCode']];
+                }
+                $holdings[] = $holding;
+                array_set($component, $b, $holdings);
+            }
+        }
+
+
+        // Add GetIt
+        foreach ($this->extractGetIts($getits) as $getit) {
+            foreach ($components as &$component) {
+                if (array_get($component, 'category') == $getit['category']) {
+                    $component['url'] = $getit['url1'];
+                }
+            }
+        }
+
+        return $components;
     }
 
     private function extractPNXGroups(\stdClass $pnx_record, BibRecord $record)
@@ -191,14 +291,27 @@ class PrimoRecord implements \JsonSerializable
     protected function extractMarcArray(QuiteSimpleXMLElement $group, $xpath)
     {
         $codelist = [
+            'S' => 'status',
+
+            'I' => 'institution',
+            'L' => 'library',
             '1' => 'collection',
             '2' => 'callcode',
-            'S' => 'status',
-            'L' => 'library',
-            'I' => 'institution',
+
+            'X' => 'institutionCode',
+            'Y' => 'libraryCode',
+            'Z' => 'collectionCode',
+            'O' => 'id',
+
         ];
         return array_map(function($ava) use ($codelist) {
             $o = [];
+
+            // FIX for Primo API not returning consistent data..
+            if (substr($ava, 0, 1) != '$') {
+                $ava = '$$V' . $ava;
+            }
+
             foreach (explode('$$', $ava) as $el) {
                 if (strlen($el)) {
                     $code = array_get($codelist, substr($el, 0, 1), substr($el, 0, 1));

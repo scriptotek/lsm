@@ -62,7 +62,15 @@ class PrimoSearch {
         return $queryObj;
     }
 
-    protected function processQuery(Query $queryObj, $expanded, $fullRepr)
+    public function getRecordOptions($options)
+    {
+        return [
+            'primo_inst' => $options->get('institution', config('app.primo.institution')),
+            'alma_inst' => $options->get('alma', config('app.alma.institution')),
+        ];
+    }
+
+    protected function processQuery(Query $queryObj, $expanded, $fullRepr, $options)
     {
         $url = str_replace('json=true&', '', $this->primo->url('brief', $queryObj));
 
@@ -87,7 +95,7 @@ class PrimoSearch {
 
         $out = [];
         foreach ($root->xpath('//s:DOC') as $doc) {
-            $out[] = PrimoRecord::make($doc, $deeplinkProvider, $expanded)->toArray($fullRepr);
+            $out[] = PrimoRecord::make($doc, $deeplinkProvider, $expanded, $this->getRecordOptions($options))->toArray($fullRepr);
         }
 
         $docset = $root->first('//s:DOCSET');
@@ -132,7 +140,7 @@ class PrimoSearch {
 
         $fullRepr = $input->get('repr') == 'full';
 
-        return $this->processQuery($queryObj, false, $fullRepr);
+        return $this->processQuery($queryObj, false, $fullRepr, $input);
     }
 
     public function getGroup($groupId, $options=[])
@@ -184,7 +192,7 @@ class PrimoSearch {
         $deeplinkProvider = $this->primo->createDeepLink();
 
         $doc = $root->first('//s:DOC');
-        $out = PrimoRecord::make($doc, $deeplinkProvider, true)->toArray('full');
+        $out = PrimoRecord::make($doc, $deeplinkProvider, true, $this->getRecordOptions($options))->toArray('full');
 
         return [
             'source' => $url,
