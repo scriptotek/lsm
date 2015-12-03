@@ -90,6 +90,9 @@ class PrimoRecord implements \JsonSerializable
 
         // @TODO get indices from config
         $this->full['subjects']['realfagstermer'] = $this->extractArray($record, './p:search/p:lsr20');
+        $this->full['subjects']['humord'] = $this->extractArray($record, './p:search/p:lsr14');
+        $this->full['subjects']['tekord'] = $this->extractArray($record, './p:search/p:lsr12');
+        $this->full['subjects']['mrtermer'] = $this->extractArray($record, './p:search/p:lsr19');
 
         return $this;
     }
