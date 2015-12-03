@@ -233,13 +233,13 @@ class PrimoRecord implements \JsonSerializable
         }
 
         // Add availability
+        $component['holdings'] = [];
         foreach ($this->extractMarcArray($record, './p:display/p:availlibrary') as $k) {
             $component =& $this->getComponent($components, array_get($k, 'id'));
             if ($k['institution'] == $this->primoInst) {
 
-                $b = 'holdings.' . $k['library'];
-                $holdings = array_get($component, $b, []);
                 $holding = [
+                    'library' => array_get($k, 'library'),
                     'collection_name' => $k['collection'],
                     'collection_code' => $k['collectionCode'],
                     'callcode' => array_get($k, 'callcode'),
@@ -249,8 +249,7 @@ class PrimoRecord implements \JsonSerializable
                 if (isset($alma_ids[$k['institutionCode']])) {
                     $holding['alma_id'] = $alma_ids[$k['institutionCode']];
                 }
-                $holdings[] = $holding;
-                array_set($component, $b, $holdings);
+                $component['holdings'][] = $holding;
             }
         }
 
