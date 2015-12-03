@@ -75,7 +75,7 @@ class PrimoSearch {
         $url = str_replace('json=true&', '', $this->primo->url('brief', $queryObj));
 
         if (!count($queryObj->getTerms())) {
-            throw new PrimoException('No query given');
+            throw new PrimoException('No query given', 0, null, $url);
         }
 
         $client = new HttpClient();
@@ -191,7 +191,15 @@ class PrimoSearch {
 
         $deeplinkProvider = $this->primo->createDeepLink();
 
+        $error = $root->first('/s:SEGMENTS/s:JAGROOT/s:RESULT/s:ERROR');
+        if ($error) {
+            throw new PrimoException($error->attr('MESSAGE'), 0, null, $url);
+        }
+
         $doc = $root->first('//s:DOC');
+        if (!$doc) {
+            throw new PrimoException('Invalid response from Primo', 0, null, $url);
+        }
         $out = PrimoRecord::make($doc, $deeplinkProvider, true, $this->getRecordOptions($options))->toArray('full');
 
         return [

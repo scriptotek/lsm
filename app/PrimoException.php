@@ -8,6 +8,9 @@ class PrimoException extends \Exception
 
 	public function __construct($message = null, $code = 0, \Exception $previous = null, $url = null)
 	{
+		if ($message == 'PrimoSearchWS getRecord null') {
+			$message = 'Record not found';
+		}
         parent::__construct($message, $code, $previous);
 		$this->url = $url;
 	}
