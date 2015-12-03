@@ -161,7 +161,7 @@ class PrimoSearch {
         ];
     }
 
-    public function getRecord($docId, $options=[])
+    public function getRecord($docId, $options)
     {
         $institution = $options->get('institution', config('app.primo.institution'));
         $scope = $options->get('scope', config('app.primo.default_scope'));
