@@ -109,7 +109,7 @@ class PrimoRecord implements \JsonSerializable
 
         } else {
             return 'http://' . $this->deeplinkProvider->view('UBO')
-                ->link($this->pnx_id);
+                ->link($this->id);
         }
     }
 
