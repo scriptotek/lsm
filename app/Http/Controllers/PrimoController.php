@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\PrimoCover;
 use App\PrimoSearch;
 use App\PrimoException;
 use Guzzle\Http\Exception\BadResponseException;
@@ -187,6 +188,35 @@ class PrimoController extends Controller
         return $this->handleErrors(function() use ($search, $request, $id) {
             return $search->getGroup($id, $request);
         });
+    }
+
+    /**
+     * @SWG\Get(
+     *   path="/primo/records/{id}/cover",
+     *   description="Get cover image data for a given record.",
+     *   tags={"Primo"},
+     *   produces={"image"},
+     *   @SWG\Response(
+     *     response=302,
+     *     description="Redirect to image file"
+     *   ),
+     *   @SWG\Parameter(
+     *     name="id",
+     *     in="path",
+     *     description="Primo PNX ID",
+     *     required=true,
+     *     type="string"
+     *   )
+     * )
+     *
+     * @param  PrimoCover  $cover
+     * @param  Request  $request
+     * @param  int  $recordId
+     * @return Response
+     */
+    public function getCover(PrimoCover $cover, Request $request, $recordId)
+    {
+        return $cover->getCover($recordId, $request);
     }
 
 }

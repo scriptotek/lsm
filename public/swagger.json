@@ -162,6 +162,31 @@
                     }
                 }
             }
+        },
+        "/primo/records/{id}/cover": {
+            "get": {
+                "tags": [
+                    "Primo"
+                ],
+                "description": "Get cover image data for a given record.",
+                "produces": [
+                    "image"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Primo PNX ID",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "302": {
+                        "description": "Redirect to image file"
+                    }
+                }
+            }
         }
     },
     "definitions": {

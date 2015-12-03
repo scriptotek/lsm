@@ -37,7 +37,7 @@
         onFailure: function(data) {
           log("Unable to Load SwaggerUI");
         },
-        docExpansion: "full",
+        /*docExpansion: "full",*/
         apisSorter: "alpha",
         showRequestHeaders: false
       });
