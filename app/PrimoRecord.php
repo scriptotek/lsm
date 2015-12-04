@@ -234,23 +234,32 @@ class PrimoRecord implements \JsonSerializable
 
         // Add availability
         $component['holdings'] = [];
+        $keys = [];
+
         foreach ($this->extractMarcArray($record, './p:display/p:availlibrary') as $k) {
             $component =& $this->getComponent($components, array_get($k, 'id'));
-            if ($k['institution'] == $this->primoInst) {
+            // if ($k['institution'] != $this->primoInst) {
+            //     continue;
+            // }
 
-                $holding = [
-                    'library' => array_get($k, 'library'),
-                    'collection_name' => $k['collection'],
-                    'collection_code' => $k['collectionCode'],
-                    'callcode' => array_get($k, 'callcode'),
-                    'status' => $k['status'],
-                    'alma_instance' => $k['institutionCode'],
-                ];
-                if (isset($alma_ids[$k['institutionCode']])) {
-                    $holding['alma_id'] = $alma_ids[$k['institutionCode']];
-                }
-                $component['holdings'][] = $holding;
+            $key = array_get($k, 'library') . $k['collectionCode'] . array_get($k, 'callcode');
+            if (in_array($key, $keys)) {
+                continue;  // Skip duplicates
             }
+            $keys[] = $key;
+
+            $holding = [
+                'library' => array_get($k, 'library'),
+                'collection_name' => $k['collection'],
+                'collection_code' => $k['collectionCode'],
+                'callcode' => array_get($k, 'callcode'),
+                'status' => $k['status'],
+                'alma_instance' => $k['institutionCode'],
+            ];
+            if (isset($alma_ids[$k['institutionCode']])) {
+                $holding['alma_id'] = $alma_ids[$k['institutionCode']];
+            }
+            $component['holdings'][] = $holding;
         }
 
 
