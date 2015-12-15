@@ -83,6 +83,8 @@ class PrimoRecord implements \JsonSerializable
         $this->brief['material'] = $this->extractArray($facets, './p:rsrctype');
         $this->full['format'] = $record->text('./p:display/p:type') ?: null;
         $this->full['bib_format'] = $record->text('./p:display/p:format') ?: null;
+        $this->full['ispartof'] = $record->text('./p:display/p:ispartof') ?: null;
+        $this->full['responsibility'] = $record->text('./p:display/p:lds22') ?: null;
 
         $this->full['frbr_type'] = $facets->text('./p:frbrtype');
         $this->full['frbr_group_id'] = $facets->text('./p:frbrgroupid');
