@@ -265,10 +265,12 @@ class PrimoRecord implements \JsonSerializable
 
 
         // Add GetIt
-        foreach ($this->extractGetIts($getits) as $getit) {
+        $links = $this->extractMarcArray($record, './p:links/p:linktorsrc');
+        foreach ($links as $link) {
             foreach ($components as &$component) {
-                if (array_get($component, 'category') == $getit['category']) {
-                    $component['url'] = $getit['url1'];
+                if (array_get($component, 'fid') == $link['id']) {
+                    $component['url'] = $link['url'];
+                    $component['urlDescription'] = $link['description'];
                 }
             }
         }
@@ -311,6 +313,8 @@ class PrimoRecord implements \JsonSerializable
             'Y' => 'libraryCode',
             'Z' => 'collectionCode',
             'O' => 'id',
+            'U' => 'url',
+            'D' => 'description',
 
         ];
         return array_map(function($ava) use ($codelist) {
