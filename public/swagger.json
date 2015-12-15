@@ -129,6 +129,13 @@
                         "description": "Primo PNX ID",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "name": "raw",
+                        "in": "query",
+                        "description": "Set to true to return the raw PNX record.",
+                        "type": "boolean",
+                        "default": "false"
                     }
                 ],
                 "responses": {

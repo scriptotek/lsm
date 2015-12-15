@@ -185,6 +185,10 @@ class PrimoSearch {
         $request = $client->get($url);
         $body = $request->send()->getBody();
 
+        if ($options->get('raw') == 'true') {
+            return $body;
+        }
+
         $root = new QuiteSimpleXMLElement(strval($body));
         $root->registerXPathNamespace('s', 'http://www.exlibrisgroup.com/xsd/jaguar/search');
         $root->registerXPathNamespace('p', 'http://www.exlibrisgroup.com/xsd/primo/primo_nm_bib');

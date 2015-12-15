@@ -133,7 +133,7 @@ class PrimoController extends Controller
      *   path="/primo/records/{id}",
      *   description="Get details about a single record",
      *   tags={"Primo"},
-     *   produces={"application/json"},
+     *   produces={"application/json", "application/xml"},
      *   @SWG\Response(
      *     response=200,
      *     description="A PrimoRecord"
@@ -144,6 +144,13 @@ class PrimoController extends Controller
      *     description="Primo PNX ID",
      *     required=true,
      *     type="string"
+     *   ),
+     *   @SWG\Parameter(
+     *     name="raw",
+     *     in="query",
+     *     description="Set to true to return the raw PNX record.",
+     *     type="boolean",
+     *     default="false"
      *   )
      * )
      *
@@ -154,6 +161,9 @@ class PrimoController extends Controller
      */
     public function getRecord(PrimoSearch $search, Request $request, $id)
     {
+        if ($request->get('raw') == 'true') {
+            return response()->make($search->getRecord($id, $request), 200, ['Content-Type' => 'application/xml']);
+        }
         return $this->handleErrors(function() use ($search, $request, $id) {
             return $search->getRecord($id, $request);
         });
