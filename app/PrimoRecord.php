@@ -98,6 +98,12 @@ class PrimoRecord implements \JsonSerializable
         $this->full['subjects']['humord'] = $this->extractArray($record, './p:search/p:lsr14');
         $this->full['subjects']['tekord'] = $this->extractArray($record, './p:search/p:lsr12');
         $this->full['subjects']['geo'] = $this->extractArray($record, './p:search/p:lsr17');
+        $this->full['subjects']['topic'] = $this->extractArray($record, './p:search/p:topic');
+        $this->full['subjects']['subject'] = $this->extractArray($record, './p:search/p:subject');
+
+        $this->full['subjects']['subject'] = array_map(function($s) {
+            return trim($s, '.');
+        }, $this->full['subjects']['subject']);
 
         $this->brief['status'] = [
             'print' => $this->hasPrint($this->full),
