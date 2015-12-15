@@ -103,9 +103,16 @@ class PrimoRecord implements \JsonSerializable
         $this->full['subjects']['topic'] = $this->extractArray($record, './p:search/p:topic');
         $this->full['subjects']['subject'] = $this->extractArray($record, './p:search/p:subject');
 
+        // Trim ending dots
         $this->full['subjects']['subject'] = array_map(function($s) {
             return trim($s, '.');
         }, $this->full['subjects']['subject']);
+
+        // Filter out free keywords
+        $this->full['subjects']['subject'] = array_filter($this->full['subjects']['subject'], function($s) {
+            $firstChar = substr($s,0, 1);
+            return (mb_strtolower($firstChar) !== $firstChar);
+        });
 
         $this->brief['status'] = [
             'print' => $this->hasPrint($this->full),
