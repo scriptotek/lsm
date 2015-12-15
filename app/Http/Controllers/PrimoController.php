@@ -59,13 +59,13 @@ class PrimoController extends Controller
      *   @SWG\Parameter(
      *     name="subject",
      *     in="query",
-     *     description="Subject term",
+     *     description="One or more subject terms. Multiple subject terms separated by comma will be searched using OR.",
      *     type="string"
      *   ),
      *   @SWG\Parameter(
      *     name="vocabulary",
      *     in="query",
-     *     description="Subject vocabulary. Use 'geo' for geographic names.",
+     *     description="Subject vocabulary. Use 'geo' for geographic names. Leave blank to search all subject vocabularies.",
      *     type="string",
      *     enum={"realfagstermer", "humord", "tekord", "mrtermer", "geo"}
      *   ),

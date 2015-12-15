@@ -29,7 +29,7 @@
                     {
                         "name": "subject",
                         "in": "query",
-                        "description": "Subject term",
+                        "description": "One or more subject terms. Multiple subject terms separated by comma will be searched using OR.",
                         "type": "string"
                     },
                     {

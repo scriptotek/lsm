@@ -134,8 +134,8 @@ class PrimoSearch {
             $vocabulary = $input->get('vocabulary');
             $queryTerm = new QueryTerm();
             $index = isset($this->indices[$vocabulary]) ? 'lsr' . $this->indices[$vocabulary] : 'sub';
-            $queryTerm->set($index, QueryTerm::EXACT, $input->get('subject'));
-            $queryObj->addTerm($queryTerm);
+            $queryTerm->set($index, QueryTerm::EXACT, explode(',', $input->get('subject')));
+            $queryObj->includeTerm($queryTerm);
         }
 
         $fullRepr = $input->get('repr') == 'full';
