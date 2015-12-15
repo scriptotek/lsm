@@ -268,7 +268,7 @@ class PrimoRecord implements \JsonSerializable
         $links = $this->extractMarcArray($record, './p:links/p:linktorsrc');
         foreach ($links as $link) {
             foreach ($components as &$component) {
-                if (array_get($component, 'fid') == $link['id']) {
+                if (array_get($component, 'fid') == array_get($link, 'id') || !isset($link['id'])) {
                     $component['url'] = $link['url'];
                     $component['urlDescription'] = $link['description'];
                 }
