@@ -95,6 +95,8 @@ class PrimoRecord implements \JsonSerializable
 
         $this->full['components'] = $this->extractComponents($record, $getits, 'UBO', '47BIBSYS_UBO');
 
+        $this->full['urls'] = $this->extractUrls($record, $getits);
+
         // @TODO get indices from config
         $this->full['subjects']['realfagstermer'] = $this->extractArray($record, './p:search/p:lsr20');
         $this->full['subjects']['humord'] = $this->extractArray($record, './p:search/p:lsr14');
@@ -102,6 +104,8 @@ class PrimoRecord implements \JsonSerializable
         $this->full['subjects']['geo'] = $this->extractArray($record, './p:search/p:lsr17');
         $this->full['subjects']['topic'] = $this->extractArray($record, './p:search/p:topic');
         $this->full['subjects']['subject'] = $this->extractArray($record, './p:search/p:subject');
+
+        $this->full['thumbnails'] = $this->extractThumbs($this->extractArray($sear_links, './s:thumbnail'));
 
         // Trim ending dots
         $this->full['subjects']['subject'] = array_map(function($s) {
@@ -120,6 +124,44 @@ class PrimoRecord implements \JsonSerializable
         ];
 
         return $this;
+    }
+
+    public function extractUrls($record, $getits)
+    {
+        $urls = [];
+
+        // Add urls for Alma-E
+        foreach ($this->extractGetIts($getits) as $getit) {
+            if (in_array(array_get($getit, 'category'), ['Online Resource', 'Alma-E'])) {
+                $urls[$getit['url1']] = 'Available online';
+            }
+        }
+
+        // Add link descriptions for online resources
+        $links = $this->extractMarcArray($record, './p:links/p:linktorsrc');
+        foreach ($links as $link) {
+            $urls[$link['url']] = $link['description'];
+        }
+
+        $out = [];
+        foreach ($urls as $key => $val) {
+            $out[] = ['url' => $key, 'description' => $val];
+        }
+
+        return $out;
+    }
+
+    public function extractThumbs($thumbs)
+    {
+        $out = [];
+        foreach ($thumbs as $thumb) {
+            if (preg_match('/images.amazon.com/', $thumb)) {
+                $out['amazon'] = $thumb;
+            } else if (preg_match('/innhold.bibsys.no/', $thumb)) {
+                $out['bibsys'] = $thumb;
+            }
+        }
+        return $out;
     }
 
     function extractGetIts($getits)
@@ -276,18 +318,6 @@ class PrimoRecord implements \JsonSerializable
                 $holding['alma_id'] = $alma_ids[$k['institutionCode']];
             }
             $component['holdings'][] = $holding;
-        }
-
-
-        // Add GetIt
-        $links = $this->extractMarcArray($record, './p:links/p:linktorsrc');
-        foreach ($links as $link) {
-            foreach ($components as &$component) {
-                if (array_get($component, 'fid') == array_get($link, 'id') || !isset($link['id'])) {
-                    $component['url'] = $link['url'];
-                    $component['urlDescription'] = $link['description'];
-                }
-            }
         }
 
         return $components;
