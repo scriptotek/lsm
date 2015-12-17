@@ -70,6 +70,18 @@ class PrimoSearch {
         ];
     }
 
+    public function parseFacet($root, $name)
+    {
+        $values = [];
+        foreach ($root->xpath('//s:FACET[@NAME="' . $name . '"]/s:FACET_VALUES') as $value) {
+            $values[] = ['value' => $value->attr('KEY'), 'count' => intval($value->attr('VALUE'))];
+        }
+        $values = array_reverse(array_sort($values, function($value) {
+            return $value['count'];
+        }));
+        return array_slice($values, 0, 10);
+    }
+
     protected function processQuery(Query $queryObj, $expanded, $fullRepr, $options)
     {
         $url = str_replace('json=true&', '', $this->primo->url('brief', $queryObj));
@@ -98,6 +110,11 @@ class PrimoSearch {
             $out[] = PrimoRecord::make($doc, $deeplinkProvider, $expanded, $this->getRecordOptions($options))->toArray($fullRepr);
         }
 
+        $facets = [];
+        $vocab = $options->get('vocabulary');
+        if (isset($this->indices[$vocab])) {
+            $facets[$vocab] = $this->parseFacet($root, 'local' . $this->indices[$vocab]);
+        }
         $docset = $root->first('//s:DOCSET');
 
         $hits = intval($docset->attr('TOTALHITS'));
@@ -112,6 +129,7 @@ class PrimoSearch {
             'next' => $next,
             'total_results' => $hits,
             'results' => $out,
+            'facets' => $facets,
         ];
     }
 
