@@ -158,6 +158,14 @@ class PrimoSearch {
             }
         }
 
+        if ($input->has('genre')) {
+            foreach (explode(' AND ', $input->get('genre')) AS $elem) {
+                $queryTerm = new QueryTerm();
+                $queryTerm->set('facet_genre', QueryTerm::EXACT, explode(' OR ', $elem));
+                $queryObj->includeTerm($queryTerm);
+            }
+        }
+
         $fullRepr = $input->get('repr') == 'full';
 
         return $this->processQuery($queryObj, false, $fullRepr, $input);

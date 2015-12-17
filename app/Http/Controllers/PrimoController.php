@@ -51,6 +51,12 @@ class PrimoController extends Controller
      *     @SWG\Schema(ref="#/definitions/PrimoSearchErrorResponse")
      *   ),
      *   @SWG\Parameter(
+     *     name="genre",
+     *     in="query",
+     *     description="One or more form/genre terms, separated by `OR`. Not limited to a specific vocabulary.",
+     *     type="string"
+     *   ),
+     *   @SWG\Parameter(
      *     name="query",
      *     in="query",
      *     description="Query string",

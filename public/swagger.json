@@ -21,6 +21,12 @@
                 ],
                 "parameters": [
                     {
+                        "name": "genre",
+                        "in": "query",
+                        "description": "One or more form/genre terms, separated by `OR`. Not limited to a specific vocabulary.",
+                        "type": "string"
+                    },
+                    {
                         "name": "query",
                         "in": "query",
                         "description": "Query string",
