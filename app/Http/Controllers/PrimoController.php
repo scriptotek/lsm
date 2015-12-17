@@ -59,7 +59,7 @@ class PrimoController extends Controller
      *   @SWG\Parameter(
      *     name="subject",
      *     in="query",
-     *     description="One or more subject terms. Multiple subject terms separated by comma will be searched using OR.",
+     *     description="One or more subject terms. Boolean operators `AND` and `OR` are supported, with `AND` taking precedence over `OR`. Grouping with parentheses are not supported.",
      *     type="string"
      *   ),
      *   @SWG\Parameter(

@@ -29,13 +29,13 @@
                     {
                         "name": "subject",
                         "in": "query",
-                        "description": "One or more subject terms. Multiple subject terms separated by comma will be searched using OR.",
+                        "description": "One or more subject terms. Boolean operators `AND` and `OR` are supported, with `AND` taking precedence over `OR`. Grouping with parentheses are not supported.",
                         "type": "string"
                     },
                     {
                         "name": "vocabulary",
                         "in": "query",
-                        "description": "Subject vocabulary. Use 'geo' for geographic names.",
+                        "description": "Subject vocabulary. Use 'geo' for geographic names. Leave blank to search all subject vocabularies.",
                         "type": "string",
                         "enum": [
                             "realfagstermer",
@@ -120,7 +120,8 @@
                 ],
                 "description": "Get details about a single record",
                 "produces": [
-                    "application/json"
+                    "application/json",
+                    "application/xml"
                 ],
                 "parameters": [
                     {

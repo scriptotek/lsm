@@ -150,10 +150,12 @@ class PrimoSearch {
 
         if ($input->has('subject')) {
             $vocabulary = $input->get('vocabulary');
-            $queryTerm = new QueryTerm();
-            $index = isset($this->indices[$vocabulary]) ? 'lsr' . $this->indices[$vocabulary] : 'sub';
-            $queryTerm->set($index, QueryTerm::EXACT, explode(',', $input->get('subject')));
-            $queryObj->includeTerm($queryTerm);
+            foreach (explode(' AND ', $input->get('subject')) AS $elem) {
+                $queryTerm = new QueryTerm();
+                $index = isset($this->indices[$vocabulary]) ? 'lsr' . $this->indices[$vocabulary] : 'sub';
+                $queryTerm->set($index, QueryTerm::EXACT, explode(' OR ', $elem));
+                $queryObj->includeTerm($queryTerm);
+            }
         }
 
         $fullRepr = $input->get('repr') == 'full';

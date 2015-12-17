@@ -101,6 +101,7 @@ class PrimoRecord implements \JsonSerializable
         $this->full['subjects']['realfagstermer'] = $this->extractArray($record, './p:search/p:lsr20');
         $this->full['subjects']['humord'] = $this->extractArray($record, './p:search/p:lsr14');
         $this->full['subjects']['tekord'] = $this->extractArray($record, './p:search/p:lsr12');
+        $this->full['subjects']['mrtermer'] = $this->extractArray($record, './p:search/p:lsr19');
         $this->full['subjects']['geo'] = $this->extractArray($record, './p:search/p:lsr17');
         $this->full['subjects']['topic'] = $this->extractArray($record, './p:search/p:topic');
         $this->full['subjects']['subject'] = $this->extractArray($record, './p:search/p:subject');
@@ -113,10 +114,10 @@ class PrimoRecord implements \JsonSerializable
         }, $this->full['subjects']['subject']);
 
         // Filter out free keywords
-        $this->full['subjects']['subject'] = array_filter($this->full['subjects']['subject'], function($s) {
+        $this->full['subjects']['subject'] = array_values(array_filter($this->full['subjects']['subject'], function($s) {
             $firstChar = substr($s,0, 1);
             return (mb_strtolower($firstChar) !== $firstChar);
-        });
+        }));
 
         $this->brief['status'] = [
             'print' => $this->hasPrint($this->full),
@@ -275,9 +276,12 @@ class PrimoRecord implements \JsonSerializable
         // Add delivery
         foreach ($this->extractMarcArray($record, './p:delivery/p:delcategory') as $k) {
             $component =& $this->getComponent($components, array_get($k, 'id'));
-            if (array_get($k, 'institution', $this->primoInst) == $this->primoInst) {
-                array_set($component, 'category', $k['V']);
-            }
+
+            // @TODO: Beware: This limitaion means results with no local holdings will end up with no category.
+            //        See below.
+            //if (array_get($k, 'institution', $this->primoInst) == $this->primoInst) {
+            array_set($component, 'category', $k['V']);
+            //}
         }
 
         // Add Alma IDs
@@ -285,9 +289,7 @@ class PrimoRecord implements \JsonSerializable
         foreach ($this->extractMarcArray($record, './p:control/p:almaid') as $k) {
             $component =& $this->getComponent($components, array_get($k, 'id'));
             list($inst, $id) = explode(':', $k['V']);
-            if ($inst == $this->almaInst) {
-                $component['alma_id'] = $id;
-            }
+            array_set($component, 'alma_id.' . $inst, $id);
         }
 
         // Add availability
@@ -296,6 +298,8 @@ class PrimoRecord implements \JsonSerializable
 
         foreach ($this->extractMarcArray($record, './p:display/p:availlibrary') as $k) {
             $component =& $this->getComponent($components, array_get($k, 'id'));
+
+            // @TODO: Beware: This limitaion means some results will end up with on holdings
             // if ($k['institution'] != $this->primoInst) {
             //     continue;
             // }
