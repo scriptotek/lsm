@@ -1,6 +1,6 @@
 {
-    "name": "scriptotek/scs",
-    "description": "University of Oslo Library Simple Catalogue Search",
+    "name": "scriptotek/lsm",
+    "description": "University of Oslo Library Services Middleware",
     "license": "MIT",
     "type": "project",
     "authors": [

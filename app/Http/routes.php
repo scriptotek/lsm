@@ -3,10 +3,10 @@
 /**
  * @SWG\Swagger(
  *   schemes={"https"},
- *   host="scs.biblionaut.net",
+ *   host="lsm.biblionaut.net",
  *   basePath="/",
  *   @SWG\Info(
- *     title="University of Oslo Library Simple Catalogue Search (SCS)",
+ *     title="University of Oslo Library Services Middleware (LSM)",
  *     version="0.1"
  *   )
  * )

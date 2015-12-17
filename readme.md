@@ -1,6 +1,6 @@
-## scs
+## University of Oslo Library Services Middleware
 
-Update swagger documentation:
+To update swagger documentation:
 
 	./vendor/bin/swagger app -o public/swagger.json
 

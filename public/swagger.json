@@ -1,10 +1,10 @@
 {
     "swagger": "2.0",
     "info": {
-        "title": "University of Oslo Library Simple Catalogue Search (SCS)",
+        "title": "University of Oslo Library Services Middleware (LSM)",
         "version": "0.1"
     },
-    "host": "scs.biblionaut.net",
+    "host": "lsm.biblionaut.net",
     "basePath": "/",
     "schemes": [
         "https"
