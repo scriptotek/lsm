@@ -57,6 +57,12 @@ class PrimoController extends Controller
      *     type="string"
      *   ),
      *   @SWG\Parameter(
+     *     name="place",
+     *     in="query",
+     *     description="One or more geographical names, separated by `OR`. Not limited to a specific vocabulary.",
+     *     type="string"
+     *   ),
+     *   @SWG\Parameter(
      *     name="query",
      *     in="query",
      *     description="Query string",
@@ -71,9 +77,9 @@ class PrimoController extends Controller
      *   @SWG\Parameter(
      *     name="vocabulary",
      *     in="query",
-     *     description="Subject vocabulary. Use 'geo' for geographic names. Leave blank to search all subject vocabularies.",
+     *     description="Subject vocabulary. Used as a qualifier with the subject field, leave blank to search all subject vocabularies.",
      *     type="string",
-     *     enum={"realfagstermer", "humord", "tekord", "mrtermer", "geo"}
+     *     enum={"realfagstermer", "humord", "tekord", "mrtermer"}
      *   ),
      *   @SWG\Parameter(
      *     name="material",

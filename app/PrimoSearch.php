@@ -166,6 +166,14 @@ class PrimoSearch {
             }
         }
 
+        if ($input->has('place')) {
+            foreach (explode(' AND ', $input->get('place')) AS $elem) {
+                $queryTerm = new QueryTerm();
+                $queryTerm->set('facet_local' . $this->indices['geo'], QueryTerm::EXACT, explode(' OR ', $elem));
+                $queryObj->includeTerm($queryTerm);
+            }
+        }
+
         $fullRepr = $input->get('repr') == 'full';
 
         return $this->processQuery($queryObj, false, $fullRepr, $input);

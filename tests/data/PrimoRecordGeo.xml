@@ -1,0 +1,659 @@
+<sear:SEGMENTS xmlns:sear="http://www.exlibrisgroup.com/xsd/jaguar/search">
+	<sear:JAGROOT>
+		<sear:RESULT>
+			<sear:DOCSET TOTALHITS="1">
+				<sear:DOC LOCAL="true">
+					<PrimoNMBib xmlns="http://www.exlibrisgroup.com/xsd/primo/primo_nm_bib">
+						<record>
+							<control>
+								<sourcerecordid>71513872870002201</sourcerecordid>
+								<sourceid>BIBSYS_ILS</sourceid>
+								<recordid>BIBSYS_ILS71513872870002201</recordid>
+								<addsrcrecordid>990600140084702201</addsrcrecordid>
+								<sourceformat>MARC21</sourceformat>
+								<sourcesystem>Alma</sourcesystem>
+								<almaid>47BIBSYS_NETWORK:71513872870002201</almaid>
+								<almaid>47BIBSYS_FFI_BIBL:216501080002246</almaid>
+								<almaid>47BIBSYS_HIT:2120057170002210</almaid>
+								<almaid>47BIBSYS_HAL:2123254640002235</almaid>
+								<almaid>47BIBSYS_JUSDEP:216001260002289</almaid>
+								<almaid>47BIBSYS_NTNU_UB:21161336400002203</almaid>
+								<almaid>47BIBSYS_NB:21168742430002202</almaid>
+								<almaid>47BIBSYS_NPOLAR:215889510002260</almaid>
+								<almaid>47BIBSYS_NIVA:214482940002295</almaid>
+								<almaid>47BIBSYS_UBO:21156650970002204</almaid>
+								<almaid>47BIBSYS_UBTO:2163348750002205</almaid>
+								<almaid>47BIBSYS_UBB:2197908220002207</almaid>
+								<almaid>47BIBSYS_UBIN:2122236410002211</almaid>
+								<almaid>47BIBSYS_UNIS:215051000002259</almaid>
+							</control>
+							<display>
+								<type>book</type>
+								<title>Tigu-su : på isflak mot Nordpolen</title>
+								<creator>Aleksandr Ugryumov</creator>
+								<contributor>Vladimir Korovin; Salve Dahle 1952-; Frank A. Jensen; Stig Falk-Petersen 1949-</contributor>
+								<publisher>Forl. Nord</publisher>
+								<creationdate>2005</creationdate>
+								<format>120 s. ill. 31 cm</format>
+								<identifier>$$CISBN$$V8290552165</identifier>
+								<subject>Geofysikk; Havis; Ekspedisjoner; Nordpolen; Historie; Geografi; Polarekspedisjoner; 1900-tallet; Russland; Geofysikk; Sovjetunionen; Drivis; Arktis; Nordpolen; polarforsking; nordpolen; geofysikk; historie; tigu-su; ekspedisjoner; arktis; kart; polhavet; sjøis; Kart; Historie; Polarforskning; Polarekspedisjoner</subject>
+								<language>nor</language>
+								<source>BIBSYS_ILS</source>
+								<availlibrary>$$IFFI_BIBL$$LFFI_BIBL1023102$$1FFI FFI/Horten$$2919.8/.9 Ugr$$Savailable$$X47BIBSYS_FFI_BIBL$$Y1023102$$Zyf0007$$P1</availlibrary>
+								<availlibrary>$$IFFI_BIBL$$LFFI_BIBL1023102$$1FFI (yf0001)$$2919.8/.9 Ugr$$Sunavailable$$X47BIBSYS_FFI_BIBL$$Y1023102$$Zyf0001$$P2</availlibrary>
+								<availlibrary>$$IHIT$$LHIT1082101$$1BØ$$2910.4 U$$Savailable$$X47BIBSYS_HIT$$Y1082101$$Zua0001$$P1</availlibrary>
+								<availlibrary>$$IHAL$$LHAL1150401$$1HÅL (xb0001)$$2919.8 Ug$$Savailable$$X47BIBSYS_HAL$$Y1150401$$Zxb0001$$P1</availlibrary>
+								<availlibrary>$$IJUSDEP$$LJUSDEP1030026$$1JUSDEP (tt0001)$$Savailable$$X47BIBSYS_JUSDEP$$Y1030026$$Ztt0001$$P1</availlibrary>
+								<availlibrary>$$INTNU_UB$$LNTNU_UB1160105$$1GUNNERUS qK$$2551$$Savailable$$X47BIBSYS_NTNU_UB$$Y1160105$$Za00261$$P1</availlibrary>
+								<availlibrary>$$INB$$LNB0183334$$1Fjellmagasinet$$2a$$Savailable$$X47BIBSYS_NB$$Y0183334$$Zg00001$$P1</availlibrary>
+								<availlibrary>$$INB$$LNB0030100$$1NB Oslo$$2NA/A 2006:2923$$Savailable$$X47BIBSYS_NB$$Y0030100$$Zg00005$$P2</availlibrary>
+								<availlibrary>$$INB$$LNB0183300$$1Fjernlånseksemplar$$Savailable$$X47BIBSYS_NB$$Y0183300$$Zg00030$$P3</availlibrary>
+								<availlibrary>$$INPOLAR$$LNPOLAR1190206$$1NPOLAR (yy0001)$$2(*601):93 Ugr$$Savailable$$X47BIBSYS_NPOLAR$$Y1190206$$Zyy0001$$P1</availlibrary>
+								<availlibrary>$$INIVA$$LNIVA1032101$$1NIVA B M (tg0023)$$2919.8/.9 Ug$$Savailable$$X47BIBSYS_NIVA$$Y1032101$$Ztg0023$$P1</availlibrary>
+								<availlibrary>$$IUBO$$LUBO1030310$$1UREAL Samling 42 (k00475)$$2FA 3864$$Savailable$$X47BIBSYS_UBO$$Y1030310$$Zk00475$$P1</availlibrary>
+								<availlibrary>$$IUBTO$$LUBTO1190201$$1UBT/KS$$2q910.4(98) Ugr$$Savailable$$X47BIBSYS_UBTO$$Y1190201$$Zc00071$$P1</availlibrary>
+								<availlibrary>$$IUBB$$LUBB1120104$$1UBBRB$$2919.8 Ugr$$Savailable$$X47BIBSYS_UBB$$Y1120104$$Zd00119$$P1</availlibrary>
+								<availlibrary>$$IUBIN$$LUBIN1180401$$1UBIN (ud0001)$$2919.804 Ugr$$Savailable$$X47BIBSYS_UBIN$$Y1180401$$Zud0001$$P1</availlibrary>
+								<availlibrary>$$IUNIS$$LUNIS1211100$$1Main stacks$$2910.4(268) Ugr$$Savailable$$X47BIBSYS_UNIS$$Y1211100$$Zyb0001$$P1</availlibrary>
+								<lds07>polarforsking nordpolen geofysikk historie tigu-su ekspedisjoner arktis kart polhavet sjøis$$INB</lds07>
+								<lds08>Norsk (bokmål)$$INORLA</lds08>
+								<lds09>71513872870002201</lds09>
+								<lds12>Tigu-su :</lds12>
+								<lds22>Aleksandr Ugryumov og Vladimir Korovin ; norsk redaksjon: Salve Dahle, Frank A. Jensen, Stig Falk-Petersen</lds22>
+								<lds29>&lt;img src=&quot;http://innhold.bibsys.no/bilde/forside/?size=mini&amp;id=LITE_150071567.jpg&quot; alt=&quot;omslagbilde&quot; class=&quot;bibsys_omslagsbilde&quot; /&gt;</lds29>
+								<lds38>polarforsking nordpolen geofysikk historie tigu-su ekspedisjoner arktis kart polhavet sjøis$$INB</lds38>
+								<lds06>Svolvær</lds06>
+								<lds10>910.9163</lds10>
+								<lds18>Fa:6$$IUBO</lds18>
+								<availinstitution>$$INTNU_UB$$Savailable</availinstitution>
+								<availinstitution>$$INB$$Savailable</availinstitution>
+								<availinstitution>$$IJUSDEP$$Savailable</availinstitution>
+								<availinstitution>$$IUNIS$$Savailable</availinstitution>
+								<availinstitution>$$IUBB$$Savailable</availinstitution>
+								<availinstitution>$$IUBIN$$Savailable</availinstitution>
+								<availinstitution>$$IHAL$$Savailable</availinstitution>
+								<availinstitution>$$IFFI_BIBL$$Savailable</availinstitution>
+								<availinstitution>$$IHIT$$Savailable</availinstitution>
+								<availinstitution>$$INIVA$$Savailable</availinstitution>
+								<availinstitution>$$INPOLAR$$Savailable</availinstitution>
+								<availinstitution>$$IUBO$$Savailable</availinstitution>
+								<availinstitution>$$IUBTO$$Savailable</availinstitution>
+								<availpnx>available</availpnx>
+							</display>
+							<links>
+								<thumbnail>$$Tamazon_thumb</thumbnail>
+								<thumbnail>$$Tgoogle_thumb</thumbnail>
+								<thumbnail>$$TBIBSYS_thumb$$1=LITE_150071567.jpg</thumbnail>
+								<addlink>$$Uhttp://content.bibsys.no/content/?type=descr_forlagssentr&amp;isbn=8290552165$$Ebeskrivelse_fra_forlagssentralen</addlink>
+								<addlink>$$Uhttp://content.bibsys.no/content/?isbn=8290552165$$Einnhold</addlink>
+								<addlink>$$Uhttp://innhold.bibsys.no/bilde/forside/?size=mini&amp;id=LITE_150071567.jpg$$Eomslagsbilde</addlink>
+								<lln09>http://content.bibsys.no/content/?isbn=8290552165</lln09>
+								<lln12>$$TBIBSYS_talis$$EBIBSYS_talis$$IUBO</lln12>
+								<lln12>$$TBIBSYS_talis$$EBIBSYS_talis$$IBI</lln12>
+								<lln16>$$TBIBSYS_bibliographic_marc21$$EBIBSYS_bibliographic_marc21</lln16>
+							</links>
+							<search>
+								<creatorcontrib>Aleksandr  Ugryumov</creatorcontrib>
+								<creatorcontrib>Ugryumov, A</creatorcontrib>
+								<creatorcontrib>Aleksandr Ugryumov og Vladimir Korovin ; norsk redaksjon: Salve Dahle, Frank A. Jensen, Stig Falk-Petersen</creatorcontrib>
+								<creatorcontrib>Vladimir  Korovin</creatorcontrib>
+								<creatorcontrib>Salve,  Dahle  1952-</creatorcontrib>
+								<creatorcontrib>Frank A.,  Jensen</creatorcontrib>
+								<creatorcontrib>Stig,  Falk-Petersen  1949-</creatorcontrib>
+								<creatorcontrib>Korovin, V</creatorcontrib>
+								<creatorcontrib>Dahle, S</creatorcontrib>
+								<creatorcontrib>Jensen, F</creatorcontrib>
+								<creatorcontrib>Falk-Petersen, S</creatorcontrib>
+								<title>Tigu-su : på isflak mot Nordpolen</title>
+								<title>Tigusu på isflak mot Nordpolen</title>
+								<subject>Geofysikk</subject>
+								<subject>Havis</subject>
+								<subject>Ekspedisjoner</subject>
+								<subject>Nordpolen</subject>
+								<subject>Historie</subject>
+								<subject>Geografi</subject>
+								<subject>Polarekspedisjoner</subject>
+								<subject>1900-tallet</subject>
+								<subject>Russland</subject>
+								<subject>Sovjetunionen</subject>
+								<subject>Drivis</subject>
+								<subject>Arktis</subject>
+								<subject>polarforsking</subject>
+								<subject>nordpolen</subject>
+								<subject>geofysikk</subject>
+								<subject>historie</subject>
+								<subject>tigu-su</subject>
+								<subject>ekspedisjoner</subject>
+								<subject>arktis</subject>
+								<subject>kart</subject>
+								<subject>polhavet</subject>
+								<subject>sjøis</subject>
+								<subject>Kart</subject>
+								<subject>Polarforskning</subject>
+								<general>Forl. Nord</general>
+								<sourceid>BIBSYS_ILS</sourceid>
+								<recordid>BIBSYS_ILS71513872870002201</recordid>
+								<isbn>8290552165</isbn>
+								<rsrctype>books</rsrctype>
+								<rsrctype>print-books</rsrctype>
+								<creationdate>2005</creationdate>
+								<startdate>20050101</startdate>
+								<enddate>20051231</enddate>
+								<addsrcrecordid>990600140084702201</addsrcrecordid>
+								<addsrcrecordid>990600140084702246</addsrcrecordid>
+								<addsrcrecordid>990600140084702210</addsrcrecordid>
+								<addsrcrecordid>990600140084702235</addsrcrecordid>
+								<addsrcrecordid>990600140084702289</addsrcrecordid>
+								<addsrcrecordid>990600140084702203</addsrcrecordid>
+								<addsrcrecordid>990600140084702202</addsrcrecordid>
+								<addsrcrecordid>990600140084702260</addsrcrecordid>
+								<addsrcrecordid>990600140084702295</addsrcrecordid>
+								<addsrcrecordid>990600140084702204</addsrcrecordid>
+								<addsrcrecordid>990600140084702205</addsrcrecordid>
+								<addsrcrecordid>990600140084702207</addsrcrecordid>
+								<addsrcrecordid>990600140084702211</addsrcrecordid>
+								<addsrcrecordid>990600140084702259</addsrcrecordid>
+								<addsrcrecordid>71513872870002201</addsrcrecordid>
+								<addsrcrecordid>216501080002246</addsrcrecordid>
+								<addsrcrecordid>2120057170002210</addsrcrecordid>
+								<addsrcrecordid>2123254640002235</addsrcrecordid>
+								<addsrcrecordid>216001260002289</addsrcrecordid>
+								<addsrcrecordid>21161336400002203</addsrcrecordid>
+								<addsrcrecordid>21168742430002202</addsrcrecordid>
+								<addsrcrecordid>215889510002260</addsrcrecordid>
+								<addsrcrecordid>214482940002295</addsrcrecordid>
+								<addsrcrecordid>21156650970002204</addsrcrecordid>
+								<addsrcrecordid>2163348750002205</addsrcrecordid>
+								<addsrcrecordid>2197908220002207</addsrcrecordid>
+								<addsrcrecordid>2122236410002211</addsrcrecordid>
+								<addsrcrecordid>215051000002259</addsrcrecordid>
+								<searchscope>BIBSYS_ILS</searchscope>
+								<searchscope>BIBSYS</searchscope>
+								<searchscope>NORBOK</searchscope>
+								<searchscope>FFI_BIBL</searchscope>
+								<searchscope>HIT</searchscope>
+								<searchscope>HAL</searchscope>
+								<searchscope>JUSDEP</searchscope>
+								<searchscope>NTNU_UB</searchscope>
+								<searchscope>NB</searchscope>
+								<searchscope>NPOLAR</searchscope>
+								<searchscope>NIVA</searchscope>
+								<searchscope>UBO</searchscope>
+								<searchscope>UBTO</searchscope>
+								<searchscope>UBB</searchscope>
+								<searchscope>UBIN</searchscope>
+								<searchscope>UNIS</searchscope>
+								<scope>BIBSYS_ILS</scope>
+								<scope>BIBSYS</scope>
+								<scope>NORBOK</scope>
+								<scope>FFI_BIBL</scope>
+								<scope>HIT</scope>
+								<scope>HAL</scope>
+								<scope>JUSDEP</scope>
+								<scope>NTNU_UB</scope>
+								<scope>NB</scope>
+								<scope>NPOLAR</scope>
+								<scope>NIVA</scope>
+								<scope>UBO</scope>
+								<scope>UBTO</scope>
+								<scope>UBB</scope>
+								<scope>UBIN</scope>
+								<scope>UNIS</scope>
+								<lsr03>Forl. Nord</lsr03>
+								<lsr04>ffi</lsr04>
+								<lsr04>bø</lsr04>
+								<lsr04>hål</lsr04>
+								<lsr04>jusdep</lsr04>
+								<lsr04>gunnerus</lsr04>
+								<lsr04>fjellmagasinet</lsr04>
+								<lsr04>nb</lsr04>
+								<lsr04>fjernlånseksemplar</lsr04>
+								<lsr04>npolar</lsr04>
+								<lsr04>niva</lsr04>
+								<lsr04>ureal</lsr04>
+								<lsr04>ubtks</lsr04>
+								<lsr04>ubbrb</lsr04>
+								<lsr04>ubin</lsr04>
+								<lsr04>main</lsr04>
+								<lsr05>ffiffihorten</lsr05>
+								<lsr05>ffi(yf0001)</lsr05>
+								<lsr05>bø</lsr05>
+								<lsr05>hål(xb0001)</lsr05>
+								<lsr05>jusdep(tt0001)</lsr05>
+								<lsr05>gunnerusqk</lsr05>
+								<lsr05>fjellmagasinet</lsr05>
+								<lsr05>nboslo</lsr05>
+								<lsr05>fjernlånseksemplar</lsr05>
+								<lsr05>npolar(yy0001)</lsr05>
+								<lsr05>nivabm(tg0023)</lsr05>
+								<lsr05>urealsamling42(k00475)</lsr05>
+								<lsr05>ubtks</lsr05>
+								<lsr05>ubbrb</lsr05>
+								<lsr05>ubin(ud0001)</lsr05>
+								<lsr05>mainstacks</lsr05>
+								<lsr05>fa3864</lsr05>
+								<lsr07>polarforsking nordpolen geofysikk historie tigu-su ekspedisjoner arktis kart polhavet sjøis$$INB</lsr07>
+								<lsr09>060014008</lsr09>
+								<lsr09>BIBSYS_ILS060014008</lsr09>
+								<lsr10>910.9163</lsr10>
+								<lsr10>919.804</lsr10>
+								<lsr10>919.8</lsr10>
+								<lsr13>(*601), 93</lsr13>
+								<lsr13>919.8/.9</lsr13>
+								<lsr13>910.4(98)</lsr13>
+								<lsr13>910.4(268)</lsr13>
+								<lsr14>Nordpolen</lsr14>
+								<lsr14>Historie</lsr14>
+								<lsr14>Geografi</lsr14>
+								<lsr14>Polarekspedisjoner</lsr14>
+								<lsr14>1900-tallet</lsr14>
+								<lsr14>Russland</lsr14>
+								<lsr14>Geofysikk</lsr14>
+								<lsr14>Sovjetunionen</lsr14>
+								<lsr14>Drivis</lsr14>
+								<lsr17>Arktis</lsr17>
+								<lsr17>Nordpolen</lsr17>
+								<lsr30>990600140084702201</lsr30>
+								<lsr33>990600140084702201</lsr33>
+								<lsr34>990600140084702201</lsr34>
+								<lsr35>990600140084702201</lsr35>
+								<lsr38>polarforsking nordpolen geofysikk historie tigu-su ekspedisjoner arktis kart polhavet sjøis$$INB</lsr38>
+								<lsr39>6004598</lsr39>
+								<lsr39>6004596</lsr39>
+								<lsr39>90353885</lsr39>
+								<lsr39>5052131</lsr39>
+								<lsr39>90352272</lsr39>
+								<lsr41>Aleksandr Ugryumov</lsr41>
+								<lsr41>Ugryumov, A</lsr41>
+								<lsr41>Aleksandr Ugryumov og Vladimir Korovin ; norsk redaksjon: Salve Dahle, Frank A. Jensen, Stig Falk-Petersen</lsr41>
+								<lsr41>Vladimir Korovin</lsr41>
+								<lsr41>Salve, Dahle 1952-</lsr41>
+								<lsr41>Frank A., Jensen</lsr41>
+								<lsr41>Stig, Falk-Petersen 1949-</lsr41>
+								<lsr41>Korovin, V</lsr41>
+								<lsr41>Dahle, S</lsr41>
+								<lsr41>Jensen, F</lsr41>
+								<lsr41>Falk-Petersen, S</lsr41>
+								<lsr02>Norbok</lsr02>
+								<lsr06>Svolvær</lsr06>
+								<lsr18>Fa:6$$IUBO</lsr18>
+								<lsr20>Geofysikk</lsr20>
+								<lsr20>Havis</lsr20>
+								<lsr20>Ekspedisjoner</lsr20>
+							</search>
+							<sort>
+								<title>Tigu-su : på isflak mot Nordpolen</title>
+								<creationdate>2005</creationdate>
+								<author>Ugryumov, Aleksandr</author>
+								<lso01>2005</lso01>
+							</sort>
+							<facets>
+								<language>nor</language>
+								<creationdate>2005</creationdate>
+								<topic>Geofysikk</topic>
+								<topic>Havis</topic>
+								<topic>Ekspedisjoner</topic>
+								<topic>Nordpolen</topic>
+								<topic>Historie</topic>
+								<topic>Geografi</topic>
+								<topic>Polarekspedisjoner</topic>
+								<topic>1900-tallet</topic>
+								<topic>Russland</topic>
+								<topic>Sovjetunionen</topic>
+								<topic>Drivis</topic>
+								<topic>Arktis</topic>
+								<topic>Polarforskning</topic>
+								<toplevel>bibsys</toplevel>
+								<prefilter>books</prefilter>
+								<prefilter>print-books</prefilter>
+								<rsrctype>books</rsrctype>
+								<rsrctype>print-books</rsrctype>
+								<creatorcontrib>Ugryumov, Aleksandr</creatorcontrib>
+								<creatorcontrib>Korovin, Vladimir</creatorcontrib>
+								<creatorcontrib>Dahle, Salve</creatorcontrib>
+								<creatorcontrib>Jensen, Frank A.</creatorcontrib>
+								<creatorcontrib>Falk-Petersen, Stig</creatorcontrib>
+								<genre>Kart</genre>
+								<genre>Historie</genre>
+								<library>FFI_BIBL1023102</library>
+								<library>HIT1082101</library>
+								<library>HAL1150401</library>
+								<library>JUSDEP1030026</library>
+								<library>NTNU_UB1160105</library>
+								<library>NB0183334</library>
+								<library>NB0030100</library>
+								<library>NB0183300</library>
+								<library>NPOLAR1190206</library>
+								<library>NIVA1032101</library>
+								<library>UBO1030310</library>
+								<library>UBTO1190201</library>
+								<library>UBB1120104</library>
+								<library>UBIN1180401</library>
+								<library>UNIS1211100</library>
+								<atoz>T</atoz>
+								<lfc02>Norbok</lfc02>
+								<lfc10>910.9163</lfc10>
+								<lfc10>919.804</lfc10>
+								<lfc10>919.8</lfc10>
+								<lfc13>(*601), 93</lfc13>
+								<lfc13>919.8/.9</lfc13>
+								<lfc13>910.4(98)</lfc13>
+								<lfc13>910.4(268)</lfc13>
+								<lfc14>Nordpolen</lfc14>
+								<lfc14>Historie</lfc14>
+								<lfc14>Geografi</lfc14>
+								<lfc14>Polarekspedisjoner</lfc14>
+								<lfc14>1900-tallet</lfc14>
+								<lfc14>Russland</lfc14>
+								<lfc14>Geofysikk</lfc14>
+								<lfc14>Sovjetunionen</lfc14>
+								<lfc14>Drivis</lfc14>
+								<lfc17>Arktis</lfc17>
+								<lfc17>Nordpolen</lfc17>
+								<lfc18>Fa:6$$IUBO</lfc18>
+								<lfc20>Geofysikk</lfc20>
+								<lfc20>Havis</lfc20>
+								<lfc20>Ekspedisjoner</lfc20>
+								<lfc04>BIBSYS</lfc04>
+								<lfc04>FFI_BIBL</lfc04>
+								<lfc04>HIT</lfc04>
+								<lfc04>HAL</lfc04>
+								<lfc04>JUSDEP</lfc04>
+								<lfc04>NTNU_UB</lfc04>
+								<lfc04>NB</lfc04>
+								<lfc04>NPOLAR</lfc04>
+								<lfc04>NIVA</lfc04>
+								<lfc04>UBO</lfc04>
+								<lfc04>UBTO</lfc04>
+								<lfc04>UBB</lfc04>
+								<lfc04>UBIN</lfc04>
+								<lfc04>UNIS</lfc04>
+								<frbrgroupid>132443183</frbrgroupid>
+								<frbrtype>6</frbrtype>
+							</facets>
+							<dedup>
+								<t>1</t>
+								<c2>8290552165</c2>
+								<c3>tigusupaisflakmotnordpolen</c3>
+								<c4>2005</c4>
+								<c5>990600140084702201</c5>
+								<f3>8290552165</f3>
+								<f5>tigusupaisflakmotnordpolen</f5>
+								<f6>2005</f6>
+								<f7>tigu su pa isflak mot nordpolen</f7>
+								<f9>120 s.</f9>
+								<f10>forl nord</f10>
+								<f11>ugryumov aleksandr</f11>
+								<f20>990600140084702201</f20>
+							</dedup>
+							<frbr>
+								<t>1</t>
+								<k1>$$Kugryumov aleksandr$$AA</k1>
+								<k3>$$Kbook$$ATtigu su pa isflak mot nordpolen</k3>
+							</frbr>
+							<delivery>
+								<institution>BIBSYS</institution>
+								<institution>FFI_BIBL</institution>
+								<institution>HIT</institution>
+								<institution>HAL</institution>
+								<institution>JUSDEP</institution>
+								<institution>NTNU_UB</institution>
+								<institution>NB</institution>
+								<institution>NPOLAR</institution>
+								<institution>NIVA</institution>
+								<institution>UBO</institution>
+								<institution>UBTO</institution>
+								<institution>UBB</institution>
+								<institution>UBIN</institution>
+								<institution>UNIS</institution>
+								<delcategory>Alma-P$$IBIBSYS</delcategory>
+								<delcategory>Alma-P$$IFFI_BIBL</delcategory>
+								<delcategory>Alma-P$$IHIT</delcategory>
+								<delcategory>Alma-P$$IHAL</delcategory>
+								<delcategory>Alma-P$$IJUSDEP</delcategory>
+								<delcategory>Alma-P$$INTNU_UB</delcategory>
+								<delcategory>Alma-P$$INB</delcategory>
+								<delcategory>Alma-P$$INPOLAR</delcategory>
+								<delcategory>Alma-P$$INIVA</delcategory>
+								<delcategory>Alma-P$$IUBO</delcategory>
+								<delcategory>Alma-P$$IUBTO</delcategory>
+								<delcategory>Alma-P$$IUBB</delcategory>
+								<delcategory>Alma-P$$IUBIN</delcategory>
+								<delcategory>Alma-P$$IUNIS</delcategory>
+							</delivery>
+							<ranking>
+								<booster1>1</booster1>
+								<booster2>1</booster2>
+							</ranking>
+							<addata>
+								<aulast>Ugryumov</aulast>
+								<aulast>Korovin</aulast>
+								<aulast>Dahle</aulast>
+								<aulast>Jensen</aulast>
+								<aulast>Falk-Petersen</aulast>
+								<aufirst>Aleksandr</aufirst>
+								<aufirst>Vladimir</aufirst>
+								<aufirst>Salve,</aufirst>
+								<aufirst>Frank A.,</aufirst>
+								<aufirst>Stig,</aufirst>
+								<au>Ugryumov, Aleksandr</au>
+								<addau>Korovin, Vladimir</addau>
+								<addau>Dahle, Salve</addau>
+								<addau>Jensen, Frank A.</addau>
+								<addau>Falk-Petersen, Stig</addau>
+								<btitle>Tigu-su : på isflak mot Nordpolen</btitle>
+								<date>2005</date>
+								<risdate>2005</risdate>
+								<isbn>8290552165</isbn>
+								<format>book</format>
+								<genre>book</genre>
+								<ristype>BOOK</ristype>
+								<cop>Svolvær</cop>
+								<pub>Forl. Nord</pub>
+								<mis1>71513872870002201</mis1>
+								<lad10>tigu su pa isflak mot nordpolen</lad10>
+							</addata>
+							<browse>
+								<author>$$DUgryumov, Aleksandr$$EUgryumov, Aleksandr$$I(NO-TrBIB)6004598</author>
+								<author>$$DKorovin, Vladimir$$EKorovin, Vladimir$$I(NO-TrBIB)6004596</author>
+								<author>$$DDahle, Salve, 1952-$$EDahle, Salve, 1952-$$I(NO-TrBIB)90353885</author>
+								<author>$$DJensen, Frank A.$$EJensen, Frank A.$$I(NO-TrBIB)5052131</author>
+								<author>$$DFalk-Petersen, Stig, 1949-$$EFalk-Petersen, Stig, 1949-$$I(NO-TrBIB)90352272</author>
+								<title>$$DTigu-su : på isflak mot Nordpolen$$ETigu-su : på isflak mot Nordpolen</title>
+								<subject>$$DGeofysikk$$EGeofysikk$$Tnoubomn</subject>
+								<subject>$$DHavis$$EHavis$$Tnoubomn</subject>
+								<subject>$$DEkspedisjoner$$EEkspedisjoner$$Tnoubomn</subject>
+								<subject>$$DNordpolen$$ENordpolen$$Thumord</subject>
+								<subject>$$DHistorie$$EHistorie$$Thumord</subject>
+								<subject>$$DGeografi$$EGeografi$$Thumord</subject>
+								<subject>$$DPolarekspedisjoner$$EPolarekspedisjoner$$Thumord</subject>
+								<subject>$$D1900-tallet$$E1900-tallet$$Thumord</subject>
+								<subject>$$DRussland$$ERussland$$Thumord</subject>
+								<subject>$$DGeofysikk$$EGeofysikk$$Thumord</subject>
+								<subject>$$DSovjetunionen$$ESovjetunionen$$Thumord</subject>
+								<subject>$$DDrivis$$EDrivis$$Thumord</subject>
+								<subject>$$DArktis$$EArktis$$Tno-ubo-mn</subject>
+								<subject>$$DNordpolen$$ENordpolen$$Tno-ubo-mn</subject>
+								<subject>$$DKart$$EKart$$Tnoubomn</subject>
+								<subject>$$DHistorie$$EHistorie$$Tnoubomn</subject>
+								<callnumber>$$IFFI_BIBL$$D919.8/.9 Ugr$$E919.8/.9 ugr$$T8</callnumber>
+								<callnumber>$$IHIT$$D910.4 U$$E910.4 u$$T8</callnumber>
+								<callnumber>$$IHAL$$D919.8 Ug$$E919.8 ug$$T8</callnumber>
+								<callnumber>$$IJUSDEP$$T8</callnumber>
+								<callnumber>$$INTNU_UB$$D551$$E551$$T8</callnumber>
+								<callnumber>$$INB$$Da$$Ea$$T8</callnumber>
+								<callnumber>$$INB$$DNA/A 2006:2923$$Ena/a 2006:2923$$T8</callnumber>
+								<callnumber>$$INB$$T8</callnumber>
+								<callnumber>$$INPOLAR$$D(*601):93 Ugr$$E(*601):93 ugr$$T8</callnumber>
+								<callnumber>$$INIVA$$D919.8/.9 Ug$$E919.8/.9 ug$$T8</callnumber>
+								<callnumber>$$IUBO$$DFA 3864$$Efa 3864$$T8</callnumber>
+								<callnumber>$$IUBTO$$Dq910.4(98) Ugr$$Eq910.4(98) ugr$$T8</callnumber>
+								<callnumber>$$IUBB$$D919.8 Ugr$$E919.8 ugr$$T8</callnumber>
+								<callnumber>$$IUBIN$$D919.804 Ugr$$E919.804 ugr$$T8</callnumber>
+								<callnumber>$$IUNIS$$D910.4(268) Ugr$$E910.4(268) ugr$$T8</callnumber>
+								<institution>BIBSYS</institution>
+								<institution>FFI_BIBL</institution>
+								<institution>HIT</institution>
+								<institution>HAL</institution>
+								<institution>JUSDEP</institution>
+								<institution>NTNU_UB</institution>
+								<institution>NB</institution>
+								<institution>NPOLAR</institution>
+								<institution>NIVA</institution>
+								<institution>UBO</institution>
+								<institution>UBTO</institution>
+								<institution>UBB</institution>
+								<institution>UBIN</institution>
+								<institution>UNIS</institution>
+							</browse>
+						</record>
+					</PrimoNMBib>
+					<sear:GETIT GetIt1="https://bibsys-k.alma.exlibrisgroup.com/view/uresolver/47BIBSYS_UBO/openurl?ctx_enc=info:ofi/enc:UTF-8&amp;ctx_id=10_1&amp;ctx_tim=2015-12-28T18%3A40%3A13IST&amp;ctx_ver=Z39.88-2004&amp;url_ctx_fmt=info:ofi/fmt:kev:mtx:ctx&amp;url_ver=Z39.88-2004&amp;rfr_id=info:sid/primo.exlibrisgroup.com-BIBSYS_ILS&amp;req_id=&amp;rft_dat=ie=47BIBSYS_NETWORK:71513872870002201,ie=47BIBSYS_FFI_BIBL:216501080002246,ie=47BIBSYS_HIT:2120057170002210,ie=47BIBSYS_HAL:2123254640002235,ie=47BIBSYS_JUSDEP:216001260002289,ie=47BIBSYS_NTNU_UB:21161336400002203,ie=47BIBSYS_NB:21168742430002202,ie=47BIBSYS_NPOLAR:215889510002260,ie=47BIBSYS_NIVA:214482940002295,ie=47BIBSYS_UBO:21156650970002204,ie=47BIBSYS_UBTO:2163348750002205,ie=47BIBSYS_UBB:2197908220002207,ie=47BIBSYS_UBIN:2122236410002211,ie=47BIBSYS_UNIS:215051000002259,language=,view=&amp;svc_dat=getit&amp;user_ip=&amp;req.skin=primo" GetIt2="" deliveryCategory="Alma-P"/>
+					<sear:LIBRARIES>
+						<sear:LIBRARY>
+							<sear:institution>FFI_BIBL</sear:institution>
+							<sear:library>FFI_BIBL1023102</sear:library>
+							<sear:status>unavailable</sear:status>
+							<sear:collection>FFI (yf0001)</sear:collection>
+							<sear:callNumber>919.8/.9 Ugr</sear:callNumber>
+							<sear:url>OVP</sear:url>
+						</sear:LIBRARY>
+					</sear:LIBRARIES>
+					<sear:LIBRARIES>
+						<sear:LIBRARY>
+							<sear:institution>FFI_BIBL</sear:institution>
+							<sear:library>FFI_BIBL1023102</sear:library>
+							<sear:status>available</sear:status>
+							<sear:collection>FFI FFI/Horten</sear:collection>
+							<sear:callNumber>919.8/.9 Ugr</sear:callNumber>
+							<sear:url>OVP</sear:url>
+						</sear:LIBRARY>
+						<sear:LIBRARY>
+							<sear:institution>HIT</sear:institution>
+							<sear:library>HIT1082101</sear:library>
+							<sear:status>available</sear:status>
+							<sear:collection>BØ</sear:collection>
+							<sear:callNumber>910.4 U</sear:callNumber>
+							<sear:url>OVP</sear:url>
+						</sear:LIBRARY>
+						<sear:LIBRARY>
+							<sear:institution>HAL</sear:institution>
+							<sear:library>HAL1150401</sear:library>
+							<sear:status>available</sear:status>
+							<sear:collection>HÅL (xb0001)</sear:collection>
+							<sear:callNumber>919.8 Ug</sear:callNumber>
+							<sear:url>OVP</sear:url>
+						</sear:LIBRARY>
+						<sear:LIBRARY>
+							<sear:institution>JUSDEP</sear:institution>
+							<sear:library>JUSDEP1030026</sear:library>
+							<sear:status>available</sear:status>
+							<sear:collection>JUSDEP (tt0001)</sear:collection>
+							<sear:callNumber/>
+							<sear:url>OVP</sear:url>
+						</sear:LIBRARY>
+						<sear:LIBRARY>
+							<sear:institution>NTNU_UB</sear:institution>
+							<sear:library>NTNU_UB1160105</sear:library>
+							<sear:status>available</sear:status>
+							<sear:collection>GUNNERUS qK</sear:collection>
+							<sear:callNumber>551</sear:callNumber>
+							<sear:url>OVP</sear:url>
+						</sear:LIBRARY>
+						<sear:LIBRARY>
+							<sear:institution>NB</sear:institution>
+							<sear:library>NB0183334</sear:library>
+							<sear:status>available</sear:status>
+							<sear:collection>Fjellmagasinet</sear:collection>
+							<sear:callNumber>a</sear:callNumber>
+							<sear:url>OVP</sear:url>
+						</sear:LIBRARY>
+						<sear:LIBRARY>
+							<sear:institution>NB</sear:institution>
+							<sear:library>NB0030100</sear:library>
+							<sear:status>available</sear:status>
+							<sear:collection>NB Oslo</sear:collection>
+							<sear:callNumber>NA/A 2006:2923</sear:callNumber>
+							<sear:url>OVP</sear:url>
+						</sear:LIBRARY>
+						<sear:LIBRARY>
+							<sear:institution>NB</sear:institution>
+							<sear:library>NB0183300</sear:library>
+							<sear:status>available</sear:status>
+							<sear:collection>Fjernlånseksemplar</sear:collection>
+							<sear:callNumber/>
+							<sear:url>OVP</sear:url>
+						</sear:LIBRARY>
+						<sear:LIBRARY>
+							<sear:institution>NPOLAR</sear:institution>
+							<sear:library>NPOLAR1190206</sear:library>
+							<sear:status>available</sear:status>
+							<sear:collection>NPOLAR (yy0001)</sear:collection>
+							<sear:callNumber>(*601):93 Ugr</sear:callNumber>
+							<sear:url>OVP</sear:url>
+						</sear:LIBRARY>
+						<sear:LIBRARY>
+							<sear:institution>NIVA</sear:institution>
+							<sear:library>NIVA1032101</sear:library>
+							<sear:status>available</sear:status>
+							<sear:collection>NIVA B M (tg0023)</sear:collection>
+							<sear:callNumber>919.8/.9 Ug</sear:callNumber>
+							<sear:url>OVP</sear:url>
+						</sear:LIBRARY>
+						<sear:LIBRARY>
+							<sear:institution>UBO</sear:institution>
+							<sear:library>UBO1030310</sear:library>
+							<sear:status>available</sear:status>
+							<sear:collection>UREAL Samling 42 (k00475)</sear:collection>
+							<sear:callNumber>FA 3864</sear:callNumber>
+							<sear:url>OVP</sear:url>
+						</sear:LIBRARY>
+						<sear:LIBRARY>
+							<sear:institution>UBTO</sear:institution>
+							<sear:library>UBTO1190201</sear:library>
+							<sear:status>available</sear:status>
+							<sear:collection>UBT/KS</sear:collection>
+							<sear:callNumber>q910.4(98) Ugr</sear:callNumber>
+							<sear:url>OVP</sear:url>
+						</sear:LIBRARY>
+						<sear:LIBRARY>
+							<sear:institution>UBB</sear:institution>
+							<sear:library>UBB1120104</sear:library>
+							<sear:status>available</sear:status>
+							<sear:collection>UBBRB</sear:collection>
+							<sear:callNumber>919.8 Ugr</sear:callNumber>
+							<sear:url>OVP</sear:url>
+						</sear:LIBRARY>
+						<sear:LIBRARY>
+							<sear:institution>UBIN</sear:institution>
+							<sear:library>UBIN1180401</sear:library>
+							<sear:status>available</sear:status>
+							<sear:collection>UBIN (ud0001)</sear:collection>
+							<sear:callNumber>919.804 Ugr</sear:callNumber>
+							<sear:url>OVP</sear:url>
+						</sear:LIBRARY>
+						<sear:LIBRARY>
+							<sear:institution>UNIS</sear:institution>
+							<sear:library>UNIS1211100</sear:library>
+							<sear:status>available</sear:status>
+							<sear:collection>Main stacks</sear:collection>
+							<sear:callNumber>910.4(268) Ugr</sear:callNumber>
+							<sear:url>OVP</sear:url>
+						</sear:LIBRARY>
+					</sear:LIBRARIES>
+					<sear:LINKS>
+						<sear:thumbnail>http://images.amazon.com/images/P/8290552165.01._SSTHUM_.jpg</sear:thumbnail>
+						<sear:thumbnail>http://books.google.com/books?bibkeys=ISBN:8290552165,OCLC:,LCCN:&amp;jscmd=viewapi&amp;callback=updateGBSCover</sear:thumbnail>
+						<sear:thumbnail>http://innhold.bibsys.no/bilde/forside/?size=mini&amp;id=LITE_150071567.jpg</sear:thumbnail>
+						<sear:addlink>http://content.bibsys.no/content/?type=descr_forlagssentr&amp;isbn=8290552165</sear:addlink>
+						<sear:addlink>http://content.bibsys.no/content/?isbn=8290552165</sear:addlink>
+						<sear:addlink>http://innhold.bibsys.no/bilde/forside/?size=mini&amp;id=LITE_150071567.jpg</sear:addlink>
+						<sear:lln09>errorPage</sear:lln09>
+						<sear:lln12>http://readinglist.bi.edu/ui/forms/bookmarklet.html?bibid=71513872870002201</sear:lln12>
+						<sear:lln16>https://bibsys.alma.exlibrisgroup.com/view/sru/47BIBSYS_NETWORK?version=1.2&amp;operation=searchRetrieve&amp;recordSchema=marcxml&amp;query=alma.all_for_ui=71513872870002201</sear:lln16>
+					</sear:LINKS>
+				</sear:DOC>
+			</sear:DOCSET>
+		</sear:RESULT>
+	</sear:JAGROOT>
+</sear:SEGMENTS>

@@ -25,12 +25,23 @@ class PrimoRecordTest extends TestCase
 
         $this->assertSetsEqual(
             ['engelsk', 'toefl', 'språktester', 'testen', 'språkbruk', 'øvingsbøker'],
-            array_get($record, 'subjects.keywords')
+            array_get($record, 'subjects.keyword')
         );
 
         $this->assertSetsEqual(
             [],
             array_get($record, 'subjects.subject')
+        );
+
+    }
+
+    public function testGeographicNames()
+    {
+        $record = $this->loadPrimoRecord('PrimoRecordGeo.xml');
+
+        $this->assertSetsEqual(
+            ['Nordpolen', 'Arktis'],
+            array_get($record, 'subjects.place')
         );
 
     }
