@@ -105,6 +105,8 @@ class PrimoRecord implements \JsonSerializable
         $this->full['subjects']['geo'] = $this->extractArray($record, './p:search/p:lsr17');
         $this->full['subjects']['topic'] = $this->extractArray($record, './p:search/p:topic');
         $this->full['subjects']['subject'] = $this->extractArray($record, './p:search/p:subject');
+        $this->full['subjects']['genre'] = $this->extractArray($record, './p:facets/p:genre');
+        $this->full['subjects']['keywords'] = [];
 
         $this->full['thumbnails'] = $this->extractThumbs($this->extractArray($sear_links, './s:thumbnail'));
 
@@ -114,8 +116,12 @@ class PrimoRecord implements \JsonSerializable
         }, $this->full['subjects']['subject']);
 
         // Filter out free keywords
+        $this->full['subjects']['keywords'] = array_values(array_filter($this->full['subjects']['subject'], function($s) {
+            $firstChar = mb_substr($s,0, 1);
+            return (mb_strtolower($firstChar) === $firstChar);
+        }));
         $this->full['subjects']['subject'] = array_values(array_filter($this->full['subjects']['subject'], function($s) {
-            $firstChar = substr($s,0, 1);
+            $firstChar = mb_substr($s,0, 1);
             return (mb_strtolower($firstChar) !== $firstChar);
         }));
 
