@@ -1,0 +1,406 @@
+<sear:SEGMENTS xmlns:sear="http://www.exlibrisgroup.com/xsd/jaguar/search">
+	<sear:JAGROOT>
+		<sear:RESULT>
+			<sear:DOCSET TOTALHITS="1">
+				<sear:DOC LOCAL="true">
+					<PrimoNMBib xmlns="http://www.exlibrisgroup.com/xsd/primo/primo_nm_bib">
+						<record>
+							<control>
+								<sourcerecordid>71496206810002201</sourcerecordid>
+								<sourceid>BIBSYS_ILS</sourceid>
+								<recordid>BIBSYS_ILS71496206810002201</recordid>
+								<addsrcrecordid>991237300664702201</addsrcrecordid>
+								<sourceformat>MARC21</sourceformat>
+								<sourcesystem>Alma</sourcesystem>
+								<almaid>47BIBSYS_NETWORK:71496206810002201</almaid>
+								<almaid>47BIBSYS_BI:2116669820002215</almaid>
+								<almaid>47BIBSYS_HSH:2117063100002231</almaid>
+								<almaid>47BIBSYS_HBV:2116349520002217</almaid>
+								<almaid>47BIBSYS_HIN:217894020002236</almaid>
+								<almaid>47BIBSYS_HINT:2121335890002219</almaid>
+								<almaid>47BIBSYS_HIOA:2145832280002212</almaid>
+								<almaid>47BIBSYS_HIST:2113177140002222</almaid>
+								<almaid>47BIBSYS_HIT:2120667750002210</almaid>
+								<almaid>47BIBSYS_HIO:2145164620002218</almaid>
+							</control>
+							<display>
+								<type>book</type>
+								<title>The Official guide to the TOEFL test</title>
+								<contributor>Educational Testing Service</contributor>
+								<edition>4th ed.</edition>
+								<publisher>McGraw-Hill</publisher>
+								<creationdate>c2012</creationdate>
+								<format>653 s. ill.</format>
+								<identifier>$$CISBN$$V9780071766586</identifier>
+								<subject>engelsk; toefl; språktester; språkbruk; testen; øvingsbøker</subject>
+								<language>eng</language>
+								<source>BIBSYS_ILS</source>
+								<availlibrary>$$IBI$$LBI1032105$$1BIOSL$$2378(076) OFF$$Savailable$$X47BIBSYS_BI$$Y1032105$$Ztb0019$$P1</availlibrary>
+								<availlibrary>$$IHSH$$LHSH1110601$$1HSH/HGSD$$2428 Off$$Sunavailable$$X47BIBSYS_HSH$$Y1110601$$Zxa0001$$P1</availlibrary>
+								<availlibrary>$$IHBV$$LHBV1070101$$1HBV/VESTF$$2428 Off$$Savailable$$X47BIBSYS_HBV$$Y1070101$$Zub0062$$P1</availlibrary>
+								<availlibrary>$$IHIN$$LHIN1180501$$1HIN (uf0001)$$Sunavailable$$X47BIBSYS_HIN$$Y1180501$$Zuf0001$$P1</availlibrary>
+								<availlibrary>$$IHINT$$LHINT1170201$$1HINT/STE$$2428.2076 Off$$Savailable$$X47BIBSYS_HINT$$Y1170201$$Zun0057$$P1</availlibrary>
+								<availlibrary>$$IHIOA$$LHIOA1030344$$1HIOA/P35$$2428 Off$$Savailable$$X47BIBSYS_HIOA$$Y1030344$$Zxp0056$$P1</availlibrary>
+								<availlibrary>$$IHIST$$LHIST1160124$$1HIST/ATI$$2428 Off$$Savailable$$X47BIBSYS_HIST$$Y1160124$$Zux0024$$P1</availlibrary>
+								<availlibrary>$$IHIT$$LHIT1082101$$1BØ$$2802.0 O$$Sunavailable$$X47BIBSYS_HIT$$Y1082101$$Zua0001$$P1</availlibrary>
+								<availlibrary>$$IHIO$$LHIO1010101$$1HIØ/hald$$2q 428.2076 Off$$Sunavailable$$X47BIBSYS_HIO$$Y1010101$$Zuc0031$$P1</availlibrary>
+								<availlibrary>$$IHIO$$LHIO1010601$$1HIØ/fred$$2428 Of$$Sunavailable$$X47BIBSYS_HIO$$Y1010601$$Zuc0002$$P2</availlibrary>
+								<lds03>1 CD i lomme</lds03>
+								<lds07>engelsk toefl språktester språkbruk testen øvingsbøker$$INB</lds07>
+								<lds08>Engelsk$$INORLA</lds08>
+								<lds09>71496206810002201</lds09>
+								<lds12>The Official guide to the TOEFL test</lds12>
+								<lds22>[Educational Testing Service]</lds22>
+								<lds29>&lt;img src=&quot;http://innhold.bibsys.no/bilde/forside/?size=mini&amp;id=9780071766586.jpg&quot; alt=&quot;omslagbilde&quot; class=&quot;bibsys_omslagsbilde&quot; /&gt;</lds29>
+								<lds38>engelsk toefl språktester språkbruk testen øvingsbøker$$INB</lds38>
+								<lds06>New York</lds06>
+								<lds10>428</lds10>
+								<availinstitution>$$IHINT$$Savailable</availinstitution>
+								<availinstitution>$$IHSH$$Sunavailable</availinstitution>
+								<availinstitution>$$IHIN$$Sunavailable</availinstitution>
+								<availinstitution>$$IBI$$Savailable</availinstitution>
+								<availinstitution>$$IHBV$$Savailable</availinstitution>
+								<availinstitution>$$IHIOA$$Savailable</availinstitution>
+								<availinstitution>$$IHIST$$Savailable</availinstitution>
+								<availinstitution>$$IHIT$$Sunavailable</availinstitution>
+								<availinstitution>$$IHIO$$Sunavailable</availinstitution>
+								<availpnx>available</availpnx>
+							</display>
+							<links>
+								<thumbnail>$$Tamazon_thumb</thumbnail>
+								<thumbnail>$$Tgoogle_thumb</thumbnail>
+								<thumbnail>$$TBIBSYS_thumb$$1=9780071766586.jpg</thumbnail>
+								<addlink>$$Uhttp://content.bibsys.no/content/?isbn=0071766588$$Einnhold</addlink>
+								<addlink>$$Uhttp://innhold.bibsys.no/bilde/forside/?size=mini&amp;id=9780071766586.jpg$$Eomslagsbilde</addlink>
+								<lln09>http://content.bibsys.no/content/?isbn=0071766588</lln09>
+								<lln12>$$TBIBSYS_talis$$EBIBSYS_talis$$IUBO</lln12>
+								<lln12>$$TBIBSYS_talis$$EBIBSYS_talis$$IBI</lln12>
+								<lln16>$$TBIBSYS_bibliographic_marc21$$EBIBSYS_bibliographic_marc21</lln16>
+							</links>
+							<search>
+								<creatorcontrib>[Educational Testing Service]</creatorcontrib>
+								<creatorcontrib>Educational Testing Service</creatorcontrib>
+								<title>The Official guide to the TOEFL test</title>
+								<subject>engelsk</subject>
+								<subject>toefl</subject>
+								<subject>språktester</subject>
+								<subject>språkbruk</subject>
+								<subject>testen</subject>
+								<subject>øvingsbøker</subject>
+								<general>McGraw-Hill</general>
+								<sourceid>BIBSYS_ILS</sourceid>
+								<recordid>BIBSYS_ILS71496206810002201</recordid>
+								<isbn>9780071766586</isbn>
+								<rsrctype>books</rsrctype>
+								<rsrctype>print-books</rsrctype>
+								<creationdate>2012</creationdate>
+								<startdate>20120101</startdate>
+								<enddate>20121231</enddate>
+								<addsrcrecordid>991237300664702201</addsrcrecordid>
+								<addsrcrecordid>991237300664702215</addsrcrecordid>
+								<addsrcrecordid>991237300664702231</addsrcrecordid>
+								<addsrcrecordid>991237300664702217</addsrcrecordid>
+								<addsrcrecordid>991237300664702236</addsrcrecordid>
+								<addsrcrecordid>991237300664702219</addsrcrecordid>
+								<addsrcrecordid>991237300664702212</addsrcrecordid>
+								<addsrcrecordid>991237300664702222</addsrcrecordid>
+								<addsrcrecordid>991237300664702210</addsrcrecordid>
+								<addsrcrecordid>991237300664702218</addsrcrecordid>
+								<addsrcrecordid>71496206810002201</addsrcrecordid>
+								<addsrcrecordid>2116669820002215</addsrcrecordid>
+								<addsrcrecordid>2117063100002231</addsrcrecordid>
+								<addsrcrecordid>2116349520002217</addsrcrecordid>
+								<addsrcrecordid>217894020002236</addsrcrecordid>
+								<addsrcrecordid>2121335890002219</addsrcrecordid>
+								<addsrcrecordid>2145832280002212</addsrcrecordid>
+								<addsrcrecordid>2113177140002222</addsrcrecordid>
+								<addsrcrecordid>2120667750002210</addsrcrecordid>
+								<addsrcrecordid>2145164620002218</addsrcrecordid>
+								<searchscope>BIBSYS_ILS</searchscope>
+								<searchscope>BIBSYS</searchscope>
+								<searchscope>BI</searchscope>
+								<searchscope>HSH</searchscope>
+								<searchscope>HBV</searchscope>
+								<searchscope>HIN</searchscope>
+								<searchscope>HINT</searchscope>
+								<searchscope>HIOA</searchscope>
+								<searchscope>HIST</searchscope>
+								<searchscope>HIT</searchscope>
+								<searchscope>HIO</searchscope>
+								<scope>BIBSYS_ILS</scope>
+								<scope>BIBSYS</scope>
+								<scope>BI</scope>
+								<scope>HSH</scope>
+								<scope>HBV</scope>
+								<scope>HIN</scope>
+								<scope>HINT</scope>
+								<scope>HIOA</scope>
+								<scope>HIST</scope>
+								<scope>HIT</scope>
+								<scope>HIO</scope>
+								<lsr03>McGraw-Hill</lsr03>
+								<lsr04>biosl</lsr04>
+								<lsr04>hshhgsd</lsr04>
+								<lsr04>hbvvestf</lsr04>
+								<lsr04>hin</lsr04>
+								<lsr04>hintste</lsr04>
+								<lsr04>hioap35</lsr04>
+								<lsr04>histati</lsr04>
+								<lsr04>bø</lsr04>
+								<lsr04>hiøhald</lsr04>
+								<lsr04>hiøfred</lsr04>
+								<lsr05>biosl</lsr05>
+								<lsr05>hshhgsd</lsr05>
+								<lsr05>hbvvestf</lsr05>
+								<lsr05>hin(uf0001)</lsr05>
+								<lsr05>hintste</lsr05>
+								<lsr05>hioap35</lsr05>
+								<lsr05>histati</lsr05>
+								<lsr05>bø</lsr05>
+								<lsr05>hiøhald</lsr05>
+								<lsr05>hiøfred</lsr05>
+								<lsr07>engelsk toefl språktester språkbruk testen øvingsbøker$$INB</lsr07>
+								<lsr09>123730066</lsr09>
+								<lsr09>BIBSYS_ILS123730066</lsr09>
+								<lsr10>428</lsr10>
+								<lsr10>428.2076</lsr10>
+								<lsr13>802.0</lsr13>
+								<lsr13>378(076)</lsr13>
+								<lsr30>991237300664702201</lsr30>
+								<lsr33>991237300664702201</lsr33>
+								<lsr34>991237300664702201</lsr34>
+								<lsr35>991237300664702201</lsr35>
+								<lsr38>engelsk toefl språktester språkbruk testen øvingsbøker$$INB</lsr38>
+								<lsr39>90338859</lsr39>
+								<lsr41>[Educational Testing Service]</lsr41>
+								<lsr41>Educational Testing Service</lsr41>
+								<lsr06>New York</lsr06>
+							</search>
+							<sort>
+								<title>Official guide to the TOEFL test</title>
+								<creationdate>2012</creationdate>
+								<author>Educational Testing Service</author>
+								<lso01>2012</lso01>
+							</sort>
+							<facets>
+								<language>eng</language>
+								<creationdate>2012</creationdate>
+								<toplevel>bibsys</toplevel>
+								<prefilter>books</prefilter>
+								<prefilter>print-books</prefilter>
+								<rsrctype>books</rsrctype>
+								<rsrctype>print-books</rsrctype>
+								<creatorcontrib>Educational Testing Service</creatorcontrib>
+								<library>BI1032105</library>
+								<library>HSH1110601</library>
+								<library>HBV1070101</library>
+								<library>HIN1180501</library>
+								<library>HINT1170201</library>
+								<library>HIOA1030344</library>
+								<library>HIST1160124</library>
+								<library>HIT1082101</library>
+								<library>HIO1010101</library>
+								<library>HIO1010601</library>
+								<atoz>O</atoz>
+								<lfc10>428</lfc10>
+								<lfc10>428.2076</lfc10>
+								<lfc13>802.0</lfc13>
+								<lfc13>378(076)</lfc13>
+								<lfc04>BIBSYS</lfc04>
+								<lfc04>BI</lfc04>
+								<lfc04>HSH</lfc04>
+								<lfc04>HBV</lfc04>
+								<lfc04>HIN</lfc04>
+								<lfc04>HINT</lfc04>
+								<lfc04>HIOA</lfc04>
+								<lfc04>HIST</lfc04>
+								<lfc04>HIT</lfc04>
+								<lfc04>HIO</lfc04>
+								<frbrgroupid>128410410</frbrgroupid>
+								<frbrtype>6</frbrtype>
+							</facets>
+							<dedup>
+								<t>1</t>
+								<c2>9780071766586</c2>
+								<c3>officialguidetothetoefltest</c3>
+								<c4>2012</c4>
+								<c5>991237300664702201</c5>
+								<f3>9780071766586</f3>
+								<f5>officialguidetothetoefltest</f5>
+								<f6>2012</f6>
+								<f7>official guide to the toefl test</f7>
+								<f9>653 s.</f9>
+								<f10>mcgraw hill</f10>
+								<f20>991237300664702201</f20>
+							</dedup>
+							<frbr>
+								<t>1</t>
+								<k1>$$Keducational testing service$$AA</k1>
+								<k3>$$Kbook$$ATofficial guide to the toefl test</k3>
+							</frbr>
+							<delivery>
+								<institution>BIBSYS</institution>
+								<institution>BI</institution>
+								<institution>HSH</institution>
+								<institution>HBV</institution>
+								<institution>HIN</institution>
+								<institution>HINT</institution>
+								<institution>HIOA</institution>
+								<institution>HIST</institution>
+								<institution>HIT</institution>
+								<institution>HIO</institution>
+								<delcategory>Alma-P$$IBIBSYS</delcategory>
+								<delcategory>Alma-P$$IBI</delcategory>
+								<delcategory>Alma-P$$IHSH</delcategory>
+								<delcategory>Alma-P$$IHBV</delcategory>
+								<delcategory>Alma-P$$IHIN</delcategory>
+								<delcategory>Alma-P$$IHINT</delcategory>
+								<delcategory>Alma-P$$IHIOA</delcategory>
+								<delcategory>Alma-P$$IHIST</delcategory>
+								<delcategory>Alma-P$$IHIT</delcategory>
+								<delcategory>Alma-P$$IHIO</delcategory>
+							</delivery>
+							<ranking>
+								<booster1>1</booster1>
+								<booster2>1</booster2>
+							</ranking>
+							<addata>
+								<addau>Educational Testing Service</addau>
+								<btitle>The Official guide to the TOEFL test</btitle>
+								<date>2012</date>
+								<risdate>2012</risdate>
+								<isbn>9780071766586</isbn>
+								<format>book</format>
+								<genre>book</genre>
+								<ristype>BOOK</ristype>
+								<cop>New York</cop>
+								<pub>McGraw-Hill</pub>
+								<mis1>71496206810002201</mis1>
+								<lad10>official guide to the toefl test</lad10>
+							</addata>
+							<browse>
+								<author>$$DEducational Testing Service$$EEducational Testing Service$$I(NO-TrBIB)90338859</author>
+								<title>$$DThe Official guide to the TOEFL test$$EOfficial guide to the TOEFL test</title>
+								<callnumber>$$IBI$$D378(076) OFF$$E378(076) off$$T8</callnumber>
+								<callnumber>$$IHSH$$D428 Off$$E428 off$$T8</callnumber>
+								<callnumber>$$IHBV$$D428 Off$$E428 off$$T8</callnumber>
+								<callnumber>$$IHIN$$T8</callnumber>
+								<callnumber>$$IHINT$$D428.2076 Off$$E428.2076 off$$T8</callnumber>
+								<callnumber>$$IHIOA$$D428 Off$$E428 off$$T8</callnumber>
+								<callnumber>$$IHIST$$D428 Off$$E428 off$$T8</callnumber>
+								<callnumber>$$IHIT$$D802.0 O$$E802.0 o$$T8</callnumber>
+								<callnumber>$$IHIO$$Dq 428.2076 Off$$Eq 428.2076 off$$T8</callnumber>
+								<callnumber>$$IHIO$$D428 Of$$E428 of$$T8</callnumber>
+								<institution>BIBSYS</institution>
+								<institution>BI</institution>
+								<institution>HSH</institution>
+								<institution>HBV</institution>
+								<institution>HIN</institution>
+								<institution>HINT</institution>
+								<institution>HIOA</institution>
+								<institution>HIST</institution>
+								<institution>HIT</institution>
+								<institution>HIO</institution>
+							</browse>
+						</record>
+					</PrimoNMBib>
+					<sear:GETIT GetIt1="https://bibsys-k.alma.exlibrisgroup.com/view/uresolver/47BIBSYS_UBO/openurl?ctx_enc=info:ofi/enc:UTF-8&amp;ctx_id=10_1&amp;ctx_tim=2015-12-28T15%3A51%3A06IST&amp;ctx_ver=Z39.88-2004&amp;url_ctx_fmt=info:ofi/fmt:kev:mtx:ctx&amp;url_ver=Z39.88-2004&amp;rfr_id=info:sid/primo.exlibrisgroup.com-BIBSYS_ILS&amp;req_id=&amp;rft_dat=ie=47BIBSYS_NETWORK:71496206810002201,ie=47BIBSYS_BI:2116669820002215,ie=47BIBSYS_HSH:2117063100002231,ie=47BIBSYS_HBV:2116349520002217,ie=47BIBSYS_HIN:217894020002236,ie=47BIBSYS_HINT:2121335890002219,ie=47BIBSYS_HIOA:2145832280002212,ie=47BIBSYS_HIST:2113177140002222,ie=47BIBSYS_HIT:2120667750002210,ie=47BIBSYS_HIO:2145164620002218,language=,view=&amp;svc_dat=getit&amp;user_ip=&amp;req.skin=primo" GetIt2="" deliveryCategory="Alma-P"/>
+					<sear:LIBRARIES>
+						<sear:LIBRARY>
+							<sear:institution>HSH</sear:institution>
+							<sear:library>HSH1110601</sear:library>
+							<sear:status>unavailable</sear:status>
+							<sear:collection>HSH/HGSD</sear:collection>
+							<sear:callNumber>428 Off</sear:callNumber>
+							<sear:url>OVP</sear:url>
+						</sear:LIBRARY>
+						<sear:LIBRARY>
+							<sear:institution>HIN</sear:institution>
+							<sear:library>HIN1180501</sear:library>
+							<sear:status>unavailable</sear:status>
+							<sear:collection>HIN (uf0001)</sear:collection>
+							<sear:callNumber/>
+							<sear:url>OVP</sear:url>
+						</sear:LIBRARY>
+						<sear:LIBRARY>
+							<sear:institution>HIT</sear:institution>
+							<sear:library>HIT1082101</sear:library>
+							<sear:status>unavailable</sear:status>
+							<sear:collection>BØ</sear:collection>
+							<sear:callNumber>802.0 O</sear:callNumber>
+							<sear:url>OVP</sear:url>
+						</sear:LIBRARY>
+						<sear:LIBRARY>
+							<sear:institution>HIO</sear:institution>
+							<sear:library>HIO1010101</sear:library>
+							<sear:status>unavailable</sear:status>
+							<sear:collection>HIØ/hald</sear:collection>
+							<sear:callNumber>q 428.2076 Off</sear:callNumber>
+							<sear:url>OVP</sear:url>
+						</sear:LIBRARY>
+						<sear:LIBRARY>
+							<sear:institution>HIO</sear:institution>
+							<sear:library>HIO1010601</sear:library>
+							<sear:status>unavailable</sear:status>
+							<sear:collection>HIØ/fred</sear:collection>
+							<sear:callNumber>428 Of</sear:callNumber>
+							<sear:url>OVP</sear:url>
+						</sear:LIBRARY>
+					</sear:LIBRARIES>
+					<sear:LIBRARIES>
+						<sear:LIBRARY>
+							<sear:institution>BI</sear:institution>
+							<sear:library>BI1032105</sear:library>
+							<sear:status>available</sear:status>
+							<sear:collection>BIOSL</sear:collection>
+							<sear:callNumber>378(076) OFF</sear:callNumber>
+							<sear:url>OVP</sear:url>
+						</sear:LIBRARY>
+						<sear:LIBRARY>
+							<sear:institution>HBV</sear:institution>
+							<sear:library>HBV1070101</sear:library>
+							<sear:status>available</sear:status>
+							<sear:collection>HBV/VESTF</sear:collection>
+							<sear:callNumber>428 Off</sear:callNumber>
+							<sear:url>OVP</sear:url>
+						</sear:LIBRARY>
+						<sear:LIBRARY>
+							<sear:institution>HINT</sear:institution>
+							<sear:library>HINT1170201</sear:library>
+							<sear:status>available</sear:status>
+							<sear:collection>HINT/STE</sear:collection>
+							<sear:callNumber>428.2076 Off</sear:callNumber>
+							<sear:url>OVP</sear:url>
+						</sear:LIBRARY>
+						<sear:LIBRARY>
+							<sear:institution>HIOA</sear:institution>
+							<sear:library>HIOA1030344</sear:library>
+							<sear:status>available</sear:status>
+							<sear:collection>HIOA/P35</sear:collection>
+							<sear:callNumber>428 Off</sear:callNumber>
+							<sear:url>OVP</sear:url>
+						</sear:LIBRARY>
+						<sear:LIBRARY>
+							<sear:institution>HIST</sear:institution>
+							<sear:library>HIST1160124</sear:library>
+							<sear:status>available</sear:status>
+							<sear:collection>HIST/ATI</sear:collection>
+							<sear:callNumber>428 Off</sear:callNumber>
+							<sear:url>OVP</sear:url>
+						</sear:LIBRARY>
+					</sear:LIBRARIES>
+					<sear:LINKS>
+						<sear:thumbnail>http://images.amazon.com/images/P/9780071766586.01._SSTHUM_.jpg</sear:thumbnail>
+						<sear:thumbnail>http://books.google.com/books?bibkeys=ISBN:9780071766586,OCLC:,LCCN:&amp;jscmd=viewapi&amp;callback=updateGBSCover</sear:thumbnail>
+						<sear:thumbnail>http://innhold.bibsys.no/bilde/forside/?size=mini&amp;id=9780071766586.jpg</sear:thumbnail>
+						<sear:addlink>http://content.bibsys.no/content/?isbn=0071766588</sear:addlink>
+						<sear:addlink>http://innhold.bibsys.no/bilde/forside/?size=mini&amp;id=9780071766586.jpg</sear:addlink>
+						<sear:lln09>errorPage</sear:lln09>
+						<sear:lln12>http://readinglist.bi.edu/ui/forms/bookmarklet.html?bibid=71496206810002201</sear:lln12>
+						<sear:lln16>https://bibsys.alma.exlibrisgroup.com/view/sru/47BIBSYS_NETWORK?version=1.2&amp;operation=searchRetrieve&amp;recordSchema=marcxml&amp;query=alma.all_for_ui=71496206810002201</sear:lln16>
+					</sear:LINKS>
+				</sear:DOC>
+			</sear:DOCSET>
+		</sear:RESULT>
+	</sear:JAGROOT>
+</sear:SEGMENTS>
