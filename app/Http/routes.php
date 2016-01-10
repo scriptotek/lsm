@@ -44,4 +44,13 @@ $app->group(['middleware' => 'cors', 'namespace' => 'App\Http\Controllers'], fun
 	$app->get('/primo/records/{id}/cover', 'PrimoController@getCover');
 	// Returns cover data for a single PrimoRecord
 
+	$app->get('/subjects/search', 'SubjectsController@search');
+	// Returns a list of Subject
+
+	$app->get('/subjects/show/{vocab}/{id}', 'SubjectsController@show');
+	// Returns a Subject
+
+	$app->get('/subjects/lookup', 'SubjectsController@lookup');
+	// Returns a Subject
+
 });

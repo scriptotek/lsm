@@ -24,7 +24,8 @@
         "bclibraries/primo-services" : "dev-error-handling",
         "zircote/swagger-php": "^2.0",
         "danmichaelo/quitesimplexmlelement": "dev-master",
-        "palanik/lumen-cors": "dev-master"
+        "palanik/lumen-cors": "dev-master",
+        "digitalbazaar/json-ld": "dev-master"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",

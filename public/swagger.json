@@ -10,6 +10,197 @@
         "https"
     ],
     "paths": {
+        "/subjects/search": {
+            "get": {
+                "tags": [
+                    "Authorities"
+                ],
+                "description": "Search for terms, optionally filtered by vocabulary and concept type.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "query",
+                        "in": "query",
+                        "description": "Case-insensitive search term. Use * at the beginning and/or end to truncate.",
+                        "type": "string"
+                    },
+                    {
+                        "name": "parent",
+                        "in": "query",
+                        "description": "Only search children of this concept, specified by URI.",
+                        "type": "string"
+                    },
+                    {
+                        "name": "group",
+                        "in": "query",
+                        "description": "Only search children of this group, specified by URI.",
+                        "type": "string"
+                    },
+                    {
+                        "name": "fields",
+                        "in": "query",
+                        "description": "Space-separated list of extra fields to include in the results. Supported values: 'broader'",
+                        "type": "string"
+                    },
+                    {
+                        "name": "unique",
+                        "in": "query",
+                        "description": "Boolean flag to indicate that each concept should be returned only once, instead of returning all the different ways it could match (for example both via prefLabel and altLabel).",
+                        "type": "boolean",
+                        "default": "true"
+                    },
+                    {
+                        "name": "lang",
+                        "in": "query",
+                        "description": "Search language.",
+                        "type": "string",
+                        "enum": [
+                            "nb",
+                            "nn",
+                            "en"
+                        ]
+                    },
+                    {
+                        "name": "labellang",
+                        "in": "query",
+                        "description": "Language used to format results.",
+                        "type": "string",
+                        "enum": [
+                            "nb",
+                            "nn",
+                            "en"
+                        ]
+                    },
+                    {
+                        "name": "vocab",
+                        "in": "query",
+                        "description": "Subject vocabulary. Leave blank to search all subject vocabularies.",
+                        "type": "string",
+                        "enum": [
+                            "realfagstermer",
+                            "humord",
+                            "tekord",
+                            "mrtermer"
+                        ]
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "All resources have type `Concept`or `Facet`. Concepts are further subdivided into `Topic`, `Place`, `Time`, `CompoundConcept`, `VirtualCompoundConcept` and `NonIndexable`.",
+                        "type": "string",
+                        "enum": [
+                            "Concept",
+                            "Facet",
+                            "Topic",
+                            "Place",
+                            "Time",
+                            "CompoundConcept",
+                            "VirtualCompoundConcept",
+                            "NonIndexable"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    }
+                }
+            }
+        },
+        "/subjects/show/{vocab}/{id}": {
+            "get": {
+                "tags": [
+                    "Authorities"
+                ],
+                "description": "Get a single subject by ID.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "vocab",
+                        "in": "path",
+                        "description": "Subject vocabulary. Leave blank to search all subject vocabularies.",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "realfagstermer",
+                            "humord",
+                            "tekord",
+                            "mrtermer"
+                        ]
+                    },
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Local ID, e.g. `c006445`.",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    }
+                }
+            }
+        },
+        "/subjects/lookup": {
+            "get": {
+                "tags": [
+                    "Authorities"
+                ],
+                "description": "Get a single subject by term value.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "vocab",
+                        "in": "query",
+                        "description": "Subject vocabulary. Leave blank to search all subject vocabularies.",
+                        "required": true,
+                        "type": "string",
+                        "enum": [
+                            "realfagstermer",
+                            "humord",
+                            "tekord",
+                            "mrtermer"
+                        ]
+                    },
+                    {
+                        "name": "query",
+                        "in": "query",
+                        "description": "Term, e.g. `Fisker`.",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "Example: Set type to \u2019Place\u2019 if you want the place \u2018Java\u2019, \u2018Topic\u2019 if you want the programming language. ",
+                        "type": "string",
+                        "enum": [
+                            "Concept",
+                            "Facet",
+                            "Topic",
+                            "Place",
+                            "Time",
+                            "CompoundConcept",
+                            "VirtualCompoundConcept",
+                            "NonIndexable"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    }
+                }
+            }
+        },
         "/primo/search": {
             "get": {
                 "tags": [
