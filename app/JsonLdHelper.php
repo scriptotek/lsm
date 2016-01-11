@@ -18,7 +18,7 @@ final class JsonLdHelper {
      * both '@language' and '@set'.
      * See <https://github.com/json-ld/json-ld.org/issues/407>
      */
-    static public function toLanguageMapSet($graph, $property)
+    static public function toLanguageMapSet(&$graph, $property)
     {
         if (!isset($graph->{$property})) {
             $graph->{$property} = (object)[];

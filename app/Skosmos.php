@@ -220,15 +220,42 @@ class Skosmos {
         return $this->request('GET', '/data', ['uri' => $uri]);
     }
 
-    public function getByUri($uri, $followlinks=true)
+    public function getByUri($uri, $expandMappings=false)
     {
         $data = $this->getRaw($uri);
+
+        $processor = new JsonLdProcessor();
+        $data = $processor->expand($data, []);
+
+        if ($expandMappings) {
+            $uris = [];
+            foreach ($data as $graph) {
+                foreach (['http://www.w3.org/2004/02/skos/core#exactMatch', 'http://www.w3.org/2004/02/skos/core#closeMatch', 'http://www.w3.org/2004/02/skos/core#relatedMatch', 'http://www.w3.org/2004/02/skos/core#narrowMatch', 'http://www.w3.org/2004/02/skos/core#broadMatch'] as $rel) {
+                    if (isset($graph->{$rel})) {
+                        if (is_array($graph->{$rel})) {
+                            foreach ($graph->{$rel} as $uriObj) {
+                                $uris[] = $uriObj->{'@id'};
+                            }
+                        } else {
+                            $uris[] = $graph->{$rel}->{'@id'};
+                        }
+                    }
+                }
+            }
+            foreach ($uris as $mappedUri) {
+                $mappedData = $this->getRaw($mappedUri);
+                $mappedData = $processor->expand($mappedData, []);
+                $data = array_merge($data, $mappedData);
+            }
+        }
+
         $processor = new JsonLdProcessor();
         $frame = (object)[
           '@context' => $this->context,
           '@embed' => '@always',
           '@id' => $uri,
         ];
+
         $framed = $processor->frame($data, $frame, []);
 
         // Since we only have a single resource, we don't really need @graph
@@ -237,16 +264,8 @@ class Skosmos {
         foreach ($framed->graph[0] as $key => $val) {
             $resource->{$key} = $val;
         }
-        return $resource;
-
-
-        // foreach ($framed->graph as $graph)
-        // {
-        //     if (in_array('Concept', $graph->type)) {
-        //         JsonLdHelper::toLanguageMapSet($graph, 'altLabel');
-        //         JsonLdHelper::toLanguageMapSet($graph, 'scopeNote');
-        //     }
-        // }
+        JsonLdHelper::toLanguageMapSet($resource, 'altLabel');
+        JsonLdHelper::toLanguageMapSet($resource, 'scopeNote');
 
         // if (isset($framed->graph[0]->exactMatch)) {
         //     $url = $framed->graph[0]->exactMatch;
@@ -256,7 +275,7 @@ class Skosmos {
         //     }
         // }
 
-        return $framed;
+        return $resource;
     }
 
     public function getUri($vocab, $id)
@@ -264,12 +283,12 @@ class Skosmos {
         return 'http://data.ub.uio.no/' . $vocab . '/' . $id;
     }
 
-    public function get($vocab, $id, $followlinks=true)
+    public function get($vocab, $id, $expandMappings=false)
     {
         $vocab = preg_replace('/[^a-z0-9]/', '', $vocab);
         $id = preg_replace('/[^a-z0-9]/', '', $id);
 
-        return $this->getByUri($this->getUri($vocab, $id), $followlinks);
+        return $this->getByUri($this->getUri($vocab, $id), $expandMappings);
     }
 
 }

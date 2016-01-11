@@ -138,6 +138,12 @@
                         "description": "Local ID, e.g. `c006445`.",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "name": "expand_mappings",
+                        "in": "query",
+                        "description": "Expand mappings?",
+                        "type": "boolean"
                     }
                 ],
                 "responses": {

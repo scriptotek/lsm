@@ -124,6 +124,13 @@ class SubjectsController extends Controller
      *     description="Local ID, e.g. `c006445`.",
      *     required=true,
      *     type="string"
+     *   ),
+     *   @SWG\Parameter(
+     *     name="expand_mappings",
+     *     in="query",
+     *     description="If set to false, you'll only get the URIs for mapped concepts. If set to true, you will get data for one level of mappings.",
+     *     type="boolean",
+     *     default="false"
      *   )
      * )
      *
@@ -133,7 +140,7 @@ class SubjectsController extends Controller
      */
     public function show(Skosmos $skosmos, Request $request, $vocab, $id)
     {
-        $data = $skosmos->get($vocab, $id);
+        $data = $skosmos->get($vocab, $id, $request->get('expand_mappings'));
         return response()->json($data);
     }
 
@@ -168,6 +175,13 @@ class SubjectsController extends Controller
      *     description="Example: Set type to ’Place’ if you want the place ‘Java’, ‘Topic’ if you want the programming language. ",
      *     type="string",
      *     enum={"Concept", "Facet", "Topic", "Place", "Time", "CompoundConcept", "VirtualCompoundConcept", "NonIndexable"}
+     *   ),
+     *   @SWG\Parameter(
+     *     name="expand_mappings",
+     *     in="query",
+     *     description="If set to false, you'll only get the URIs for mapped concepts. If set to true, you will get data for one level of mappings.",
+     *     type="boolean",
+     *     default="false"
      *   )
      * )
      *
@@ -192,7 +206,7 @@ class SubjectsController extends Controller
 
         $uri = $data->results[0]->uri;
 
-        $data = $skosmos->getByUri($uri);
+        $data = $skosmos->getByUri($uri, $request->get('expand_mappings'));
 
         return response()->json($data);
     }
