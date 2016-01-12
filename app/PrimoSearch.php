@@ -120,7 +120,7 @@ class PrimoSearch {
         $hits = intval($docset->attr('TOTALHITS'));
         $first = intval($docset->attr('FIRSTHIT'));
         $next = intval($docset->attr('LASTHIT')) + 1;
-        if ($next >= $hits) {
+        if ($next > $hits) {
             $next = null;
         }
         return [
