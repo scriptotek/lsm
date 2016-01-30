@@ -17,11 +17,13 @@ class PrimoController extends Controller
             $data = $requestFn();
         } catch (PrimoException $e) {
             return response()->json([
+                'results' => [],
                 'error' => $e->getMessage(),
                 'source' => $e->getUrl(),
             ], 400);
         } catch (BadResponseException $e) {
             return response()->json([
+                'results' => [],
                 'error' => $e->getMessage(),
                 'source' => $e->getRequest()->getUrl(),
             ], 400);
