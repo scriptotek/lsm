@@ -37,6 +37,11 @@ class PrimoCover extends PrimoSearch
 
     public function coverFromRecord($record)
     {
+        $bsCover = array_get($record, 'thumbnails.bibsys');
+        if ($bsCover) {
+            $bsCover = str_replace('mini', 'stor', $bsCover);
+            return $bsCover;
+        }
         $isbns = array_get($record, 'isbns', []);
         if (!count($isbns)) {
             return $this->defaultCover;
