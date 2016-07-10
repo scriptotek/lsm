@@ -128,6 +128,7 @@ class PrimoRecord implements \JsonSerializable
         $this->brief['status'] = [
             'print' => $this->hasPrint($this->full),
             'electronic' => $this->hasElectronic($this->full),
+            'digital' => $this->hasDigital($this->full),
         ];
 
         return $this;
@@ -137,17 +138,23 @@ class PrimoRecord implements \JsonSerializable
     {
         $urls = [];
 
-        // Add urls for Alma-E
+        // Add urls for Alma-E, Online Resource and Alma-D
         foreach ($this->extractGetIts($getits) as $getit) {
             if (in_array(array_get($getit, 'category'), ['Online Resource', 'Alma-E'])) {
                 $urls[$getit['url1']] = 'Available online';
+            } elseif (array_get($getit, 'category') == 'Alma-D') {
+                if ($record->text('./p:delivery/p:resdelscope') == 'NB_D_DELRES') {
+                    $urls[$getit['url1']] = 'Digitized online version only available at the National Library';
+                } else {
+                    $urls[$getit['url1']] = 'Available online (digitized)';
+                }
             }
         }
 
         // Add link descriptions for online resources
         $links = $this->extractMarcArray($record, './p:links/p:linktorsrc');
         foreach ($links as $link) {
-            $urls[$link['url']] = $link['description'];
+            $urls[$link['url']] = array_get($link, 'description', 'Available online');
         }
 
         $out = [];
@@ -264,6 +271,14 @@ class PrimoRecord implements \JsonSerializable
     {
         return array_reduce($x['components'], function ($carry, $item) {
             $x = in_array(array_get($item, 'category'), ['Alma-E', 'Online Resource']) && array_get($item, 'alma_id');
+            return $carry || $x;
+        }, false);
+    }
+
+    public function hasDigital($x)
+    {
+        return array_reduce($x['components'], function ($carry, $item) {
+            $x = in_array(array_get($item, 'category'), ['Alma-D']) && array_get($item, 'alma_id');
             return $carry || $x;
         }, false);
     }
