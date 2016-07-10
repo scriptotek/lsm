@@ -20,7 +20,7 @@ class Skosmos {
     public function __construct(HttpClient $http)
     {
         $this->http = $http;
-        $this->baseUrl = 'https://skosmos.biblionaut.net/rest/v1';
+        $this->baseUrl = 'https://data.ub.uio.no/skosmos/rest/v1';
 
         $this->context = (object)[
             'mads' => 'http://www.loc.gov/mads/rdf/v1#',
