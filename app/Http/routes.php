@@ -26,10 +26,6 @@
 |
 */
 
-$app->get('/', function () use ($app) {
-    return view('welcome');
-});
-
 $app->group(['middleware' => 'cors', 'namespace' => 'App\Http\Controllers'], function ($app) {
 
 	$app->get('/primo/search', 'PrimoController@search');

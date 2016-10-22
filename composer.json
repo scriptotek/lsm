@@ -19,13 +19,13 @@
     "prefer-stable": true,
     "require": {
         "php": ">=5.5.9",
-        "laravel/lumen-framework": "5.1.*",
-        "vlucas/phpdotenv": "~1.0",
-        "bclibraries/primo-services" : "dev-error-handling",
+        "laravel/lumen-framework": "5.2.*",
+        "vlucas/phpdotenv": "~2.2",
+        "bclibraries/primo-services" : "dev-master",
         "zircote/swagger-php": "^2.0",
-        "danmichaelo/quitesimplexmlelement": "dev-master",
-        "palanik/lumen-cors": "dev-master",
-        "digitalbazaar/json-ld": "dev-master"
+        "danmichaelo/quitesimplexmlelement": "~0.4",
+        "palanik/lumen-cors": "~0.0.2",
+        "digitalbazaar/json-ld": "~0.4"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",
