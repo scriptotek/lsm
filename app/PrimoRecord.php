@@ -188,11 +188,6 @@ class PrimoRecord extends PrimoResult implements \JsonSerializable
             ->link($this->id);
     }
 
-    public function groupLink()
-    {
-        return ($this->full['frbr_type'] != '6') ? url('primo/groups/' .$this->full['frbr_group_id']) : null;
-    }
-
     public function coverLink()
     {
         return url('primo/records/' .$this->id . '/cover');
