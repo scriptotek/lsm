@@ -193,7 +193,7 @@ class PrimoSearch {
         $queryTerm->set('facet_frbrgroupid', QueryTerm::EXACT, $groupId);
         $queryObj->addTerm($queryTerm);
 
-        $res = $this->processQuery($queryObj, true, true);
+        $res = $this->processQuery($queryObj, true, true, $options);
         return [
             'source' => $res['source'],
             'error' => null,
