@@ -137,6 +137,9 @@ class PrimoController extends Controller
      */
     public function search(PrimoSearch $search, Request $request)
     {
+        if ($request->get('raw') == 'true') {
+            return response()->make($search->search($request), 200, ['Content-Type' => 'application/xml']);
+        }
         return $this->handleErrors(function() use ($search, $request) {
             return $search->search($request);
         });
@@ -209,6 +212,9 @@ class PrimoController extends Controller
      */
     public function getGroup(PrimoSearch $search, Request $request, $id)
     {
+        if ($request->get('raw') == 'true') {
+            return response()->make($search->getGroup($id, $request), 200, ['Content-Type' => 'application/xml']);
+        }
         return $this->handleErrors(function() use ($search, $request, $id) {
             return $search->getGroup($id, $request);
         });

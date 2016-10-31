@@ -94,6 +94,10 @@ class PrimoSearch {
         $request = $client->get($url);
         $body = $request->send()->getBody();
 
+        if ($options->get('raw') == 'true') {
+            return strval($body);
+        }
+
         $root = new QuiteSimpleXMLElement(strval($body));
         $root->registerXPathNamespace('s', 'http://www.exlibrisgroup.com/xsd/jaguar/search');
         $root->registerXPathNamespace('p', 'http://www.exlibrisgroup.com/xsd/primo/primo_nm_bib');
@@ -194,6 +198,9 @@ class PrimoSearch {
         $queryObj->addTerm($queryTerm);
 
         $res = $this->processQuery($queryObj, true, true, $options);
+        if ($options->get('raw') == 'true') {
+            return $res;
+        }
         return [
             'source' => $res['source'],
             'error' => null,
