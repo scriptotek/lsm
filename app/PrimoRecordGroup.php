@@ -40,23 +40,11 @@ class PrimoRecordGroup extends PrimoResult implements \JsonSerializable
 
     public function process()
     {
-        $record = $this->doc->first('./p:PrimoNMBib/p:record');
-        $sear_links = $this->doc->first('./sear:LINKS');
-        $facets = $record->first('./p:facets');
+        parent::process();
 
-        $this->brief['id'] = $facets->text('./p:frbrgroupid');
-
-        $this->brief['title'] = $record->text('./p:display/p:title') ?: null;
-        $this->brief['creators'] = $this->extractArray($facets, './p:creatorcontrib');
+        $this->brief['id'] = $this->doc->text('./p:PrimoNMBib/p:record/p:facets/p:frbrgroupid');
 
         return $this;
-    }
-
-    private function extractArray(QuiteSimpleXMLElement $group, $xpath)
-    {
-        return array_map(function ($x) {
-            return $x->text();
-        }, $group->all($xpath));
     }
 
 }
