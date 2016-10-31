@@ -8,21 +8,9 @@ use Danmichaelo\QuiteSimpleXMLElement\QuiteSimpleXMLElement;
 
 class PrimoRecordGroup extends PrimoResult implements \JsonSerializable
 {
-    protected $brief;
-    protected $full;
-    protected $doc;
-    protected $deeplinkProvider;
 
     public function __get($property) {
         return isset($this->brief[$property]) ? $this->brief[$property] : (isset($this->full[$property]) ? $this->full[$property] : null);
-    }
-
-    function __construct(QuiteSimpleXMLElement $doc, DeepLink $deeplinkProvider)
-    {
-        $this->doc = $doc;
-        $this->deeplinkProvider = $deeplinkProvider;
-        $this->brief = ['type' => 'group'];
-        $this->full = [];
     }
 
     protected function preferredResourceType($rtypes)

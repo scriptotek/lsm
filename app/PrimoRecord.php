@@ -9,12 +9,6 @@ use Danmichaelo\QuiteSimpleXMLElement\QuiteSimpleXMLElement;
 class PrimoRecord extends PrimoResult implements \JsonSerializable
 {
     public $orderedMaterialList = ['e-books', 'print-books'];
-    protected $brief;
-    protected $full;
-    protected $doc;
-    protected $deeplinkProvider;
-    protected $primoInst;  // E.g. 'UBO'
-    protected $almaInst;  // E.g. '47BIBSYS_UBO'
 
     static function make(QuiteSimpleXMLElement $doc, DeepLink $deeplinkProvider, $expanded=false, $options)
     {
@@ -30,16 +24,6 @@ class PrimoRecord extends PrimoResult implements \JsonSerializable
 
     public function __get($property) {
         return isset($this->brief[$property]) ? $this->brief[$property] : (isset($this->full[$property]) ? $this->full[$property] : null);
-    }
-
-    function __construct(QuiteSimpleXMLElement $doc, DeepLink $deeplinkProvider, $options)
-    {
-        $this->doc = $doc;
-        $this->deeplinkProvider = $deeplinkProvider;
-        $this->brief = ['type' => 'record'];
-        $this->full = [];
-        $this->primoInst = strtoupper(array_get($options, 'primo_inst', null));
-        $this->almaInst = strtoupper(array_get($options, 'alma_inst', null));
     }
 
     protected function preferredResourceType($rtypes)

@@ -8,6 +8,23 @@ use Danmichaelo\QuiteSimpleXMLElement\QuiteSimpleXMLElement;
 
 class PrimoResult
 {
+    protected $brief;
+    protected $full;
+    protected $doc;
+    protected $deeplinkProvider;
+
+    protected $primoInst;  // E.g. 'UBO'
+    protected $almaInst;  // E.g. '47BIBSYS_UBO'
+
+    function __construct(QuiteSimpleXMLElement $doc, DeepLink $deeplinkProvider, $options)
+    {
+        $this->doc = $doc;
+        $this->deeplinkProvider = $deeplinkProvider;
+        $this->brief = ['type' => ($this instanceof PrimoRecordGroup) ? 'group' : 'record'];
+        $this->full = [];
+        $this->primoInst = strtoupper(array_get($options, 'primo_inst', null));
+        $this->almaInst = strtoupper(array_get($options, 'alma_inst', null));
+    }
 
     public function toArray($fullRepr=false)
     {
