@@ -34,7 +34,7 @@ class PrimoRecordGroup extends PrimoResult implements \JsonSerializable
         $queryTerm->set('facet_frbrgroupid', QueryTerm::EXACT, $this->id);
 
         return 'http://' . $this->deeplinkProvider
-            ->view('UBO')
+            ->view($this->primoInst)
             ->search($queryTerm, 'bibsys_ils', 'library_catalogue');
     }
 

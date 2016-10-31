@@ -77,7 +77,7 @@ class PrimoRecord extends PrimoResult implements \JsonSerializable
         $this->full['series'] = $record->text('./p:addata/p:seriestitle') ?: null;
         // $this->relation = $record->text('./p:display/p:relation') ?: null;
 
-        $this->full['components'] = $this->extractComponents($record, $getits, 'UBO', '47BIBSYS_UBO');
+        $this->full['components'] = $this->extractComponents($record, $getits, $this->primoInst, $this->almaInst);
 
         $this->full['urls'] = $this->extractUrls($record, $getits);
 
@@ -184,7 +184,7 @@ class PrimoRecord extends PrimoResult implements \JsonSerializable
     public function primoLink()
     {
         return 'http://' . $this->deeplinkProvider
-            ->view('UBO')
+            ->view($this->primoInst)
             ->link($this->id);
     }
 
