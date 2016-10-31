@@ -189,11 +189,17 @@ class PrimoResult
         // $this->relation = $record->text('./p:display/p:relation') ?: null;
 
         // @TODO get indices from config
-        $this->full['subjects']['realfagstermer'] = $this->extractArray($record, './p:search/p:lsr20');
-        $this->full['subjects']['humord'] = $this->extractArray($record, './p:search/p:lsr14');
+        $this->full['class']['ddc'] = $this->extractArray($record, './p:search/p:lsr10');
+        $this->full['subjects']['mesh'] = $this->extractArray($record, './p:search/p:lsr11');
         $this->full['subjects']['tekord'] = $this->extractArray($record, './p:search/p:lsr12');
-        $this->full['subjects']['mrtermer'] = $this->extractArray($record, './p:search/p:lsr19');
+        $this->full['class']['udc'] = $this->extractArray($record, './p:search/p:lsr13');
+        $this->full['subjects']['humord'] = $this->extractArray($record, './p:search/p:lsr14');
+        $this->full['subjects']['agrovoc'] = $this->extractArray($record, './p:search/p:lsr15');
+        $this->full['class']['nlm'] = $this->extractArray($record, './p:search/p:lsr16');
         $this->full['subjects']['place'] = $this->extractArray($record, './p:search/p:lsr17');
+        $this->full['subjects']['mrtermer'] = $this->extractArray($record, './p:search/p:lsr19');
+        $this->full['subjects']['realfagstermer'] = $this->extractArray($record, './p:search/p:lsr20');
+
         $this->full['subjects']['topic'] = $this->extractArray($record, './p:search/p:topic');
         $this->full['subjects']['subject'] = $this->extractArray($record, './p:search/p:subject');
         $this->full['subjects']['genre'] = $this->extractArray($record, './p:facets/p:genre');
