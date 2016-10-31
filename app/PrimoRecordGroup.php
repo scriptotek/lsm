@@ -6,7 +6,7 @@ use BCLib\PrimoServices\DeepLink;
 use BCLib\PrimoServices\QueryTerm;
 use Danmichaelo\QuiteSimpleXMLElement\QuiteSimpleXMLElement;
 
-class PrimoRecordGroup implements \JsonSerializable
+class PrimoRecordGroup extends PrimoResult implements \JsonSerializable
 {
     protected $brief;
     protected $full;
@@ -40,6 +40,16 @@ class PrimoRecordGroup implements \JsonSerializable
         return url('primo/groups/' .$this->id);
     }
 
+    public function primoLink()
+    {
+        $queryTerm = new QueryTerm();
+        $queryTerm->set('facet_frbrgroupid', QueryTerm::EXACT, $this->id);
+
+        return 'http://' . $this->deeplinkProvider
+            ->view('UBO')
+            ->search($queryTerm, 'bibsys_ils', 'library_catalogue');
+    }
+
     public function process()
     {
         $record = $this->doc->first('./p:PrimoNMBib/p:record');
@@ -52,18 +62,6 @@ class PrimoRecordGroup implements \JsonSerializable
         $this->brief['creators'] = $this->extractArray($facets, './p:creatorcontrib');
 
         return $this;
-    }
-
-    public function toArray($expanded=false)
-    {
-        $data = $this->brief;
-        $data['links']['self'] = $this->link();
-        return $data;
-    }
-
-    public function jsonSerialize()
-    {
-        return $this->toArray();
     }
 
     private function extractArray(QuiteSimpleXMLElement $group, $xpath)

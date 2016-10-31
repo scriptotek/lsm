@@ -6,7 +6,7 @@ use BCLib\PrimoServices\DeepLink;
 use BCLib\PrimoServices\QueryTerm;
 use Danmichaelo\QuiteSimpleXMLElement\QuiteSimpleXMLElement;
 
-class PrimoRecord implements \JsonSerializable
+class PrimoRecord extends PrimoResult implements \JsonSerializable
 {
     public $orderedMaterialList = ['e-books', 'print-books'];
     protected $brief;
@@ -192,25 +192,16 @@ class PrimoRecord implements \JsonSerializable
         return $out;
     }
 
-    public function primoLink()
-    {
-        if ($this->multiple_editions) {
-
-            $queryTerm = new QueryTerm();
-            $queryTerm->set('facet_frbrgroupid', QueryTerm::EXACT, $this->id);
-
-            return 'http://' . $this->deeplinkProvider->view('UBO')
-                ->search($queryTerm, null, 'library_catalogue');
-
-        } else {
-            return 'http://' . $this->deeplinkProvider->view('UBO')
-                ->link($this->id);
-        }
-    }
-
     public function link()
     {
         return url('primo/records/' .$this->id);
+    }
+
+    public function primoLink()
+    {
+        return 'http://' . $this->deeplinkProvider
+            ->view('UBO')
+            ->link($this->id);
     }
 
     public function groupLink()
@@ -221,30 +212,6 @@ class PrimoRecord implements \JsonSerializable
     public function coverLink()
     {
         return url('primo/records/' .$this->id . '/cover');
-    }
-
-    public function jsonSerialize()
-    {
-        return toArray('full');
-    }
-
-    public function toArray($fullRepr=false)
-    {
-        $data = $this->brief;
-        $data['links'] = [
-            'self' => $this->link(),
-        ];
-        if ($fullRepr) {
-            $data['links']['primo'] = $this->primoLink();
-            $data['links']['group'] = $this->groupLink();
-            $data['links']['cover'] = $this->coverLink();
-            // $this->addLocations();
-        }
-
-        if ($fullRepr) {
-            $data = array_merge($data, $this->full);
-        }
-        return $data;
     }
 
     public function & getComponent(&$components, $id)
