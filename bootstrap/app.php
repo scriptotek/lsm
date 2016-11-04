@@ -95,6 +95,7 @@ $app->routeMiddleware([
 */
 
 $app->register(App\Providers\AppServiceProvider::class);
+$app->register(Latrell\Swagger\SwaggerServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
