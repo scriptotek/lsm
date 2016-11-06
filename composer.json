@@ -13,6 +13,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/scriptotek/primo-services"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/danmichaelo/Swagger"
         }
     ],
     "minimum-stability": "dev",
@@ -26,7 +30,7 @@
         "palanik/lumen-cors": "~0.0.2",
         "digitalbazaar/json-ld": "~0.4",
         "laravelista/lumen-vendor-publish": "^2.0",
-        "latrell/swagger": "~1.0.1",
+        "latrell/swagger": "~1.0.2",
         "guzzlehttp/guzzle": "^6.2"
     },
     "require-dev": {
