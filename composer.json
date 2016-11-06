@@ -26,7 +26,8 @@
         "palanik/lumen-cors": "~0.0.2",
         "digitalbazaar/json-ld": "~0.4",
         "laravelista/lumen-vendor-publish": "^2.0",
-        "latrell/swagger": "~1.0.1"
+        "latrell/swagger": "~1.0.1",
+        "guzzlehttp/guzzle": "^6.2"
     },
     "require-dev": {
         "phpunit/phpunit": "~4.0",
