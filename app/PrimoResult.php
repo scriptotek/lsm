@@ -101,7 +101,7 @@ class PrimoResult
         // Add urls for Alma-E, Online Resource and Alma-D
         foreach ($this->extractGetIts($getits) as $getit) {
             if (in_array(array_get($getit, 'category'), ['Online Resource', 'Alma-E'])) {
-                $urls[$getit['url1']] = 'Available online';
+                $urls[$getit['url1']] = 'E-book';
             } elseif (array_get($getit, 'category') == 'Alma-D') {
                 if ($record->text('./p:delivery/p:resdelscope') == 'NB_D_DELRES') {
                     $urls[$getit['url1']] = 'Digitized online version only available at the National Library';
