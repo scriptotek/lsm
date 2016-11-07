@@ -4,12 +4,210 @@
         "title": "University of Oslo Library Services Middleware (LSM)",
         "version": "0.1"
     },
-    "host": "lsm.biblionaut.net",
+    "host": "ub-lsm.uio.no",
     "basePath": "/",
     "schemes": [
         "https"
     ],
     "paths": {
+        "/primo/search": {
+            "get": {
+                "tags": [
+                    "Primo"
+                ],
+                "description": "Search using either a free text query with `query`, or a controlled subject query using `vocabulary` and `subject` in combination. Pagination: If there's no more results, `next` will be null. Otherwise `next` will hold the value to be used with `first` to get the next batch of results. Returns: a list of Primo records (`type: record`) and groups of Primo records (`type: group`). Groups can be expanded using the `/primo/group` endpoint.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "genre",
+                        "in": "query",
+                        "description": "One or more form/genre terms, separated by `OR`. Not limited to a specific vocabulary.",
+                        "type": "string"
+                    },
+                    {
+                        "name": "place",
+                        "in": "query",
+                        "description": "One or more geographical names, separated by `OR`. Not limited to a specific vocabulary.",
+                        "type": "string"
+                    },
+                    {
+                        "name": "query",
+                        "in": "query",
+                        "description": "Query string",
+                        "type": "string"
+                    },
+                    {
+                        "name": "subject",
+                        "in": "query",
+                        "description": "One or more subject terms. Boolean operators `AND` and `OR` are supported, with `AND` taking precedence over `OR`. Grouping with parentheses are not supported.",
+                        "type": "string"
+                    },
+                    {
+                        "name": "vocabulary",
+                        "in": "query",
+                        "description": "Subject vocabulary. Used as a qualifier with the subject field, leave blank to search all subject vocabularies.",
+                        "type": "string",
+                        "enum": [
+                            "realfagstermer",
+                            "humord",
+                            "tekord",
+                            "mrtermer"
+                        ]
+                    },
+                    {
+                        "name": "material",
+                        "in": "query",
+                        "description": "Comma-separated lisf of material types (example: `print-books,print-journals` or `e-books,e-journals`). By default, all material types are included. No truncation is supported.",
+                        "type": "string"
+                    },
+                    {
+                        "name": "institution",
+                        "in": "query",
+                        "description": "Limit to a institution. Example: `UBO`. Case insensitive.",
+                        "type": "string"
+                    },
+                    {
+                        "name": "library",
+                        "in": "query",
+                        "description": "Limit to one or more comma-separated library codes. Examples: `ubo1030310,ubo1030317` for Realfagsbiblioteket and Informatikkbiblioteket. Case insensitive. Warning: ebooks will be excluded when setting `library` since ebooks are not linked to a library code anymore (except for a few thousand errors\u2026).",
+                        "type": "string"
+                    },
+                    {
+                        "name": "start",
+                        "in": "query",
+                        "description": "First document to retrieve, starts at 1.",
+                        "type": "integer"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Number of documents to retrieve, defaults to 10, maximum is 50.",
+                        "type": "integer"
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Sort field, defaults to relevance.",
+                        "type": "string",
+                        "default": "relevance",
+                        "enum": [
+                            "relevance",
+                            "popularity",
+                            "date",
+                            "author",
+                            "title"
+                        ]
+                    },
+                    {
+                        "name": "repr",
+                        "in": "query",
+                        "description": "Result representation format. `compact=repr` returns a more simplifed representation, suitable for e.g. limited bandwidth. `compact=full` includes more information. This parameter has no effect on groups, only records.",
+                        "type": "string",
+                        "default": "compact",
+                        "enum": [
+                            "compact",
+                            "full"
+                        ]
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    },
+                    "400": {
+                        "description": "error",
+                        "schema": {
+                            "$ref": "#/definitions/PrimoSearchErrorResponse"
+                        }
+                    }
+                }
+            }
+        },
+        "/primo/records/{id}": {
+            "get": {
+                "tags": [
+                    "Primo"
+                ],
+                "description": "Get details about a single record",
+                "produces": [
+                    "application/json",
+                    "application/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Primo PNX ID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "raw",
+                        "in": "query",
+                        "description": "Set to true to return the raw PNX record.",
+                        "type": "boolean",
+                        "default": "false"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A PrimoRecord"
+                    }
+                }
+            }
+        },
+        "/primo/groups/{id}": {
+            "get": {
+                "tags": [
+                    "Primo"
+                ],
+                "description": "Get a list of records belonging to a record group.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "FRBR group id",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "A PrimoRecordGroup"
+                    }
+                }
+            }
+        },
+        "/primo/records/{id}/cover": {
+            "get": {
+                "tags": [
+                    "Primo"
+                ],
+                "description": "Get cover image data for a given record.",
+                "produces": [
+                    "image"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Primo PNX ID",
+                        "required": true,
+                        "type": "string"
+                    }
+                ],
+                "responses": {
+                    "302": {
+                        "description": "Redirect to image file"
+                    }
+                }
+            }
+        },
         "/subjects/search": {
             "get": {
                 "tags": [
@@ -142,8 +340,9 @@
                     {
                         "name": "expand_mappings",
                         "in": "query",
-                        "description": "Expand mappings?",
-                        "type": "boolean"
+                        "description": "If set to false, you'll only get the URIs for mapped concepts. If set to true, you will get data for one level of mappings.",
+                        "type": "boolean",
+                        "default": "false"
                     }
                 ],
                 "responses": {
@@ -198,208 +397,18 @@
                             "VirtualCompoundConcept",
                             "NonIndexable"
                         ]
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "success"
-                    }
-                }
-            }
-        },
-        "/primo/search": {
-            "get": {
-                "tags": [
-                    "Primo"
-                ],
-                "description": "Search using either a free text query with `query`, or a controlled subject query using `vocabulary` and `subject` in combination. Pagination: If there's no more results, `next` will be null. Otherwise `next` will hold the value to be used with `first` to get the next batch of results. Returns: a list of Primo records (`type: record`) and groups of Primo records (`type: group`). Groups can be expanded using the `/primo/group` endpoint.",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "genre",
-                        "in": "query",
-                        "description": "One or more form/genre terms, separated by `OR`. Not limited to a specific vocabulary.",
-                        "type": "string"
                     },
                     {
-                        "name": "place",
+                        "name": "expand_mappings",
                         "in": "query",
-                        "description": "One or more geographical names, separated by `OR`. Not limited to a specific vocabulary.",
-                        "type": "string"
-                    },
-                    {
-                        "name": "query",
-                        "in": "query",
-                        "description": "Query string",
-                        "type": "string"
-                    },
-                    {
-                        "name": "subject",
-                        "in": "query",
-                        "description": "One or more subject terms. Boolean operators `AND` and `OR` are supported, with `AND` taking precedence over `OR`. Grouping with parentheses are not supported.",
-                        "type": "string"
-                    },
-                    {
-                        "name": "vocabulary",
-                        "in": "query",
-                        "description": "Subject vocabulary. Used as a qualifier with the subject field, leave blank to search all subject vocabularies.",
-                        "type": "string",
-                        "enum": [
-                            "realfagstermer",
-                            "humord",
-                            "tekord",
-                            "mrtermer"
-                        ]
-                    },
-                    {
-                        "name": "material",
-                        "in": "query",
-                        "description": "Comma-separated lisf of material types (example: `print-books,print-journals` or `e-books,e-journals`). By default, all material types are included. No truncation is supported.",
-                        "type": "string"
-                    },
-                    {
-                        "name": "institution",
-                        "in": "query",
-                        "description": "Limit to a institution. Example: `UBO`. Case insensitive.",
-                        "type": "string"
-                    },
-                    {
-                        "name": "library",
-                        "in": "query",
-                        "description": "Limit to one or more comma-separated library codes. Examples: `ubo1030310,ubo1030317` for Realfagsbiblioteket and Informatikkbiblioteket. Case insensitive. Warning: ebooks will be excluded when setting `library` since ebooks are not linked to a library code anymore (except for a few thousand errors\u2026).",
-                        "type": "string"
-                    },
-                    {
-                        "name": "start",
-                        "in": "query",
-                        "description": "First document to retrieve, starts at 1.",
-                        "type": "integer"
-                    },
-                    {
-                        "name": "limit",
-                        "in": "query",
-                        "description": "Number of documents to retrieve, defaults to 10, maximum is 50.",
-                        "type": "integer"
-                    },
-                    {
-                        "name": "sort",
-                        "in": "query",
-                        "description": "Sort field, defaults to popularity.",
-                        "type": "string",
-                        "default": "popularity",
-                        "enum": [
-                            "popularity",
-                            "date",
-                            "author",
-                            "title"
-                        ]
-                    },
-                    {
-                        "name": "repr",
-                        "in": "query",
-                        "description": "Result representation format. `compact=repr` returns a more simplifed representation, suitable for e.g. limited bandwidth. `compact=full` includes more information. This parameter has no effect on groups, only records.",
-                        "type": "string",
-                        "default": "compact",
-                        "enum": [
-                            "compact",
-                            "full"
-                        ]
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "success"
-                    },
-                    "400": {
-                        "description": "error",
-                        "schema": {
-                            "$ref": "#/definitions/PrimoSearchErrorResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/primo/records/{id}": {
-            "get": {
-                "tags": [
-                    "Primo"
-                ],
-                "description": "Get details about a single record",
-                "produces": [
-                    "application/json",
-                    "application/xml"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Primo PNX ID",
-                        "required": true,
-                        "type": "string"
-                    },
-                    {
-                        "name": "raw",
-                        "in": "query",
-                        "description": "Set to true to return the raw PNX record.",
+                        "description": "If set to false, you'll only get the URIs for mapped concepts. If set to true, you will get data for one level of mappings.",
                         "type": "boolean",
                         "default": "false"
                     }
                 ],
                 "responses": {
                     "200": {
-                        "description": "A PrimoRecord"
-                    }
-                }
-            }
-        },
-        "/primo/groups/{id}": {
-            "get": {
-                "tags": [
-                    "Primo"
-                ],
-                "description": "Get a list of records belonging to a record group.",
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "FRBR group id",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "A PrimoRecordGroup"
-                    }
-                }
-            }
-        },
-        "/primo/records/{id}/cover": {
-            "get": {
-                "tags": [
-                    "Primo"
-                ],
-                "description": "Get cover image data for a given record.",
-                "produces": [
-                    "image"
-                ],
-                "parameters": [
-                    {
-                        "name": "id",
-                        "in": "path",
-                        "description": "Primo PNX ID",
-                        "required": true,
-                        "type": "string"
-                    }
-                ],
-                "responses": {
-                    "302": {
-                        "description": "Redirect to image file"
+                        "description": "success"
                     }
                 }
             }

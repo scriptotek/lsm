@@ -116,10 +116,10 @@ class PrimoController extends Controller
      *   @SWG\Parameter(
      *     name="sort",
      *     in="query",
-     *     description="Sort field, defaults to popularity.",
+     *     description="Sort field, defaults to relevance.",
      *     type="string",
-     *     default="popularity",
-     *     enum={"popularity", "date", "author", "title"}
+     *     default="relevance",
+     *     enum={"relevance", "popularity", "date", "author", "title"}
      *   ),
      *   @SWG\Parameter(
      *     name="repr",

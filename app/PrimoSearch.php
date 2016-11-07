@@ -53,7 +53,10 @@ class PrimoSearch {
 
         $start = $options->get('start', 1);
         $limit = $options->get('limit', 10);
-        $sort = $options->get('sort', 'popularity');
+        $sort = $options->get('sort', null);
+        if ($sort == 'relevance') {
+            $sort = null; // default
+        }
 
         $queryObj->sortField($sort)
             ->start($start)
