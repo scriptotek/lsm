@@ -3,7 +3,7 @@
 /**
  * @SWG\Swagger(
  *   schemes={"https"},
- *   host="lsm.biblionaut.net",
+ *   host="ub-lsm.uio.no",
  *   basePath="/",
  *   @SWG\Info(
  *     title="University of Oslo Library Services Middleware (LSM)",
