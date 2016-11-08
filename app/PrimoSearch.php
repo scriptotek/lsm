@@ -54,12 +54,11 @@ class PrimoSearch {
         $start = $options->get('start', 1);
         $limit = $options->get('limit', 10);
         $sort = $options->get('sort', null);
-        if ($sort == 'relevance') {
-            $sort = null; // default
+        if ($sort != 'relevance') {
+            $queryObj->sortField($sort);
         }
 
-        $queryObj->sortField($sort)
-            ->start($start)
+        $queryObj->start($start)
             ->bulkSize($limit);
 
         return $queryObj;
