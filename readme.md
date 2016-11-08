@@ -2,10 +2,14 @@
 
 Documentation at https://lsm.biblionaut.net/
 
-To update swagger documentation:
+Setup:
+
+    composer install
+    php artisan vendor:publish
+
+Update swagger documentation:
 
     ./vendor/bin/swagger app -o public/swagger.json
-
 
 Example nginx site config:
 
