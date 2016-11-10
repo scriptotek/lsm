@@ -12,7 +12,7 @@ class PrimoRecord extends PrimoResult implements \JsonSerializable
 
     static function make(QuiteSimpleXMLElement $doc, DeepLink $deeplinkProvider, $expanded=false, $options)
     {
-        $is_group = $doc->text('./p:PrimoNMBib/p:record/p:facets/p:frbrtype') != '6';
+        $is_group = ($doc->text('./p:PrimoNMBib/p:record/p:facets/p:frbrtype') != '6' && $doc->text('./p:PrimoNMBib/p:record/p:display/p:version', '1') != '1');
 
         if ($is_group && !$expanded) {
             $item = new PrimoRecordGroup($doc, $deeplinkProvider, $options);
