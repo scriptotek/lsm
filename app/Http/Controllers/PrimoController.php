@@ -90,6 +90,14 @@ class PrimoController extends Controller
      *     type="string"
      *   ),
      *   @SWG\Parameter(
+     *     name="scope",
+     *     in="query",
+     *     description="Search scope. Defaults to `BIBSYS_ILS`.",
+     *     type="string",
+     *     default="BIBSYS_ILS",
+     *     enum={"BIBSYS_ILS", "UBO"}
+     *   ),
+     *   @SWG\Parameter(
      *     name="institution",
      *     in="query",
      *     description="Limit to a institution. Example: `UBO`. Case insensitive.",
