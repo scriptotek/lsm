@@ -100,26 +100,46 @@ class PrimoResult
 
         // Add urls for Alma-E, Online Resource and Alma-D
         foreach ($this->extractGetIts($getits) as $getit) {
-            if (in_array(array_get($getit, 'category'), ['Online Resource', 'Alma-E'])) {
-                $urls[$getit['url1']] = 'E-book';
-            } elseif (array_get($getit, 'category') == 'Alma-D') {
-                if ($record->text('./p:delivery/p:resdelscope') == 'NB_D_DELRES') {
-                    $urls[$getit['url1']] = 'Digitized online version only available at the National Library';
-                } else {
-                    $urls[$getit['url1']] = 'Available online (digitized)';
+            if (array_get($getit, 'category') == 'Online Resource') {
+                // Jeg trooor dette alltid er åpne ressurser
+                $urls[$getit['url1']] = ['type' => 'Online Resource', 'description' => 'E-book'];
+
+            } else if (array_get($getit, 'category') == 'Alma-E') {
+                // Disse derimot...
+
+                $urls[$getit['url1']] = ['type' => 'Alma-E', 'access' => [], 'description' => 'E-book'];
+
+                foreach ($this->extractMarcArray($record, './p:delivery/p:delcategory') as $k) {
+                    $alma_cat = array_get($k, 'V');
+                    $inst = array_get($k, 'institution');
+                    if ($alma_cat == 'Alma-E') {
+                        $urls[$getit['url1']]['access'][] = $inst;
+                    }
                 }
+
+            } elseif (array_get($getit, 'category') == 'Alma-D') {
+                // @TODO: Må finne noen eksempler på disse
+
+                $urls[$getit['url1']] = ['type' => 'Alma-D', 'access' => [], 'description' => 'Digitized material'];
+
+                // if ($record->text('./p:delivery/p:resdelscope') == 'NB_D_DELRES') {
+                //     $urls[$getit['url1']] = ['type' => 'Digitized online version only available at the National Library'];
+                // } else {
+                //     $urls[$getit['url1']] = ['type' => 'Alma-D'];
+                // }
             }
         }
 
         // Add link descriptions for online resources
         $links = $this->extractMarcArray($record, './p:links/p:linktorsrc');
         foreach ($links as $link) {
-            $urls[$link['url']] = array_get($link, 'description', 'Available online');
+            $urls[$link['url']]['description'] = array_get($link, 'description', 'Available online');
         }
 
         $out = [];
         foreach ($urls as $key => $val) {
-            $out[] = ['url' => $key, 'description' => $val];
+            $val['url'] = $key;
+            $out[] = $val;
         }
 
         return $out;
