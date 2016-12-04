@@ -118,15 +118,22 @@ class PrimoResult
                 }
 
             } elseif (array_get($getit, 'category') == 'Alma-D') {
-                // @TODO: Må finne noen eksempler på disse
+                // Eksempel: https://ub-lsm.uio.no/primo/records/BIBSYS_ILS71503149490002201?raw=true
+                // Kun tilgjengelig fra NB
 
                 $urls[$getit['url1']] = ['type' => 'Alma-D', 'access' => [], 'description' => 'Digitized material'];
 
                 // if ($record->text('./p:delivery/p:resdelscope') == 'NB_D_DELRES') {
                 //     $urls[$getit['url1']] = ['type' => 'Digitized online version only available at the National Library'];
-                // } else {
-                //     $urls[$getit['url1']] = ['type' => 'Alma-D'];
                 // }
+
+                foreach ($this->extractMarcArray($record, './p:delivery/p:delcategory') as $k) {
+                    $alma_cat = array_get($k, 'V');
+                    $inst = array_get($k, 'institution');
+                    if ($alma_cat == 'Alma-D') {
+                        $urls[$getit['url1']]['access'][] = $inst;
+                    }
+                }
             }
         }
 
