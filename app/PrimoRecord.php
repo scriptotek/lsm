@@ -44,6 +44,11 @@ class PrimoRecord extends PrimoResult implements \JsonSerializable
 
         $this->brief['id'] = $record->text('./p:control/p:recordid');
 
+        $this->full['source'] = $record->text('./p:control/p:sourcesystem');
+        if ($this->full['source'] == 'Alma') {
+            $this->full['alma_id'] = $record->text('./p:control/p:addsrcrecordid');
+        }
+
         $getits = $this->doc->all('./sear:GETIT');
         $this->full['components'] = $this->extractComponents($record, $getits, $this->primoInst, $this->almaInst);
 
@@ -131,12 +136,12 @@ class PrimoRecord extends PrimoResult implements \JsonSerializable
             //}
         }
 
-        // Add Alma IDs
+        // Add Alma holdings IDs.
         $alma_ids = [];
         foreach ($this->extractMarcArray($record, './p:control/p:almaid') as $k) {
             $component =& $this->getComponent($components, array_get($k, 'id'));
             list($inst, $id) = explode(':', $k['V']);
-            array_set($component, 'alma_id.' . $inst, $id);
+            array_set($component, 'alma_holdings.' . $inst, $id);
         }
 
         // Add availability
