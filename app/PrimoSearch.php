@@ -47,7 +47,25 @@ class PrimoSearch {
 
         if ($options->has('material')) {
             $queryTerm = new QueryTerm();
-            $queryTerm->set('rtype', QueryTerm::EXACT, explode(',', $options->get('material')));
+
+            /**
+             * This is really weird, but using
+             *
+             *    $queryTerm->set('rtype',
+             *       QueryTerm::EXACT,
+             *       explode(',', $options->get('material'))
+             *    );
+             *
+             * sometimes resulted in fewer results than expected. E.g. for the
+             * search "field theories Eduardo" with "rtype,exact,print-books",
+             * I got 3 results rather than the expected 4. Using "facet_rtype"
+             * seems to work better.
+             */
+            $queryTerm->set('facet_rtype',
+                QueryTerm::EXACT,
+                explode(',', $options->get('material'))
+            );
+
             $queryObj->includeTerm($queryTerm);
         }
 
