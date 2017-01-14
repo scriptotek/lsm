@@ -27,7 +27,7 @@ $app = new Laravel\Lumen\Application(
 
 // $app->withFacades();
 
-// $app->withEloquent();
+$app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
@@ -80,7 +80,8 @@ $app->singleton(
 // ]);
 
 $app->routeMiddleware([
-	'cors' => 'palanik\lumen\Middleware\LumenCors',
+    'auth' => App\Http\Middleware\Authenticate::class,
+    'cors' => palanik\lumen\Middleware\LumenCors::class,
 ]);
 
 /*
@@ -95,6 +96,7 @@ $app->routeMiddleware([
 */
 
 $app->register(App\Providers\AppServiceProvider::class);
+$app->register(App\Providers\AuthServiceProvider::class);
 $app->register(App\Providers\HttpClientServiceProvider::class);
 $app->register(Latrell\Swagger\SwaggerServiceProvider::class);
 $app->register(Scriptotek\Alma\Providers\AlmaServiceProvider::class);
