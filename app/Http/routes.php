@@ -46,3 +46,5 @@ $app->get('/subjects/show/{vocab}/{id}', 'SubjectsController@show');
 $app->get('/subjects/lookup', 'SubjectsController@lookup');
 // Returns a Subject
 
+$app->get('/alma/records/{id}', 'AlmaController@getRecord');
+// Returns a single AlmaRecord
