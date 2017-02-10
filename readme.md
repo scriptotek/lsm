@@ -1,6 +1,6 @@
 ## University of Oslo Library Services Middleware
 
-Documentation at https://ub-lsm.biblionaut.net/
+Documentation at https://ub-lsm.uio.no/
 
 Setup:
 
