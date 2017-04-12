@@ -2,13 +2,10 @@
 
 namespace App;
 
-use BCLib\PrimoServices\Availability\AlmaClient;
 use BCLib\PrimoServices\PrimoServices;
 use BCLib\PrimoServices\Query;
 use BCLib\PrimoServices\QueryTerm;
 use Http\Client\HttpClient;
-use Http\Discovery\HttpClientDiscovery;
-use Http\Discovery\MessageFactoryDiscovery;
 use Http\Message\MessageFactory;
 use Danmichaelo\QuiteSimpleXMLElement\QuiteSimpleXMLElement;
 
@@ -20,10 +17,9 @@ class PrimoSearch {
     public $alma;
     public $indices;
 
-    public function __construct(PrimoServices $primo, AlmaClient $alma, HttpClient $http, MessageFactory $messageFactory)
+    public function __construct(PrimoServices $primo, HttpClient $http, MessageFactory $messageFactory)
     {
         $this->primo = $primo;
-        $this->alma = $alma;
         $this->http = $http;
         $this->messageFactory = $messageFactory;
         $this->indices = config('app.primo.indices');

@@ -2,9 +2,9 @@
 
 namespace App;
 
-use BCLib\PrimoServices\Availability\AlmaClient;
 use BCLib\PrimoServices\PrimoServices;
 use Http\Client\HttpClient;
+use Http\Message\MessageFactory;
 use Illuminate\Http\Request;
 
 
@@ -13,23 +13,22 @@ class PrimoCover extends PrimoSearch
     protected $defaultCover;
     protected $http;
 
-    public function __construct(PrimoServices $primo, AlmaClient $alma, HttpClient $http)
+    public function __construct(PrimoServices $primo, HttpClient $http, MessageFactory $messageFactory)
     {
-        parent::__construct($primo, $alma);
+        parent::__construct($primo, $http, $messageFactory);
         $this->defaultCover = url('assets/no_cover.jpg');
-        $this->http = $http;
     }
 
     protected function coverFromGoogleBooks($isbn)
     {
-        $res = $this->http->request('GET', 'https://www.googleapis.com/books/v1/volumes', [
-            'query' => [
+        $url = 'https://www.googleapis.com/books/v1/volumes?' . http_build_query([
                 'q' => $isbn,
                 'country' => 'NO',
-            ]
-        ]);
+            ]);
+        $request = $this->messageFactory->createRequest('GET', $url);
+        $response = $this->http->sendRequest($request)->getBody();
+        $response = json_decode((string) $response, true);
 
-        $response = json_decode($res->getBody(), true);
         $thumb_url = array_get($response, 'items.0.volumeInfo.imageLinks.smallThumbnail');
         if ($thumb_url) {
             $thumb_url = str_replace('&edge=curl', '', $thumb_url);

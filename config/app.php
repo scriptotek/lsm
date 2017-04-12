@@ -24,14 +24,4 @@ return [
         ]),
     ],
 
-    /*
-    |--------------------------------------------------------------------------
-    | Alma configuration
-    |--------------------------------------------------------------------------
-    */
-
-    'alma' => [
-        'host' => env('ALMA_HOST', 'bibsys-k.alma.exlibrisgroup.com'),
-        'institution' => env('ALMA_INST', '47BIBSYS_UBO'),
-    ],
 ];
