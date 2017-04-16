@@ -6,7 +6,6 @@ use BCLib\PrimoServices\Availability\AlmaClient;
 use BCLib\PrimoServices\PrimoServices;
 use BCLib\PrimoServices\Query;
 use BCLib\PrimoServices\QueryTerm;
-use Guzzle\Http\Client as HttpClient;
 use Danmichaelo\QuiteSimpleXMLElement\QuiteSimpleXMLElement;
 use Illuminate\Http\Request;
 use JsonLdProcessor;

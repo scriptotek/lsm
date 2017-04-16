@@ -95,6 +95,7 @@ $app->routeMiddleware([
 */
 
 $app->register(App\Providers\AppServiceProvider::class);
+$app->register(App\Providers\HttpClientServiceProvider::class);
 $app->register(Latrell\Swagger\SwaggerServiceProvider::class);
 $app->register(Scriptotek\Alma\Providers\AlmaServiceProvider::class);
 

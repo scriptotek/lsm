@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use Guzzle\Http\Client as HttpClient;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -16,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->singleton('BCLib\PrimoServices\Availability\AlmaClient', function ($app) {
             return new \BCLib\PrimoServices\Availability\AlmaClient(
-                new HttpClient(),
+                null,
                 config('app.alma.host'),
                 config('app.alma.institution')
             );

@@ -6,7 +6,10 @@ use BCLib\PrimoServices\Availability\AlmaClient;
 use BCLib\PrimoServices\PrimoServices;
 use BCLib\PrimoServices\Query;
 use BCLib\PrimoServices\QueryTerm;
-use Guzzle\Http\Client as HttpClient;
+use Http\Client\HttpClient;
+use Http\Discovery\HttpClientDiscovery;
+use Http\Discovery\MessageFactoryDiscovery;
+use Http\Message\MessageFactory;
 use Danmichaelo\QuiteSimpleXMLElement\QuiteSimpleXMLElement;
 
 class PrimoSearch {
@@ -17,10 +20,12 @@ class PrimoSearch {
     public $alma;
     public $indices;
 
-    public function __construct(PrimoServices $primo, AlmaClient $alma)
+    public function __construct(PrimoServices $primo, AlmaClient $alma, HttpClient $http, MessageFactory $messageFactory)
     {
         $this->primo = $primo;
         $this->alma = $alma;
+        $this->http = $http;
+        $this->messageFactory = $messageFactory;
         $this->indices = config('app.primo.indices');
     }
 
@@ -110,15 +115,14 @@ class PrimoSearch {
             throw new PrimoException('No query given', 0, null, $url);
         }
 
-        $client = new HttpClient();
-        $request = $client->get($url);
-        $body = $request->send()->getBody();
+        $request = $this->messageFactory->createRequest('GET', $url);
+        $body = (string) $this->http->sendRequest($request)->getBody();
 
         if ($options->get('raw') == 'true') {
-            return strval($body);
+            return $body;
         }
 
-        $root = new QuiteSimpleXMLElement(strval($body));
+        $root = new QuiteSimpleXMLElement($body);
         $root->registerXPathNamespace('s', 'http://www.exlibrisgroup.com/xsd/jaguar/search');
         $root->registerXPathNamespace('p', 'http://www.exlibrisgroup.com/xsd/primo/primo_nm_bib');
 
@@ -244,15 +248,14 @@ class PrimoSearch {
         $url = str_replace('&indx=1&bulkSize=10', '', $url);
         $url .= '&docId=' . $docId . '&getDelivery=true';
 
-        $client = new HttpClient();
-        $request = $client->get($url);
-        $body = $request->send()->getBody();
+        $request = $this->messageFactory->createRequest('GET', $url);
+        $body = (string) $this->http->sendRequest($request)->getBody();
 
         if ($options->get('raw') == 'true') {
             return $body;
         }
 
-        $root = new QuiteSimpleXMLElement(strval($body));
+        $root = new QuiteSimpleXMLElement($body);
         $root->registerXPathNamespace('s', 'http://www.exlibrisgroup.com/xsd/jaguar/search');
         $root->registerXPathNamespace('p', 'http://www.exlibrisgroup.com/xsd/primo/primo_nm_bib');
 

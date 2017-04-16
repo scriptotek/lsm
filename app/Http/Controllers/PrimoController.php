@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use App\PrimoCover;
 use App\PrimoSearch;
 use App\PrimoException;
-use Guzzle\Http\Exception\BadResponseException;
+use Http\Client\Exception\HttpException;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class PrimoController extends Controller
 {
@@ -21,7 +22,7 @@ class PrimoController extends Controller
                 'error' => $e->getMessage(),
                 'source' => $e->getUrl(),
             ], 400);
-        } catch (BadResponseException $e) {
+        } catch (HttpException $e) {
             return response()->json([
                 'results' => [],
                 'error' => $e->getMessage(),

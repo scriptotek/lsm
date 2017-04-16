@@ -6,7 +6,6 @@ use App\PrimoCover;
 use App\PrimoSearch;
 use App\Skosmos;
 use App\PrimoException;
-use Guzzle\Http\Exception\BadResponseException;
 use Illuminate\Http\Request;
 
 class SubjectsController extends Controller

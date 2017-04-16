@@ -4,7 +4,7 @@ namespace App;
 
 use BCLib\PrimoServices\Availability\AlmaClient;
 use BCLib\PrimoServices\PrimoServices;
-use GuzzleHttp\Client as Http;
+use Http\Client\HttpClient;
 use Illuminate\Http\Request;
 
 
@@ -13,7 +13,7 @@ class PrimoCover extends PrimoSearch
     protected $defaultCover;
     protected $http;
 
-    public function __construct(PrimoServices $primo, AlmaClient $alma, Http $http)
+    public function __construct(PrimoServices $primo, AlmaClient $alma, HttpClient $http)
     {
         parent::__construct($primo, $alma);
         $this->defaultCover = url('assets/no_cover.jpg');

@@ -6,8 +6,9 @@ use BCLib\PrimoServices\Availability\AlmaClient;
 use BCLib\PrimoServices\PrimoServices;
 use BCLib\PrimoServices\Query;
 use BCLib\PrimoServices\QueryTerm;
-use Guzzle\Http\Client as HttpClient;
 use Danmichaelo\QuiteSimpleXMLElement\QuiteSimpleXMLElement;
+use Http\Client\HttpClient;
+use Http\Message\MessageFactory;
 use Illuminate\Http\Request;
 use JsonLdProcessor;
 
@@ -17,9 +18,10 @@ class Skosmos {
     public $baseUrl;
     protected $context;
 
-    public function __construct(HttpClient $http)
+    public function __construct(HttpClient $http, MessageFactory $messageFactory)
     {
         $this->http = $http;
+        $this->messageFactory = $messageFactory;
         $this->baseUrl = 'https://data.ub.uio.no/skosmos/rest/v1';
 
         $this->context = (object)[
@@ -149,8 +151,8 @@ class Skosmos {
     {
         $headers = ['Accept' => 'application/json'];
         $url = $this->baseUrl . $url . '?' . http_build_query($params);
-        return json_decode($this->http->createRequest($method, $url, $headers)
-            ->send()->getBody());
+        $req = $this->messageFactory->createRequest($method, $url, $headers);
+        return json_decode($this->http->sendRequest($req)->getBody());
     }
 
     public function buildQuery(Request $request)

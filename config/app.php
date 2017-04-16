@@ -9,7 +9,7 @@ return [
     */
 
     'primo' => [
-        'host' => env('PRIMO_HOST', 'bibsys-almaprimo.hosted.exlibrisgroup.com'),  // bibsys-almaprimo.hosted.exlibrisgroup.com'), // bibsys-primo.hosted.exlibrisgroup.com'),
+        'host' => env('PRIMO_HOST', 'https://bibsys-almaprimo.hosted.exlibrisgroup.com'),  // bibsys-almaprimo.hosted.exlibrisgroup.com'), // bibsys-primo.hosted.exlibrisgroup.com'),
         'institution' => env('PRIMO_INST', 'UBO'),
         'default_scope' => 'BIBSYS_ILS',
         'indices' => env('PRIMO_INDICES', [
