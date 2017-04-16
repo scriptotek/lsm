@@ -253,7 +253,10 @@ class PrimoResult
         $sear_links = $this->doc->first('./sear:LINKS');
 
         $this->full['urls'] = $this->extractUrls($record, $getits);
-        $this->full['thumbnails'] = $this->extractThumbs($this->extractArray($sear_links, './s:thumbnail'));
+        $this->full['thumbnails'] = [];
+        if (!is_null($sear_links)) {
+            $this->full['thumbnails'] = $this->extractThumbs($this->extractArray($sear_links, './s:thumbnail'));
+        }
 
         return $this;
     }
