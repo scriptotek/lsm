@@ -100,6 +100,7 @@ $app->register(App\Providers\AuthServiceProvider::class);
 $app->register(App\Providers\HttpClientServiceProvider::class);
 $app->register(Latrell\Swagger\SwaggerServiceProvider::class);
 $app->register(Scriptotek\Alma\Providers\AlmaServiceProvider::class);
+$app->register(Sentry\SentryLaravel\SentryLumenServiceProvider::class);
 
 /*
 |--------------------------------------------------------------------------
