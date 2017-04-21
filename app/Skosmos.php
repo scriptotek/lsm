@@ -2,11 +2,6 @@
 
 namespace App;
 
-use BCLib\PrimoServices\Availability\AlmaClient;
-use BCLib\PrimoServices\PrimoServices;
-use BCLib\PrimoServices\Query;
-use BCLib\PrimoServices\QueryTerm;
-use Danmichaelo\QuiteSimpleXMLElement\QuiteSimpleXMLElement;
 use Http\Client\HttpClient;
 use Http\Message\MessageFactory;
 use Illuminate\Http\Request;

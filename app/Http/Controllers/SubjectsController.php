@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\PrimoCover;
-use App\PrimoSearch;
 use App\Skosmos;
-use App\PrimoException;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class SubjectsController extends Controller
 {
@@ -133,8 +131,10 @@ class SubjectsController extends Controller
      *   )
      * )
      *
-     * @param  Skosmos  $skosmos
-     * @param  Request  $request
+     * @param  Skosmos $skosmos
+     * @param  Request $request
+     * @param          $vocab
+     * @param          $id
      * @return Response
      */
     public function show(Skosmos $skosmos, Request $request, $vocab, $id)
