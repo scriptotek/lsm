@@ -10,6 +10,38 @@
         "https"
     ],
     "paths": {
+        "/alma/records/{id}": {
+            "get": {
+                "tags": [
+                    "Alma"
+                ],
+                "description": "Get details about a single record",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Alma ID",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "raw",
+                        "in": "query",
+                        "description": "Set to true to return the raw MARC21 record.",
+                        "type": "boolean",
+                        "default": "false"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "An AlmaRecord"
+                    }
+                }
+            }
+        },
         "/primo/search": {
             "get": {
                 "tags": [
@@ -291,7 +323,9 @@
                             "realfagstermer",
                             "humord",
                             "tekord",
-                            "mrtermer"
+                            "mrtermer",
+                            "usvd",
+                            "lskjema"
                         ]
                     },
                     {
@@ -338,7 +372,9 @@
                             "realfagstermer",
                             "humord",
                             "tekord",
-                            "mrtermer"
+                            "mrtermer",
+                            "usvd",
+                            "lskjema"
                         ]
                     },
                     {
@@ -383,7 +419,9 @@
                             "realfagstermer",
                             "humord",
                             "tekord",
-                            "mrtermer"
+                            "mrtermer",
+                            "usvd",
+                            "lskjema"
                         ]
                     },
                     {

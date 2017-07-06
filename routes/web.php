@@ -1,20 +1,5 @@
 <?php
 
-/**
- * @SWG\Swagger(
- *   schemes={"https"},
- *   host="ub-lsm.uio.no",
- *   basePath="/",
- *   @SWG\Info(
- *     title="University of Oslo Library Services Middleware (LSM)",
- *     version="0.1"
- *   )
- * )
- * @SWG\Tag(
- *   name="Documents"
- * )
- */
-
 /*
 |--------------------------------------------------------------------------
 | Application Routes
