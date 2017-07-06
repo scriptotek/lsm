@@ -32,6 +32,8 @@ class Skosmos {
             'ddc' => 'http://data.ub.uio.no/ddc/',
             'tekord' => 'http://data.ub.uio.no/tekord/',
             'mrtermer' => 'http://data.ub.uio.no/mrtermer/',
+            'usvd' => 'http://data.ub.uio.no/usvd/',
+            'lskjema' => 'http://data.ub.uio.no/lskjema/',
 
             // '@language' => 'nb',
             'uri' => '@id',
@@ -55,6 +57,7 @@ class Skosmos {
             ],
 
             'label' => 'rdfs:label',
+            'notation' => 'skos:notation',
 
             'exactMatch' => (object)[
                 '@id' => 'skos:exactMatch',

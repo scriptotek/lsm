@@ -69,7 +69,7 @@ class SubjectsController extends Controller
      *     in="query",
      *     description="Subject vocabulary. Leave blank to search all subject vocabularies.",
      *     type="string",
-     *     enum={"realfagstermer", "humord", "tekord", "mrtermer"}
+     *     enum={"realfagstermer", "humord", "tekord", "mrtermer", "usvd", "lskjema"}
      *   ),
      *   @SWG\Parameter(
      *     name="type",
@@ -113,7 +113,7 @@ class SubjectsController extends Controller
      *     description="Subject vocabulary. Leave blank to search all subject vocabularies.",
      *     required=true,
      *     type="string",
-     *     enum={"realfagstermer", "humord", "tekord", "mrtermer"}
+     *     enum={"realfagstermer", "humord", "tekord", "mrtermer", "usvd", "lskjema"}
      *   ),
      *   @SWG\Parameter(
      *     name="id",
@@ -159,7 +159,7 @@ class SubjectsController extends Controller
      *     description="Subject vocabulary. Leave blank to search all subject vocabularies.",
      *     required=true,
      *     type="string",
-     *     enum={"realfagstermer", "humord", "tekord", "mrtermer"}
+     *     enum={"realfagstermer", "humord", "tekord", "mrtermer", "usvd", "lskjema"}
      *   ),
      *   @SWG\Parameter(
      *     name="query",
