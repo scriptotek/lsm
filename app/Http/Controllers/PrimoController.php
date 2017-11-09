@@ -72,6 +72,12 @@ class PrimoController extends Controller
      *     type="string"
      *   ),
      *   @SWG\Parameter(
+     *     name="raw_query",
+     *     in="query",
+     *     description="Raw query string on the form 'field,operator,term'. Example: 'lsr05,exact,urealsamling42 AND lsr05,exact,urealboksamling'. Multiple queries can be combined with AND, but OR is not supported.",
+     *     type="string"
+     *   ),
+     *   @SWG\Parameter(
      *     name="subject",
      *     in="query",
      *     description="One or more subject terms. Boolean operators `AND` and `OR` are supported, with `AND` taking precedence over `OR`. Grouping with parentheses are not supported.",

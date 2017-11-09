@@ -172,6 +172,15 @@ class PrimoSearch {
             $queryObj->addterm($queryTerm);
         }
 
+        if ($input->has('raw_query')) {
+            foreach (preg_split('/and/i', $input->get('raw_query')) as $q) {
+                $q = explode(',', $q);
+                $queryTerm = new QueryTerm();
+                $queryTerm->set(trim($q[0]), trim($q[1]), trim($q[2]));
+                $queryObj->addterm($queryTerm);
+            }
+        }
+
         if ($input->has('subject')) {
             $vocabulary = $input->get('vocabulary');
             foreach (explode(' AND ', $input->get('subject')) AS $elem) {
