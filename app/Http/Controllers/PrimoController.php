@@ -41,7 +41,7 @@ class PrimoController extends Controller
      * ),
      * @SWG\Get(
      *   path="/primo/search",
-     *   description="Search using either a free text query with `query`, or a controlled subject query using `vocabulary` and `subject` in combination. Pagination: If there's no more results, `next` will be null. Otherwise `next` will hold the value to be used with `first` to get the next batch of results. Returns: a list of Primo records (`type: record`) and groups of Primo records (`type: group`). Groups can be expanded using the `/primo/group` endpoint.",
+     *   description="Search using either a free text query with `query`, or a controlled subject query using `vocabulary` and `subject` in combination. Pagination: If there's no more results, `next` will be null. Otherwise `next` will hold the value to be used with `first` to get the next batch of results. Returns: a list of Primo records (`type: record`) and groups of Primo records (`type: group`). Groups can be expanded using the `/primo/group` endpoint. To automatically expand all groups, set 'expand_groups' to true, but note that this will effect the response time substantially.",
      *   tags={"Primo"},
      *   produces={"application/json"},
      *   @SWG\Response(
@@ -143,6 +143,13 @@ class PrimoController extends Controller
      *     type="string",
      *     default="compact",
      *     enum={"compact", "full"}
+     *   ),
+     *   @SWG\Parameter(
+     *     name="expand_groups",
+     *     in="query",
+     *     description="Expand all groups. Note that this will substantially increase response time as we need to make one request to Primo for each group.",
+     *     type="boolean",
+     *     default="false"
      *   )
      * )
      *

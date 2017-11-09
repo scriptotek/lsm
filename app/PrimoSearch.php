@@ -147,6 +147,15 @@ class PrimoSearch {
         if ($next > $hits) {
             $next = null;
         }
+
+        if (array_get($options, 'expand_groups')) {
+            foreach ($out as &$o) {
+                if ($o['type'] == 'group') {
+                    $o['records'] = array_get($this->getGroup($o['id'], []), 'result.records');
+                }
+            }
+        }
+
         return [
             'source' => $url,
             'first' => $first,
