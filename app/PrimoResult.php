@@ -58,24 +58,50 @@ class PrimoResult
         }, $group->all($xpath));
     }
 
-    protected function extractMarcArray(QuiteSimpleXMLElement $group, $xpath)
+    protected function extractSubjects(QuiteSimpleXMLElement $record, $vocabulary)
     {
-        $codelist = [
-            'S' => 'status',
+        $subjects = $this->extractMarcArray($record, './p:browse/p:subject', [
+            'D' => 'term',
+            // 'E' => 'term',
+            'T' => 'vocabulary',
+            'I' => 'identifier',
+            'P' => 'preferred',
+        ]);
 
-            'I' => 'institution',
-            'L' => 'library',
-            '1' => 'collection',
-            '2' => 'callcode',
+        $result = [];
 
-            'X' => 'institutionCode',
-            'Y' => 'libraryCode',
-            'Z' => 'collectionCode',
-            'O' => 'id',
-            'U' => 'url',
-            'D' => 'description',
+        foreach ($subjects as $subject) {
+            if (array_get($subject, 'vocabulary') != $vocabulary) {
+                continue;
+            }
+            if (strpos(array_get($subject, 'preferred', ''), 'N') !== false) {
+                continue;
+            }
+            $result[] = array_get($subject, 'term');
+        }
+        return $result;
+    }
 
-        ];
+    protected function extractMarcArray(QuiteSimpleXMLElement $group, $xpath, $codelist=null)
+    {
+        if (is_null($codelist)) {
+            $codelist = [
+                'S' => 'status',
+
+                'I' => 'institution',
+                'L' => 'library',
+                '1' => 'collection',
+                '2' => 'callcode',
+
+                'X' => 'institutionCode',
+                'Y' => 'libraryCode',
+                'Z' => 'collectionCode',
+                'O' => 'id',
+                'U' => 'url',
+                'D' => 'description',
+            ];
+        }
+
         return array_map(function($ava) use ($codelist) {
             $o = [];
 
@@ -218,15 +244,31 @@ class PrimoResult
 
         // @TODO get indices from config
         $this->full['class']['ddc'] = $this->extractArray($record, './p:search/p:lsr10');
-        $this->full['subjects']['mesh'] = $this->extractArray($record, './p:search/p:lsr11');
-        $this->full['subjects']['tekord'] = $this->extractArray($record, './p:search/p:lsr12');
+        // $this->full['subjects']['mesh'] = $this->extractArray($record, './p:search/p:lsr11');
+        // $this->full['subjects']['tekord'] = $this->extractArray($record, './p:search/p:lsr12');
         $this->full['class']['udc'] = $this->extractArray($record, './p:search/p:lsr13');
-        $this->full['subjects']['humord'] = $this->extractArray($record, './p:search/p:lsr14');
+        // $this->full['subjects']['humord'] = $this->extractArray($record, './p:search/p:lsr14');
         $this->full['subjects']['agrovoc'] = $this->extractArray($record, './p:search/p:lsr15');
         $this->full['class']['nlm'] = $this->extractArray($record, './p:search/p:lsr16');
-        $this->full['subjects']['place'] = $this->extractArray($record, './p:search/p:lsr17');
-        $this->full['subjects']['mrtermer'] = $this->extractArray($record, './p:search/p:lsr19');
-        $this->full['subjects']['realfagstermer'] = $this->extractArray($record, './p:search/p:lsr20');
+
+        $this->full['subjects']['mrtermer'] = $this->extractSubjects($record, 'NOUBOMR');
+        $this->full['subjects']['mesh'] = $this->extractSubjects($record, 'MESH');
+        $this->full['subjects']['tekord'] = $this->extractSubjects($record, 'TEKORD');
+        $this->full['subjects']['humord'] = $this->extractSubjects($record, 'HUMORD');
+        $this->full['subjects']['realfagstermer'] = $this->extractSubjects($record, 'NOUBOMN');
+        $controlled_terms = array_merge($this->full['subjects']['mrtermer'],
+                                        $this->full['subjects']['tekord'],
+                                        $this->full['subjects']['humord'],
+                                        $this->full['subjects']['realfagstermer']
+                                        );
+        // Add place terms from supported vocabularies
+        // TODO: Refactor output to organize place by vocabulary
+        $this->full['subjects']['place'] = [];
+        foreach ($this->extractArray($record, './p:search/p:lsr17') as $p) {
+            if (in_array($p, $controlled_terms)) {
+                $this->full['subjects']['place'][] = $p;
+            }
+        }
 
         $this->full['subjects']['topic'] = $this->extractArray($record, './p:search/p:topic');
         $this->full['subjects']['subject'] = $this->extractArray($record, './p:search/p:subject');
