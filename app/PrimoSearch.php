@@ -27,26 +27,26 @@ class PrimoSearch {
 
     protected function newQuery($options)
     {
-        $institution = $options->get('institution', config('app.primo.institution'));
-        $scope = $options->get('scope', config('app.primo.default_scope'));
+        $institution = array_get($options, 'institution', config('app.primo.institution'));
+        $scope = array_get($options, 'scope', config('app.primo.default_scope'));
         $queryObj = new Query($institution);
         $queryObj->local($scope);
         $queryObj->onCampus(true);
 
-        if ($options->has('institution')) {
+        if (array_has($options, 'institution')) {
             $queryTerm = new QueryTerm();
-            $queryTerm->set('facet_local4', QueryTerm::EXACT, $options->get('institution'));
+            $queryTerm->set('facet_local4', QueryTerm::EXACT, array_get($options, 'institution'));
             $queryObj->addTerm($queryTerm);
         }
 
-        if ($options->has('library')) {
-            $library = explode(',', $options->get('library'));
+        if (array_has($options, 'library')) {
+            $library = explode(',', array_get($options, 'library'));
             $queryTerm = new QueryTerm();
             $queryTerm->set('facet_library', QueryTerm::EXACT, $library);
             $queryObj->includeTerm($queryTerm);
         }
 
-        if ($options->has('material')) {
+        if (array_has($options, 'material')) {
             $queryTerm = new QueryTerm();
 
             /**
@@ -54,7 +54,7 @@ class PrimoSearch {
              *
              *    $queryTerm->set('rtype',
              *       QueryTerm::EXACT,
-             *       explode(',', $options->get('material'))
+             *       explode(',', array_get($options, 'material'))
              *    );
              *
              * sometimes resulted in fewer results than expected. E.g. for the
@@ -64,15 +64,15 @@ class PrimoSearch {
              */
             $queryTerm->set('facet_rtype',
                 QueryTerm::EXACT,
-                explode(',', $options->get('material'))
+                explode(',', array_get($options, 'material'))
             );
 
             $queryObj->includeTerm($queryTerm);
         }
 
-        $start = $options->get('start', 1);
-        $limit = $options->get('limit', 10);
-        $sort = $options->get('sort', 'relevance');
+        $start = array_get($options, 'start', 1);
+        $limit = array_get($options, 'limit', 10);
+        $sort = array_get($options, 'sort', 'relevance');
         if ($sort != 'relevance') {
             $queryObj->sortField($sort);
         }
@@ -86,8 +86,8 @@ class PrimoSearch {
     public function getRecordOptions($options)
     {
         return [
-            'primo_inst' => $options->get('institution', config('app.primo.institution')),
-            'alma_inst' => $options->get('alma', config('app.alma.institution')),
+            'primo_inst' => array_get($options, 'institution', config('app.primo.institution')),
+            'alma_inst' => array_get($options, 'alma', config('app.alma.institution')),
         ];
     }
 
@@ -114,7 +114,7 @@ class PrimoSearch {
         $request = $this->messageFactory->createRequest('GET', $url);
         $body = (string) $this->http->sendRequest($request)->getBody();
 
-        if ($options->get('raw') == 'true') {
+        if (array_get($options, 'raw') == 'true') {
             return $body;
         }
 
@@ -135,7 +135,7 @@ class PrimoSearch {
         }
 
         $facets = [];
-        $vocab = $options->get('vocabulary');
+        $vocab = array_get($options, 'vocabulary');
         if (isset($this->indices[$vocab])) {
             $facets[$vocab] = $this->parseFacet($root, 'local' . $this->indices[$vocab]);
         }
@@ -236,7 +236,7 @@ class PrimoSearch {
         $queryObj->addTerm($queryTerm);
 
         $res = $this->processQuery($queryObj, true, true, $options);
-        if ($options->get('raw') == 'true') {
+        if (array_get($options, 'raw') == 'true') {
             return $res;
         }
         return [
@@ -252,8 +252,8 @@ class PrimoSearch {
 
     public function getRecord($docId, $options)
     {
-        $institution = $options->get('institution', config('app.primo.institution'));
-        $scope = $options->get('scope', config('app.primo.default_scope'));
+        $institution = array_get($options, 'institution', config('app.primo.institution'));
+        $scope = array_get($options, 'scope', config('app.primo.default_scope'));
         $queryObj = new Query($institution);
         $queryObj->local($scope);
         $queryObj->onCampus(true);
@@ -265,7 +265,7 @@ class PrimoSearch {
         $request = $this->messageFactory->createRequest('GET', $url);
         $body = (string) $this->http->sendRequest($request)->getBody();
 
-        if ($options->get('raw') == 'true') {
+        if (array_get($options, 'raw') == 'true') {
             return $body;
         }
 
