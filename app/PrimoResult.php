@@ -77,7 +77,7 @@ class PrimoResult
             if (strpos(array_get($subject, 'preferred', ''), 'N') !== false) {
                 continue;
             }
-            $result[] = array_get($subject, 'term');
+            $result[] = str_replace(' -- ', ' : ', array_get($subject, 'term'));
         }
         return $result;
     }
