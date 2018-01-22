@@ -88,7 +88,7 @@ class PrimoController extends Controller
      *     in="query",
      *     description="Subject vocabulary. Used as a qualifier with the subject field, leave blank to search all subject vocabularies.",
      *     type="string",
-     *     enum={"realfagstermer", "humord", "tekord", "mrtermer"}
+     *     enum={"realfagstermer", "humord", "tekord", "mrtermer", "agrovoc", "nlm", "geo", "ddc", "udc", "ubo"}
      *   ),
      *   @SWG\Parameter(
      *     name="material",

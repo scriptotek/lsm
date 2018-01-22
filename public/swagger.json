@@ -91,7 +91,13 @@
                             "realfagstermer",
                             "humord",
                             "tekord",
-                            "mrtermer"
+                            "mrtermer",
+                            "agrovoc",
+                            "nlm",
+                            "geo",
+                            "ddc",
+                            "udc",
+                            "ubo"
                         ]
                     },
                     {
