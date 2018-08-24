@@ -2,33 +2,29 @@
 
 namespace App\Providers;
 
-use App\User;
 use Illuminate\Support\Facades\Gate;
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
 
 class AuthServiceProvider extends ServiceProvider
 {
     /**
-     * Register any application services.
+     * The policy mappings for the application.
      *
-     * @return void
+     * @var array
      */
-    public function register()
-    {
-        //
-    }
+    protected $policies = [
+        'App\Model' => 'App\Policies\ModelPolicy',
+    ];
 
     /**
-     * Boot the authentication services for the application.
+     * Register any authentication / authorization services.
      *
      * @return void
      */
     public function boot()
     {
-        $this->app['auth']->viaRequest('api', function ($request) {
-            if ($request->input('api_token')) {
-                return User::where('api_token', $request->input('api_token'))->first();
-            }
-        });
+        $this->registerPolicies();
+
+        //
     }
 }
