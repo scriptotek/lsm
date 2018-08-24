@@ -41,20 +41,16 @@
         "fzaninotto/faker": "^1.4"
     },
     "autoload": {
-        "psr-4": {
             "App\\": "app/"
         },
         "classmap": [
             "database/"
         ],
-        "files": [
-            "app/helpers.php"
-        ]
     },
     "autoload-dev": {
-        "classmap": [
-            "tests/"
-        ]
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
     },
     "extra": {
         "laravel": {

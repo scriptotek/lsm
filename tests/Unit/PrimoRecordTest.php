@@ -1,14 +1,18 @@
 <?php
 
+namespace Tests\Unit;
+
 use App\PrimoRecord;
 use BCLib\PrimoServices\DeepLink;
 use Danmichaelo\QuiteSimpleXMLElement\QuiteSimpleXMLElement;
+use Tests\TestCase;
 
 class PrimoRecordTest extends TestCase
 {
     public function loadPrimoRecord($filename)
     {
-        $xml = file_get_contents(__DIR__ . '/data/' . $filename);
+        $dataDir = dirname(dirname(__FILE__)) . '/data/';
+        $xml = file_get_contents($dataDir . $filename);
 
         $root = new QuiteSimpleXMLElement($xml);
         $root->registerXPathNamespace('s', 'http://www.exlibrisgroup.com/xsd/jaguar/search');
@@ -39,7 +43,7 @@ class PrimoRecordTest extends TestCase
         $record = $this->loadPrimoRecord('PrimoRecordGeo.xml');
 
         $this->assertSetsEqual(
-            ['Nordpolen', 'Arktis'],
+            ['Nordpolen', 'Arktis', 'Russland'],
             array_get($record, 'subjects.place')
         );
     }

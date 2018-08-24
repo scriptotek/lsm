@@ -1,16 +1,12 @@
 <?php
 
-class TestCase extends Laravel\Lumen\Testing\TestCase
+namespace Tests;
+
+use Illuminate\Foundation\Testing\TestCase as BaseTestCase;
+
+abstract class TestCase extends BaseTestCase
 {
-    /**
-     * Creates the application.
-     *
-     * @return \Laravel\Lumen\Application
-     */
-    public function createApplication()
-    {
-        return require __DIR__.'/../bootstrap/app.php';
-    }
+    use CreatesApplication;
 
     /**
      * Assert that two arrays are equal. This helper method will sort the two arrays before comparing them if
