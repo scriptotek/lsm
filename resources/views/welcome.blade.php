@@ -1,95 +1,111 @@
-<!doctype html>
-<html lang="{{ app()->getLocale() }}">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>LSM: Simple Catalogue Search</title>
+  <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.18.1/swagger-ui.css">
+<style>
+    html
+    {
+        box-sizing: border-box;
+        overflow: -moz-scrollbars-vertical;
+        overflow-y: scroll;
+    }
+    *,
+    *:before,
+    *:after
+    {
+        box-sizing: inherit;
+    }
 
-        <title>Laravel</title>
+    body {
+      margin:0;
+      background: #fafafa;
+    }
+    .swagger-ui .scheme-container, .swagger-ui .topbar { display: none !important; }
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Raleway:100,600" rel="stylesheet" type="text/css">
+  </style>
+</head>
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Raleway', sans-serif;
-                font-weight: 100;
-                height: 100vh;
-                margin: 0;
-            }
+<body>
 
-            .full-height {
-                height: 100vh;
-            }
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" style="position:absolute;width:0;height:0">
+  <defs>
+    <symbol viewBox="0 0 20 20" id="unlocked">
+          <path d="M15.8 8H14V5.6C14 2.703 12.665 1 10 1 7.334 1 6 2.703 6 5.6V6h2v-.801C8 3.754 8.797 3 10 3c1.203 0 2 .754 2 2.199V8H4c-.553 0-1 .646-1 1.199V17c0 .549.428 1.139.951 1.307l1.197.387C5.672 18.861 6.55 19 7.1 19h5.8c.549 0 1.428-.139 1.951-.307l1.196-.387c.524-.167.953-.757.953-1.306V9.199C17 8.646 16.352 8 15.8 8z"></path>
+    </symbol>
 
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
+    <symbol viewBox="0 0 20 20" id="locked">
+      <path d="M15.8 8H14V5.6C14 2.703 12.665 1 10 1 7.334 1 6 2.703 6 5.6V8H4c-.553 0-1 .646-1 1.199V17c0 .549.428 1.139.951 1.307l1.197.387C5.672 18.861 6.55 19 7.1 19h5.8c.549 0 1.428-.139 1.951-.307l1.196-.387c.524-.167.953-.757.953-1.306V9.199C17 8.646 16.352 8 15.8 8zM12 8H8V5.199C8 3.754 8.797 3 10 3c1.203 0 2 .754 2 2.199V8z"/>
+    </symbol>
 
-            .position-ref {
-                position: relative;
-            }
+    <symbol viewBox="0 0 20 20" id="close">
+      <path d="M14.348 14.849c-.469.469-1.229.469-1.697 0L10 11.819l-2.651 3.029c-.469.469-1.229.469-1.697 0-.469-.469-.469-1.229 0-1.697l2.758-3.15-2.759-3.152c-.469-.469-.469-1.228 0-1.697.469-.469 1.228-.469 1.697 0L10 8.183l2.651-3.031c.469-.469 1.228-.469 1.697 0 .469.469.469 1.229 0 1.697l-2.758 3.152 2.758 3.15c.469.469.469 1.229 0 1.698z"/>
+    </symbol>
 
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
+    <symbol viewBox="0 0 20 20" id="large-arrow">
+      <path d="M13.25 10L6.109 2.58c-.268-.27-.268-.707 0-.979.268-.27.701-.27.969 0l7.83 7.908c.268.271.268.709 0 .979l-7.83 7.908c-.268.271-.701.27-.969 0-.268-.269-.268-.707 0-.979L13.25 10z"/>
+    </symbol>
 
-            .content {
-                text-align: center;
-            }
+    <symbol viewBox="0 0 20 20" id="large-arrow-down">
+      <path d="M17.418 6.109c.272-.268.709-.268.979 0s.271.701 0 .969l-7.908 7.83c-.27.268-.707.268-.979 0l-7.908-7.83c-.27-.268-.27-.701 0-.969.271-.268.709-.268.979 0L10 13.25l7.418-7.141z"/>
+    </symbol>
 
-            .title {
-                font-size: 84px;
-            }
 
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 12px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
+    <symbol viewBox="0 0 24 24" id="jump-to">
+      <path d="M19 7v4H5.83l3.58-3.59L8 6l-6 6 6 6 1.41-1.41L5.83 13H21V7z"/>
+    </symbol>
 
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @if (Auth::check())
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ url('/login') }}">Login</a>
-                        <a href="{{ url('/register') }}">Register</a>
-                    @endif
-                </div>
-            @endif
+    <symbol viewBox="0 0 24 24" id="expand">
+      <path d="M10 18h4v-2h-4v2zM3 6v2h18V6H3zm3 7h12v-2H6v2z"/>
+    </symbol>
 
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
+  </defs>
+</svg>
 
-                <div class="links">
-                    <a href="https://laravel.com/docs">Documentation</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>
-    </body>
+<div id="swagger-ui"></div>
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.18.1/swagger-ui-bundle.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.18.1/swagger-ui-standalone-preset.js"></script>
+<script type="text/javascript">
+window.onload = function() {
+  // Build a system
+  const ui = SwaggerUIBundle({
+    url: "/swagger.json",
+    dom_id: '#swagger-ui',
+    presets: [
+      SwaggerUIBundle.presets.apis,
+      SwaggerUIStandalonePreset
+    ],
+    plugins: [
+      SwaggerUIBundle.plugins.DownloadUrl
+    ],
+    layout: "StandaloneLayout",
+    supportedSubmitMethods: ['get'],
+    deepLinking: true,
+    operationsSorter: 'alpha',
+  })
+
+  window.ui = ui
+}
+/*
+        onComplete: function(swaggerApi, swaggerUi){
+
+          $('pre code').each(function(i, e) {
+            hljs.highlightBlock(e)
+          });
+
+        },
+        onFailure: function(data) {
+          log("Unable to Load SwaggerUI");
+        },
+        apisSorter: "alpha",
+        showRequestHeaders: false
+      });
+*/
+  </script>
+
+</body>
 </html>
