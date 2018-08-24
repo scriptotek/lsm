@@ -185,7 +185,7 @@ class PrimoRecord extends PrimoResult implements \JsonSerializable
 
     private function extractPNXGroups(\stdClass $pnx_record, BibRecord $record)
     {
-        $groups = array();
+        $groups = [];
         foreach ($pnx_record as $group_name => $group) {
             if (!is_null($group)) {
                 $this->extractGroupFields($group, $group_name, $record);
@@ -196,7 +196,7 @@ class PrimoRecord extends PrimoResult implements \JsonSerializable
 
     private function extractGroupFields(\stdClass $pnx_group, $group_name, BibRecord $record)
     {
-        $fields = array();
+        $fields = [];
         foreach ($pnx_group as $field_name => $field) {
             $record->addField($group_name, $field_name, $field);
         }

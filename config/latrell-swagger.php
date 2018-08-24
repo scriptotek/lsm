@@ -1,5 +1,5 @@
 <?php
-return array(
+return [
     // 'enable' => config('app.debug'),
 
     'prefix' => 'api-docs',
@@ -14,4 +14,4 @@ return array(
     'suffix' => '.{format}',
 
     'title' => 'LSM'
-);
+];
