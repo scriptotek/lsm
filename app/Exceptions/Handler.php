@@ -50,7 +50,9 @@ class Handler extends ExceptionHandler
     public function render($request, Exception $e)
     {
         $message = $e->getMessage();
-        if (is_object($message)) { $message = $message->toArray(); }
+        if (is_object($message)) {
+            $message = $message->toArray();
+        }
         $code = 500;
         if ($e instanceof HttpException) {
             $code = $e->getStatusCode();

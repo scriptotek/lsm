@@ -7,7 +7,8 @@ use Http\Message\MessageFactory;
 use Illuminate\Http\Request;
 use JsonLdProcessor;
 
-class Skosmos {
+class Skosmos
+{
 
     protected $http;
     public $baseUrl;
@@ -212,7 +213,6 @@ class Skosmos {
         // $framed =  $p->compact($data, $frame, $options);
 
         // return $framed;
-
     }
 
     public function getRaw($uri)
@@ -220,7 +220,7 @@ class Skosmos {
         return $this->request('GET', '/data', ['uri' => $uri]);
     }
 
-    public function getByUri($uri, $expandMappings=false)
+    public function getByUri($uri, $expandMappings = false)
     {
         $data = $this->getRaw($uri);
 
@@ -283,12 +283,11 @@ class Skosmos {
         return 'http://data.ub.uio.no/' . $vocab . '/' . $id;
     }
 
-    public function get($vocab, $id, $expandMappings=false)
+    public function get($vocab, $id, $expandMappings = false)
     {
         $vocab = preg_replace('/[^a-z0-9]/', '', $vocab);
         $id = preg_replace('/[^a-z0-9]/', '', $id);
 
         return $this->getByUri($this->getUri($vocab, $id), $expandMappings);
     }
-
 }

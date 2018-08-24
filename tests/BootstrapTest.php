@@ -6,5 +6,4 @@ class BootstrapTest extends TestCase
     {
         $this->assertEquals(mb_internal_encoding(), 'UTF-8');
     }
-
 }

@@ -22,7 +22,8 @@ use Swagger\Annotations as SWG;
 /**
  * @SWG\Definition()
  */
-class Document {
+class Document
+{
 
     /**
      * The product name
@@ -30,5 +31,4 @@ class Document {
      * @SWG\Property()
      */
     public $name;
-
 }

@@ -28,7 +28,7 @@ class PrimoResult
         $this->almaInst = strtoupper(array_get($options, 'alma_inst', null));
     }
 
-    public function toArray($fullRepr=false)
+    public function toArray($fullRepr = false)
     {
         $data = $this->brief;
         $data['links'] = [
@@ -37,7 +37,7 @@ class PrimoResult
         if ($fullRepr) {
             $data['links']['primo'] = $this->primoLink();
             if ($this instanceof PrimoRecord) {
-	            $data['links']['cover'] = $this->coverLink();
+                $data['links']['cover'] = $this->coverLink();
             }
             // $this->addLocations();
         }
@@ -84,7 +84,7 @@ class PrimoResult
         return $result;
     }
 
-    protected function extractMarcArray(QuiteSimpleXMLElement $group, $xpath, $codelist=null)
+    protected function extractMarcArray(QuiteSimpleXMLElement $group, $xpath, $codelist = null)
     {
         if (is_null($codelist)) {
             $codelist = [
@@ -104,7 +104,7 @@ class PrimoResult
             ];
         }
 
-        return array_map(function($ava) use ($codelist) {
+        return array_map(function ($ava) use ($codelist) {
             $o = [];
 
             // FIX for Primo API not returning consistent data..
@@ -131,7 +131,6 @@ class PrimoResult
             if (array_get($getit, 'category') == 'Online Resource') {
                 // Jeg trooor dette alltid er åpne ressurser
                 $urls[$getit['url1']] = ['type' => 'Online Resource', 'description' => 'E-book'];
-
             } else if (array_get($getit, 'category') == 'Alma-E') {
                 // Disse derimot...
 
@@ -144,7 +143,6 @@ class PrimoResult
                         $urls[$getit['url1']]['access'][] = $inst;
                     }
                 }
-
             } elseif (array_get($getit, 'category') == 'Alma-D') {
                 // Eksempel: https://ub-lsm.uio.no/primo/records/BIBSYS_ILS71503149490002201?raw=true
                 // Kun tilgjengelig fra NB
@@ -207,7 +205,8 @@ class PrimoResult
         return $out;
     }
 
-    public function process() {
+    public function process()
+    {
         $record = $this->doc->first('./p:PrimoNMBib/p:record');
         $facets = $record->first('./p:facets');
 
@@ -260,11 +259,12 @@ class PrimoResult
         $this->full['subjects']['tekord'] = $this->extractSubjects($record, 'TEKORD');
         $this->full['subjects']['humord'] = $this->extractSubjects($record, 'HUMORD');
         $this->full['subjects']['realfagstermer'] = $this->extractSubjects($record, 'NOUBOMN');
-        $controlled_terms = array_merge($this->full['subjects']['mrtermer'],
-                                        $this->full['subjects']['tekord'],
-                                        $this->full['subjects']['humord'],
-                                        $this->full['subjects']['realfagstermer']
-                                        );
+        $controlled_terms = array_merge(
+            $this->full['subjects']['mrtermer'],
+            $this->full['subjects']['tekord'],
+            $this->full['subjects']['humord'],
+            $this->full['subjects']['realfagstermer']
+        );
         // Add place terms from supported vocabularies
         // TODO: Refactor output to organize place by vocabulary
         $this->full['subjects']['place'] = [];
@@ -280,17 +280,17 @@ class PrimoResult
         $this->full['subjects']['keyword'] = [];
 
         // Trim ending dots
-        $this->full['subjects']['subject'] = array_map(function($s) {
+        $this->full['subjects']['subject'] = array_map(function ($s) {
             return trim($s, '.');
         }, $this->full['subjects']['subject']);
 
         // Filter out free keywords
-        $this->full['subjects']['keyword'] = array_values(array_filter($this->full['subjects']['subject'], function($s) {
-            $firstChar = mb_substr($s,0, 1);
+        $this->full['subjects']['keyword'] = array_values(array_filter($this->full['subjects']['subject'], function ($s) {
+            $firstChar = mb_substr($s, 0, 1);
             return (mb_strtolower($firstChar) === $firstChar);
         }));
-        $this->full['subjects']['subject'] = array_values(array_filter($this->full['subjects']['subject'], function($s) {
-            $firstChar = mb_substr($s,0, 1);
+        $this->full['subjects']['subject'] = array_values(array_filter($this->full['subjects']['subject'], function ($s) {
+            $firstChar = mb_substr($s, 0, 1);
             return (mb_strtolower($firstChar) !== $firstChar);
         }));
 

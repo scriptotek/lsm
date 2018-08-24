@@ -9,7 +9,8 @@ use Danmichaelo\QuiteSimpleXMLElement\QuiteSimpleXMLElement;
 class PrimoRecordGroup extends PrimoResult implements \JsonSerializable
 {
 
-    public function __get($property) {
+    public function __get($property)
+    {
         return isset($this->brief[$property]) ? $this->brief[$property] : (isset($this->full[$property]) ? $this->full[$property] : null);
     }
 
@@ -57,5 +58,4 @@ class PrimoRecordGroup extends PrimoResult implements \JsonSerializable
 
         return $this;
     }
-
 }

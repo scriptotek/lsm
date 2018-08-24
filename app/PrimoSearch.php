@@ -9,7 +9,8 @@ use Http\Client\HttpClient;
 use Http\Message\MessageFactory;
 use Danmichaelo\QuiteSimpleXMLElement\QuiteSimpleXMLElement;
 
-class PrimoSearch {
+class PrimoSearch
+{
 
     public $orderedMaterialList = ['e-books', 'print-books'];
 
@@ -61,7 +62,8 @@ class PrimoSearch {
              * I got 3 results rather than the expected 4. Using "facet_rtype"
              * seems to work better.
              */
-            $queryTerm->set('facet_rtype',
+            $queryTerm->set(
+                'facet_rtype',
                 QueryTerm::EXACT,
                 explode(',', array_get($options, 'material'))
             );
@@ -101,7 +103,7 @@ class PrimoSearch {
         foreach ($root->xpath('//s:FACET[@NAME="' . $name . '"]/s:FACET_VALUES') as $value) {
             $values[] = ['value' => $value->attr('KEY'), 'count' => intval($value->attr('VALUE'))];
         }
-        $values = array_reverse(array_sort($values, function($value) {
+        $values = array_reverse(array_sort($values, function ($value) {
             return $value['count'];
         }));
         return array_slice($values, 0, 10);
@@ -176,7 +178,6 @@ class PrimoSearch {
         $queryObj = $this->newQuery($input);
 
         if ($input->has('query')) {
-
             if (strlen($input->get('query')) < 3) {
                 throw new PrimoException('Query must be minimum 3 characters long.');
             }
@@ -197,7 +198,7 @@ class PrimoSearch {
 
         if ($input->has('subject')) {
             $vocabulary = $input->get('vocabulary');
-            foreach (explode(' AND ', $input->get('subject')) AS $elem) {
+            foreach (explode(' AND ', $input->get('subject')) as $elem) {
                 $queryTerm = new QueryTerm();
                 $index = isset($this->indices[$vocabulary]) ? 'lsr' . $this->indices[$vocabulary] : 'sub';
                 $queryTerm->set($index, QueryTerm::EXACT, explode(' OR ', $elem));
@@ -206,7 +207,7 @@ class PrimoSearch {
         }
 
         if ($input->has('genre')) {
-            foreach (explode(' AND ', $input->get('genre')) AS $elem) {
+            foreach (explode(' AND ', $input->get('genre')) as $elem) {
                 $queryTerm = new QueryTerm();
                 $queryTerm->set('facet_genre', QueryTerm::EXACT, explode(' OR ', $elem));
                 $queryObj->includeTerm($queryTerm);
@@ -214,7 +215,7 @@ class PrimoSearch {
         }
 
         if ($input->has('place')) {
-            foreach (explode(' AND ', $input->get('place')) AS $elem) {
+            foreach (explode(' AND ', $input->get('place')) as $elem) {
                 $queryTerm = new QueryTerm();
                 $queryTerm->set('facet_local' . $this->indices['geo'], QueryTerm::EXACT, explode(' OR ', $elem));
                 $queryObj->includeTerm($queryTerm);
@@ -226,7 +227,7 @@ class PrimoSearch {
         return $this->processQuery($queryObj, false, $fullRepr, $input);
     }
 
-    public function getGroup($groupId, $options=[])
+    public function getGroup($groupId, $options = [])
     {
         // Get all results to avoid pagination
         $options['limit'] = 50;
@@ -295,7 +296,5 @@ class PrimoSearch {
             'error' => null,
             'result' => $out,
         ];
-
     }
-
 }

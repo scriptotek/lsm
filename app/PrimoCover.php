@@ -7,7 +7,6 @@ use Http\Client\HttpClient;
 use Http\Message\MessageFactory;
 use Illuminate\Http\Request;
 
-
 class PrimoCover extends PrimoSearch
 {
     protected $defaultCover;
@@ -68,5 +67,4 @@ class PrimoCover extends PrimoSearch
 
         return redirect($url);
     }
-
 }

@@ -197,7 +197,7 @@ class SubjectsController extends Controller
         }
         $data = $skosmos->search($request);
 
-        if (!count($data->results)){
+        if (!count($data->results)) {
             return response()->json([
                 'error' => 'subject_not_found'
             ], 404);
@@ -209,6 +209,4 @@ class SubjectsController extends Controller
 
         return response()->json($data);
     }
-
-
 }

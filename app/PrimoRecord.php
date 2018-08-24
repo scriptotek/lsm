@@ -10,7 +10,7 @@ class PrimoRecord extends PrimoResult implements \JsonSerializable
 {
     public $orderedMaterialList = ['e-books', 'print-books'];
 
-    static function make(QuiteSimpleXMLElement $doc, DeepLink $deeplinkProvider, $expanded=false, $options)
+    static function make(QuiteSimpleXMLElement $doc, DeepLink $deeplinkProvider, $expanded = false, $options)
     {
         $is_group = ($doc->text('./p:PrimoNMBib/p:record/p:facets/p:frbrtype') != '6' && $doc->text('./p:PrimoNMBib/p:record/p:display/p:version', '1') != '1');
 
@@ -22,7 +22,8 @@ class PrimoRecord extends PrimoResult implements \JsonSerializable
         return $item->process();
     }
 
-    public function __get($property) {
+    public function __get($property)
+    {
         return isset($this->brief[$property]) ? $this->brief[$property] : (isset($this->full[$property]) ? $this->full[$property] : null);
     }
 
@@ -121,7 +122,7 @@ class PrimoRecord extends PrimoResult implements \JsonSerializable
     {
 
         // Get components
-        $components = array_map(function($x) use ($record){
+        $components = array_map(function ($x) use ($record) {
             return [
                 'id' => $x['V'],
                 'fid' => array_get($x, 'id'),
@@ -189,7 +190,6 @@ class PrimoRecord extends PrimoResult implements \JsonSerializable
             if (!is_null($group)) {
                 $this->extractGroupFields($group, $group_name, $record);
             }
-
         }
         return $groups;
     }
@@ -202,6 +202,4 @@ class PrimoRecord extends PrimoResult implements \JsonSerializable
         }
         return $fields;
     }
-
-
 }

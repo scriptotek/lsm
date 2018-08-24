@@ -162,7 +162,7 @@ class PrimoController extends Controller
         if ($request->get('raw') == 'true') {
             return response()->make($search->search($request), 200, ['Content-Type' => 'application/xml']);
         }
-        return $this->handleErrors(function() use ($search, $request) {
+        return $this->handleErrors(function () use ($search, $request) {
             return $search->search($request);
         });
     }
@@ -203,7 +203,7 @@ class PrimoController extends Controller
         if ($request->get('raw') == 'true') {
             return response()->make($search->getRecord($id, $request), 200, ['Content-Type' => 'application/xml']);
         }
-        return $this->handleErrors(function() use ($search, $request, $id) {
+        return $this->handleErrors(function () use ($search, $request, $id) {
             return $search->getRecord($id, $request);
         });
     }
@@ -237,7 +237,7 @@ class PrimoController extends Controller
         if ($request->get('raw') == 'true') {
             return response()->make($search->getGroup($id, $request), 200, ['Content-Type' => 'application/xml']);
         }
-        return $this->handleErrors(function() use ($search, $request, $id) {
+        return $this->handleErrors(function () use ($search, $request, $id) {
             return $search->getGroup($id, $request);
         });
     }
@@ -270,5 +270,4 @@ class PrimoController extends Controller
     {
         return $cover->getCover($recordId, $request);
     }
-
 }

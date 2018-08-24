@@ -1,8 +1,8 @@
 <?php
 
 namespace App;
-use Scriptotek\Alma\Bibs\Bib;
 
+use Scriptotek\Alma\Bibs\Bib;
 
 class AlmaRecord implements \JsonSerializable
 {
@@ -60,7 +60,7 @@ class AlmaRecord implements \JsonSerializable
         }
     }
 
-    protected function toArray($includeHoldings=false)
+    protected function toArray($includeHoldings = false)
     {
         $out = $this->bib->record->jsonSerialize();
 

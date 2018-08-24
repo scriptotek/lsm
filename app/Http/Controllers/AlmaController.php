@@ -149,7 +149,5 @@ class AlmaController extends Controller
         ];
 
         return response()->json($data);
-
     }
-
 }
