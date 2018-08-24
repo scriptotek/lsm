@@ -23,6 +23,8 @@ class PrimoResult
         $this->brief = ['type' => ($this instanceof PrimoRecordGroup) ? 'group' : 'record'];
         $this->full = [];
         $this->primoInst = strtoupper(array_get($options, 'primo_inst', null));
+        $this->primoView = strtoupper(array_get($options, 'primo_view', '??'));
+        $this->primoHost = array_get($options, 'primo_host', null);
         $this->almaInst = strtoupper(array_get($options, 'alma_inst', null));
     }
 

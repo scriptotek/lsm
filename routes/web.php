@@ -31,5 +31,12 @@ $app->get('/subjects/show/{vocab}/{id}', 'SubjectsController@show');
 $app->get('/subjects/lookup', 'SubjectsController@lookup');
 // Returns a Subject
 
-$app->get('/alma/records/{id}', 'AlmaController@getRecord');
+$app->get('/alma/search', ['as' => 'alma.search', 'uses' => 'AlmaController@search']);
 // Returns a single AlmaRecord
+
+$app->get('/alma/records/{id}', ['as' => 'alma.get', 'uses' => 'AlmaController@getRecord']);
+// Returns a single AlmaRecord
+
+
+$app->get('/stats', 'StatsController@index');
+// Returns a list of PrimoRecord and PrimoRecordGroup

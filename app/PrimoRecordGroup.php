@@ -36,6 +36,9 @@ class PrimoRecordGroup extends PrimoResult implements \JsonSerializable
 
         $someRecordId = $this->doc->text('./p:PrimoNMBib/p:record/p:control/p:recordid');
 
+        return "{$this->primoHost}/primo-explore/search?vid={$this->primoView}&query=any,contains,{$this->id}&facet=frbrgroupid,include,{$this->id}";
+
+
         return "https://bibsys-almaprimo.hosted.exlibrisgroup.com/primo_library/libweb/action/search.do?cs=frb&ct=frb&frbg={$this->id}&fctN=facet_frbrgroupid&fctV={$this->id}&doc={$someRecordId}&rfnGrp=frbr&frbrSrt=date&frbrRecordsSource=Primo+Local&frbrSourceidDisplay=BIBSYS_ILS&query=facet_frbrgroupid%2Cexact%2C{$this->id}&fn=search&search_scope=bibsys_ils&dscnt=0&scp.scps=scope%3A(BIBSYS_ILS)&vid=UBO&ct=search&institution=UBO&tab=library_catalogue&vl(freeText0)=Utgaver";
 
         // $queryTerm = new QueryTerm();

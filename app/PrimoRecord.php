@@ -68,10 +68,13 @@ class PrimoRecord extends PrimoResult implements \JsonSerializable
 
     public function primoLink()
     {
-        return $this->deeplinkProvider
-            ->view($this->primoInst)
-            ->link($this->id);
+        return "{$this->primoHost}/primo-explore/fulldisplay?docid={$this->id}&vid={$this->primoView}";
+
+        // return $this->deeplinkProvider
+        //     ->view($this->primoView)
+        //     ->link($this->id);
     }
+
 
     public function coverLink()
     {

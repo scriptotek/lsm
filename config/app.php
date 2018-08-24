@@ -9,10 +9,22 @@ return [
     */
 
     'primo' => [
-        'host' => env('PRIMO_HOST', 'https://bibsys-almaprimo.hosted.exlibrisgroup.com'),  // bibsys-almaprimo.hosted.exlibrisgroup.com'), // bibsys-primo.hosted.exlibrisgroup.com'),
-        'institution' => env('PRIMO_INST', 'UBO'),
+        'host' => 'https://bibsys-almaprimo.hosted.exlibrisgroup.com',
+        'default_institution' => 'UBO',
         'default_scope' => 'BIBSYS_ILS',
-        'indices' => env('PRIMO_INDICES', [
+        'institutions' => [
+            'UBO' => [
+                'institution' => 'UBO',
+                'view' => 'UIO',
+                'default_scope' => 'BIBSYS_ILS',
+            ],
+            'UBB' => [
+                'institution' => 'UBB',
+                'view' => 'UBB',
+                'default_scope' => 'BIBSYS_ILS',
+            ],
+        ],
+        'indices' => [
             'ddc' => '10',
             'tekord' => '12',
             'udc' => '13',
@@ -25,7 +37,17 @@ return [
             'realfagstermer' => '20',
             'avdeling' => '41',
             'avdelingsamling' => '51',
-        ]),
+        ],
     ],
+
+    /*
+    |--------------------------------------------------------------------------
+    | Alma configuration
+    |--------------------------------------------------------------------------
+    */
+
+    'alma' => [
+        'default_institution' => 'UBO',
+    ]
 
 ];

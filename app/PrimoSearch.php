@@ -27,10 +27,9 @@ class PrimoSearch {
 
     protected function newQuery($options)
     {
-        $institution = array_get($options, 'institution', config('app.primo.institution'));
-        $scope = array_get($options, 'scope', config('app.primo.default_scope'));
-        $queryObj = new Query($institution);
-        $queryObj->local($scope);
+        $opts = $this->getRecordOptions($options);
+        $queryObj = new Query($opts['primo_inst']);
+        $queryObj->local($opts['primo_scope']);
         $queryObj->onCampus(true);
 
         if (array_has($options, 'institution')) {
@@ -85,9 +84,14 @@ class PrimoSearch {
 
     public function getRecordOptions($options)
     {
+        $institutions = config('app.primo.institutions');
+        $inst = array_get($options, 'institution', config('app.primo.default_institution'));
         return [
-            'primo_inst' => array_get($options, 'institution', config('app.primo.institution')),
-            'alma_inst' => array_get($options, 'alma', config('app.alma.institution')),
+            'primo_host' => array_get($options, 'host', config('app.primo.host')),
+            'primo_inst' => $inst,
+            'primo_view' => array_get($institutions, "{$inst}.view", $inst),
+            'primo_scope' => array_get($options, 'scope', config('app.primo.default_scope')),
+            'alma_inst' => array_get($options, 'alma', config('app.alma.default_institution')),
         ];
     }
 
@@ -130,8 +134,9 @@ class PrimoSearch {
         $deeplinkProvider = $this->primo->createDeepLink();
 
         $out = [];
+        $opts = $this->getRecordOptions($options);
         foreach ($root->xpath('//s:DOC') as $doc) {
-            $out[] = PrimoRecord::make($doc, $deeplinkProvider, $expanded, $this->getRecordOptions($options))->toArray($fullRepr);
+            $out[] = PrimoRecord::make($doc, $deeplinkProvider, $expanded, $opts)->toArray($fullRepr);
         }
 
         $facets = [];
@@ -252,10 +257,9 @@ class PrimoSearch {
 
     public function getRecord($docId, $options)
     {
-        $institution = array_get($options, 'institution', config('app.primo.institution'));
-        $scope = array_get($options, 'scope', config('app.primo.default_scope'));
-        $queryObj = new Query($institution);
-        $queryObj->local($scope);
+        $opts = $this->getRecordOptions($options);
+        $queryObj = new Query($opts['primo_inst']);
+        $queryObj->local($opts['primo_scope']);
         $queryObj->onCampus(true);
 
         $url = str_replace('json=true&', '', $this->primo->url('full', $queryObj));
@@ -284,7 +288,7 @@ class PrimoSearch {
         if (!$doc) {
             throw new PrimoException('Invalid response from Primo', 0, null, $url);
         }
-        $out = PrimoRecord::make($doc, $deeplinkProvider, true, $this->getRecordOptions($options))->toArray('full');
+        $out = PrimoRecord::make($doc, $deeplinkProvider, true, $opts)->toArray('full');
 
         return [
             'source' => $url,

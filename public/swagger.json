@@ -10,6 +10,42 @@
         "https"
     ],
     "paths": {
+        "/alma/search": {
+            "get": {
+                "tags": [
+                    "Alma"
+                ],
+                "description": "Search using SRU. Max 10000 records returned. Pagination: If there's no more results, `next` will be null. Otherwise `next` will hold the value to be used with `first` to get the next batch of results.",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "query",
+                        "in": "query",
+                        "description": "CQL query string",
+                        "type": "string"
+                    },
+                    {
+                        "name": "start",
+                        "in": "query",
+                        "description": "First document to retrieve, starts at 1.",
+                        "type": "integer"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Number of documents to retrieve, defaults to 10, maximum is 50.",
+                        "type": "integer"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    }
+                }
+            }
+        },
         "/alma/records/{id}": {
             "get": {
                 "tags": [
