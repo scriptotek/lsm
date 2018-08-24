@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Aacotroneo\Saml2\Saml2Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -25,15 +27,53 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
-     * Create a new controller instance.
+     * Display SAML errors.
      *
-     * @return void
+     * @return \Illuminate\Http\Response
      */
-    public function __construct()
+    public function error()
     {
-        $this->middleware('guest')->except('logout');
+        return view('auth_error', [
+            'errors' => session()->get('saml2_error', []),
+        ]);
+    }
+
+    /**
+     * Log the user out of the application.
+     *
+     * @param Request $request
+     * @param Saml2Auth $saml
+     * @return \Illuminate\Http\Response
+     */
+    public function samlLogout(Request $request, Saml2Auth $saml)
+    {
+        $user = $request->user();
+        $webid = $user->getIntegration('webid');
+        if (!is_null($webid) && isset($webid->account_data['saml_id']) && isset($webid->account_data['saml_session'])) {
+            $saml->logout('/', $webid->account_data['saml_id'], $webid->account_data['saml_session']);
+
+            return response('OK', 200)->header('Content-Type', 'text/plain');
+        }
+
+        return $this->logout($request);
+    }
+
+    public function authenticated(Request $request, $user)
+    {
+        return redirect()->intended($this->redirectPath());
+    }
+
+    public function account(Request $request)
+    {
+        $user = $request->user();
+        $webid = $user->integrations()->where('service_name', '=', 'webid')->first();
+
+        return view('account', [
+            'user' => $user,
+            'webid' => $webid,
+        ]);
     }
 }

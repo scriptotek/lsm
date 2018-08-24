@@ -3,14 +3,13 @@
 namespace App;
 
 use BCLib\PrimoServices\DeepLink;
-use BCLib\PrimoServices\QueryTerm;
 use Danmichaelo\QuiteSimpleXMLElement\QuiteSimpleXMLElement;
 
 class PrimoRecord extends PrimoResult implements \JsonSerializable
 {
     public $orderedMaterialList = ['e-books', 'print-books'];
 
-    static function make(QuiteSimpleXMLElement $doc, DeepLink $deeplinkProvider, $expanded = false, $options)
+    static function make(QuiteSimpleXMLElement $doc, DeepLink $deeplinkProvider, $expanded, $options)
     {
         $is_group = ($doc->text('./p:PrimoNMBib/p:record/p:facets/p:frbrtype') != '6' && $doc->text('./p:PrimoNMBib/p:record/p:display/p:version', '1') != '1');
 
@@ -181,25 +180,5 @@ class PrimoRecord extends PrimoResult implements \JsonSerializable
         }
 
         return $components;
-    }
-
-    private function extractPNXGroups(\stdClass $pnx_record, BibRecord $record)
-    {
-        $groups = [];
-        foreach ($pnx_record as $group_name => $group) {
-            if (!is_null($group)) {
-                $this->extractGroupFields($group, $group_name, $record);
-            }
-        }
-        return $groups;
-    }
-
-    private function extractGroupFields(\stdClass $pnx_group, $group_name, BibRecord $record)
-    {
-        $fields = [];
-        foreach ($pnx_group as $field_name => $field) {
-            $record->addField($group_name, $field_name, $field);
-        }
-        return $fields;
     }
 }

@@ -26,4 +26,30 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    /**
+     * Get the user integrations for the user.
+     */
+    public function integrations()
+    {
+        return $this->hasMany(Integration::class);
+    }
+
+    /**
+     * Get the user rights for the user.
+     */
+    public function rights()
+    {
+        return $this->hasMany(Right::class);
+    }
+
+    public function hasIntegration($serviceName)
+    {
+        return $this->integrations()->where('service_name', '=', $serviceName)->exists();
+    }
+
+    public function getIntegration($serviceName)
+    {
+        return $this->integrations()->where('service_name', '=', $serviceName)->first();
+    }
 }
