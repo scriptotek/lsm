@@ -15,8 +15,8 @@ class PrimoServiceProvider extends ServiceProvider
     {
         $this->app->singleton('BCLib\PrimoServices\PrimoServices', function ($app) {
             return new \BCLib\PrimoServices\PrimoServices(
-                config('app.primo.host'),
-                config('app.primo.institution')
+                config('primo.host'),
+                config('primo.institution')
             );
         });
     }
