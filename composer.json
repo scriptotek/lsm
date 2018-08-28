@@ -26,6 +26,7 @@
     "require": {
         "php": "^7.1.3",
         "aacotroneo/laravel-saml2": "dev-remove_mcrypt",
+        "barryvdh/laravel-cors": "^0.11.0",
         "bclibraries/primo-services": "dev-httplug",
         "danmichaelo/quitesimplexmlelement": "^1.0",
         "digitalbazaar/json-ld": "~0.4",
