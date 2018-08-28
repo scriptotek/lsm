@@ -12,6 +12,10 @@
     "repositories": [
         {
             "type": "vcs",
+            "url": "https://github.com/aacotroneo/laravel-saml2"
+        },
+        {
+            "type": "vcs",
             "url": "https://github.com/danmichaelo/primo-services"
         },
         {
@@ -80,11 +84,5 @@
         "optimize-autoloader": true
     },
     "minimum-stability": "dev",
-    "prefer-stable": true,
-    "repositories": [
-        {
-            "type": "vcs",
-            "url": "https://github.com/aacotroneo/laravel-saml2"
-        }
-    ]
+    "prefer-stable": true
 }
