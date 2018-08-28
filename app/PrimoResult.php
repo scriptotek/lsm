@@ -270,11 +270,9 @@ class PrimoResult
         $this->full['subjects']['place'] = [];
 
         $x = $this->extractArray($record, './p:search/p:lsr17');
-        
+
         foreach ($this->extractArray($record, './p:search/p:lsr17') as $p) {
-            print("GNU");
             if (in_array($p, $controlled_terms)) {
-                print(":ADD ");
                 $this->full['subjects']['place'][] = $p;
             }
         }
