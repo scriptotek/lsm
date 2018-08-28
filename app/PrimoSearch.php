@@ -23,7 +23,7 @@ class PrimoSearch
         $this->primo = $primo;
         $this->http = $http;
         $this->messageFactory = $messageFactory;
-        $this->indices = config('app.primo.indices');
+        $this->indices = config('primo.indices');
     }
 
     protected function newQuery($options)
@@ -86,14 +86,14 @@ class PrimoSearch
 
     public function getRecordOptions($options)
     {
-        $institutions = config('app.primo.institutions');
-        $inst = array_get($options, 'institution', config('app.primo.default_institution'));
+        $institutions = config('primo.institutions');
+        $inst = array_get($options, 'institution', config('primo.default_institution'));
         return [
-            'primo_host' => array_get($options, 'host', config('app.primo.host')),
+            'primo_host' => array_get($options, 'host', config('primo.host')),
             'primo_inst' => $inst,
             'primo_view' => array_get($institutions, "{$inst}.view", $inst),
-            'primo_scope' => array_get($options, 'scope', config('app.primo.default_scope')),
-            'alma_inst' => array_get($options, 'alma', config('app.alma.default_institution')),
+            'primo_scope' => array_get($options, 'scope', config('primo.default_scope')),
+            'alma_inst' => array_get($options, 'alma', config('alma.default_institution')),
         ];
     }
 

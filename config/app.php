@@ -156,7 +156,6 @@ return [
         App\Providers\HttpClientServiceProvider::class,
         App\Providers\PrimoServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
-
     ],
 
     /*
