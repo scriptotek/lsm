@@ -10,8 +10,9 @@ $this->get('saml2/error', 'Auth\LoginController@error');
 
 Route::group(['middleware' => ['session', 'auth']], function () {
     $this->post('logout', 'Auth\LoginController@samlLogout')->name('logout');
-    $this->get('account', 'Auth\LoginController@account')->name('account');
 });
+
+$this->get('account', 'Auth\LoginController@account')->name('account');
 
 /*
 |--------------------------------------------------------------------------

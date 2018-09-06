@@ -68,10 +68,16 @@ class LoginController extends Controller
 
     public function account(Request $request)
     {
+        if (!\Auth::check()) {
+            return response()->json([
+                'user' => null,
+            ], 401);
+        }
+
         $user = $request->user();
         $webid = $user->integrations()->where('service_name', '=', 'webid')->first();
 
-        return view('account', [
+        return response()->json([
             'user' => $user,
             'webid' => $webid,
         ]);
