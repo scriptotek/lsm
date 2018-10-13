@@ -20,6 +20,10 @@
         },
         {
             "type": "vcs",
+            "url": "https://github.com/scriptotek/php-primo-search"
+        },
+        {
+            "type": "vcs",
             "url": "https://github.com/danmichaelo/Swagger"
         }
     ],
@@ -41,6 +45,7 @@
         "php-http/message-factory": "^1.0",
         "scriptotek/alma-client": "@dev",
         "scriptotek/marc": "@dev",
+        "scriptotek/primo-search": "@dev",
         "sentry/sentry-laravel": "^0.8"
     },
     "require-dev": {

@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "07430a292e3856e45c3920953d886d34",
+    "content-hash": "8367943660f3256ac7d4029f36455af8",
     "packages": [
         {
             "name": "aacotroneo/laravel-saml2",
@@ -2732,6 +2732,72 @@
                 "marc"
             ],
             "time": "2017-10-02T18:07:45+00:00"
+        },
+        {
+            "name": "scriptotek/primo-search",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/scriptotek/php-primo-search.git",
+                "reference": "84dc96e3ac4e6c9e92a4776354f4db5092e9afd6"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/scriptotek/php-primo-search/zipball/84dc96e3ac4e6c9e92a4776354f4db5092e9afd6",
+                "reference": "84dc96e3ac4e6c9e92a4776354f4db5092e9afd6",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0",
+                "php-http/client-common": "^1.8",
+                "php-http/client-implementation": "^1.0",
+                "php-http/discovery": "^1.0",
+                "php-http/httplug": "^1.0",
+                "php-http/message": "^1.7",
+                "php-http/message-factory": "^1.0",
+                "psr/http-message": "^1.0"
+            },
+            "require-dev": {
+                "guzzlehttp/psr7": "^1.0",
+                "php-http/mock-client": "^1.1",
+                "phpspec/phpspec": "^5.0",
+                "squizlabs/php_codesniffer": "^3.3"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Scriptotek\\PrimoSearch\\Laravel\\ServiceProvider"
+                    ],
+                    "aliases": {
+                        "Primo": "Scriptotek\\PrimoSearch\\Laravel\\Facade"
+                    }
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Scriptotek\\PrimoSearch\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Dan Michael O. Heggø",
+                    "email": "danmichaelo@gmail.com"
+                }
+            ],
+            "description": "SDK for the Primo Search REST API",
+            "homepage": "http://github.com/scriptotek/php-primo-search",
+            "keywords": [
+                "primo"
+            ],
+            "support": {
+                "source": "https://github.com/scriptotek/php-primo-search/tree/master",
+                "issues": "https://github.com/scriptotek/php-primo-search/issues"
+            },
+            "time": "2018-10-13T19:02:29+00:00"
         },
         {
             "name": "scriptotek/sru-client",
@@ -5525,7 +5591,8 @@
         "aacotroneo/laravel-saml2": 20,
         "bclibraries/primo-services": 20,
         "scriptotek/alma-client": 20,
-        "scriptotek/marc": 20
+        "scriptotek/marc": 20,
+        "scriptotek/primo-search": 20
     },
     "prefer-stable": true,
     "prefer-lowest": false,

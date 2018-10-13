@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\PrimoCover;
 use App\PrimoSearch;
 use App\PrimoException;
+use App\PrimoSearchV2;
 use Http\Client\Exception\HttpException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -26,7 +27,7 @@ class PrimoController extends Controller
             return response()->json([
                 'results' => [],
                 'error' => $e->getMessage(),
-                'source' => $e->getRequest()->getUrl(),
+                'errorDetails' => strval($e->getResponse()->getBody()),
             ], 400);
         }
         return response()->json($data);
@@ -164,6 +165,13 @@ class PrimoController extends Controller
         }
         return $this->handleErrors(function () use ($search, $request) {
             return $search->search($request);
+        });
+    }
+
+    public function searchV2(PrimoSearchV2 $search, Request $request)
+    {
+        return $this->handleErrors(function () use ($search, $request) {
+            return $search->search($request->input());
         });
     }
 

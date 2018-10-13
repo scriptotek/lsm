@@ -87,13 +87,13 @@ class PrimoSearch
     public function getRecordOptions($options)
     {
         $institutions = config('primo.institutions');
-        $inst = array_get($options, 'institution', config('primo.default_institution'));
+        $inst = array_get($options, 'institution', config('primo.institution'));
         return [
             'primo_host' => array_get($options, 'host', config('primo.host')),
             'primo_inst' => $inst,
             'primo_view' => array_get($institutions, "{$inst}.view", $inst),
-            'primo_scope' => array_get($options, 'scope', config('primo.default_scope')),
-            'alma_inst' => array_get($options, 'alma', config('alma.default_institution')),
+            'primo_scope' => array_get($options, 'scope', config('primo.scope')),
+            'alma_inst' => array_get($options, 'alma', config('alma.institution')),
         ];
     }
 

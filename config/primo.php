@@ -7,9 +7,12 @@ return [
     | Primo configuration
     |--------------------------------------------------------------------------
     */
-    'host' => env('PRIMO_HOST', 'https://bibsys-almaprimo.hosted.exlibrisgroup.com'),
-    'default_institution' => env('PRIMO_INST', 'UBO'),
-    'default_scope' => 'BIBSYS_ILS',
+    'host' => env('PRIMO_HOST'),
+    'baseUrl' => env('PRIMO_BASE_URL'),
+    'searchUrl' => env('PRIMO_SEARCH_URL'),
+    'vid' => env('PRIMO_VID'),
+    'inst' => env('PRIMO_INST'),
+    'scope' => env('PRIMO_SCOPE'),
     'indices' => env('PRIMO_INDICES', [
         'ddc' => '10',
         'tekord' => '12',

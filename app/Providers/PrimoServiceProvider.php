@@ -36,6 +36,8 @@ class PrimoServiceProvider extends ServiceProvider
      */
     public function provides()
     {
-        return [PrimoServices::class];
+        return [
+            PrimoServices::class,
+        ];
     }
 }
