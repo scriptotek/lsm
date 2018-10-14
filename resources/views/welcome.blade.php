@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <title>LSM: Simple Catalogue Search</title>
   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,700|Source+Code+Pro:300,600|Titillium+Web:400,600,700" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.18.1/swagger-ui.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.19.3/swagger-ui.css">
 <style>
     html
     {
@@ -67,8 +67,8 @@
 <div id="swagger-ui"></div>
 
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.18.1/swagger-ui-bundle.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.18.1/swagger-ui-standalone-preset.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.19.3/swagger-ui-bundle.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/swagger-ui/3.19.3/swagger-ui-standalone-preset.js"></script>
 <script type="text/javascript">
 window.onload = function() {
   // Build a system

@@ -11,32 +11,41 @@ use Scriptotek\Alma\Client as AlmaClient;
 class AlmaController extends Controller
 {
     /**
-     * @SWG\Get(
+     * @OA\Get(
      *   path="/alma/search",
+     *   summary="Search Alma Bib records using SRU.",
      *   description="Search using SRU. Max 10000 records returned. Pagination: If there's no more results, `next` will be null. Otherwise `next` will hold the value to be used with `first` to get the next batch of results.",
      *   tags={"Alma"},
-     *   produces={"application/json"},
-     *   @SWG\Response(
+     *   @OA\Response(
      *     response=200,
      *     description="success"
      *   ),
-     *   @SWG\Parameter(
+     *   @OA\Parameter(
      *     name="query",
      *     in="query",
      *     description="CQL query string",
-     *     type="string"
+     *     @OA\Schema(
+     *       type="string"
+     *     )
      *   ),
-     *   @SWG\Parameter(
+     *   @OA\Parameter(
      *     name="start",
      *     in="query",
      *     description="First document to retrieve, starts at 1.",
-     *     type="integer"
+     *     @OA\Schema(
+     *       type="integer",
+     *       minimum=1
+     *     )
      *   ),
-     *   @SWG\Parameter(
+     *   @OA\Parameter(
      *     name="limit",
      *     in="query",
      *     description="Number of documents to retrieve, defaults to 10, maximum is 50.",
-     *     type="integer"
+     *     @OA\Schema(
+     *       type="integer",
+     *       minimum=1,
+     *       maximum=50
+     *     )
      *   )
      * )
      *
@@ -80,28 +89,32 @@ class AlmaController extends Controller
     }
 
     /**
-     * @SWG\Get(
+     * @OA\Get(
      *   path="/alma/records/{id}",
+     *   summary="Find Alma Bib record by MMS ID.",
      *   description="Get details about a single record",
      *   tags={"Alma"},
-     *   produces={"application/json"},
-     *   @SWG\Response(
+     *   @OA\Response(
      *     response=200,
      *     description="An AlmaRecord"
      *   ),
-     *   @SWG\Parameter(
+     *   @OA\Parameter(
      *     name="id",
      *     in="path",
      *     description="Alma ID",
      *     required=true,
-     *     type="string"
+     *     @OA\Schema(
+     *       type="string"
+     *     )
      *   ),
-     *   @SWG\Parameter(
+     *   @OA\Parameter(
      *     name="raw",
      *     in="query",
      *     description="Set to true to return the raw MARC21 record.",
-     *     type="boolean",
-     *     default="false"
+     *     @OA\Schema(
+     *       type="boolean",
+     *       default=false
+     *     )
      *   )
      * )
      *

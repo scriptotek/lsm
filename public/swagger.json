@@ -1,42 +1,45 @@
 {
-    "swagger": "2.0",
+    "openapi": "3.0.0",
     "info": {
         "title": "University of Oslo Library Services Middleware (LSM)",
-        "version": "0.1"
+        "version": "0.2.0"
     },
-    "host": "ub-lsm.uio.no",
-    "basePath": "/",
-    "schemes": [
-        "https"
-    ],
     "paths": {
         "/alma/search": {
             "get": {
                 "tags": [
                     "Alma"
                 ],
+                "summary": "Search Alma Bib records using SRU.",
                 "description": "Search using SRU. Max 10000 records returned. Pagination: If there's no more results, `next` will be null. Otherwise `next` will hold the value to be used with `first` to get the next batch of results.",
-                "produces": [
-                    "application/json"
-                ],
+                "operationId": "App\\Http\\Controllers\\AlmaController::search",
                 "parameters": [
                     {
                         "name": "query",
                         "in": "query",
                         "description": "CQL query string",
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "name": "start",
                         "in": "query",
                         "description": "First document to retrieve, starts at 1.",
-                        "type": "integer"
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1
+                        }
                     },
                     {
                         "name": "limit",
                         "in": "query",
                         "description": "Number of documents to retrieve, defaults to 10, maximum is 50.",
-                        "type": "integer"
+                        "schema": {
+                            "type": "integer",
+                            "maximum": 50,
+                            "minimum": 1
+                        }
                     }
                 ],
                 "responses": {
@@ -51,24 +54,27 @@
                 "tags": [
                     "Alma"
                 ],
+                "summary": "Find Alma Bib record by MMS ID.",
                 "description": "Get details about a single record",
-                "produces": [
-                    "application/json"
-                ],
+                "operationId": "App\\Http\\Controllers\\AlmaController::getRecord",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
                         "description": "Alma ID",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "name": "raw",
                         "in": "query",
                         "description": "Set to true to return the raw MARC21 record.",
-                        "type": "boolean",
-                        "default": "false"
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
                     }
                 ],
                 "responses": {
@@ -83,142 +89,246 @@
                 "tags": [
                     "Primo"
                 ],
+                "summary": "Search Primo records using the old XServices API",
                 "description": "Search using either a free text query with `query`, or a controlled subject query using `vocabulary` and `subject` in combination. Pagination: If there's no more results, `next` will be null. Otherwise `next` will hold the value to be used with `first` to get the next batch of results. Returns: a list of Primo records (`type: record`) and groups of Primo records (`type: group`). Groups can be expanded using the `/primo/group` endpoint. To automatically expand all groups, set 'expand_groups' to true, but note that this will effect the response time substantially.",
-                "produces": [
-                    "application/json"
-                ],
+                "operationId": "App\\Http\\Controllers\\PrimoController::search",
                 "parameters": [
                     {
                         "name": "genre",
                         "in": "query",
                         "description": "One or more form/genre terms, separated by `OR`. Not limited to a specific vocabulary.",
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "name": "place",
                         "in": "query",
                         "description": "One or more geographical names, separated by `OR`. Not limited to a specific vocabulary.",
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "name": "query",
                         "in": "query",
                         "description": "Query string",
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "name": "raw_query",
                         "in": "query",
                         "description": "Raw query string on the form 'field,operator,term'. Example: 'lsr05,exact,urealsamling42 AND lsr05,exact,urealboksamling'. Multiple queries can be combined with AND, but OR is not supported.",
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "name": "subject",
                         "in": "query",
                         "description": "One or more subject terms. Boolean operators `AND` and `OR` are supported, with `AND` taking precedence over `OR`. Grouping with parentheses are not supported.",
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "name": "vocabulary",
                         "in": "query",
                         "description": "Subject vocabulary. Used as a qualifier with the subject field, leave blank to search all subject vocabularies.",
-                        "type": "string",
-                        "enum": [
-                            "realfagstermer",
-                            "humord",
-                            "tekord",
-                            "mrtermer",
-                            "agrovoc",
-                            "nlm",
-                            "geo",
-                            "ddc",
-                            "udc",
-                            "ubo"
-                        ]
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "realfagstermer",
+                                "humord",
+                                "tekord",
+                                "mrtermer",
+                                "agrovoc",
+                                "nlm",
+                                "geo",
+                                "ddc",
+                                "udc",
+                                "ubo"
+                            ]
+                        }
                     },
                     {
                         "name": "material",
                         "in": "query",
                         "description": "Comma-separated lisf of material types (example: `print-books,print-journals` or `e-books,e-journals`). By default, all material types are included. No truncation is supported.",
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "name": "scope",
                         "in": "query",
                         "description": "Search scope. Defaults to `BIBSYS_ILS`.",
-                        "type": "string",
-                        "default": "BIBSYS_ILS",
-                        "enum": [
-                            "BIBSYS_ILS",
-                            "UBO"
-                        ]
+                        "schema": {
+                            "type": "string",
+                            "default": "BIBSYS_ILS",
+                            "enum": [
+                                "BIBSYS_ILS",
+                                "UBO"
+                            ]
+                        }
                     },
                     {
                         "name": "institution",
                         "in": "query",
                         "description": "Limit to a institution. Example: `UBO`. Case insensitive.",
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "name": "library",
                         "in": "query",
-                        "description": "Limit to one or more comma-separated library codes. Examples: `ubo1030310,ubo1030317` for Realfagsbiblioteket and Informatikkbiblioteket. Case insensitive. Warning: ebooks will be excluded when setting `library` since ebooks are not linked to a library code anymore (except for a few thousand errors\u2026).",
-                        "type": "string"
+                        "description": "Limit to one or more comma-separated library codes. Examples: `ubo1030310,ubo1030317` for Realfagsbiblioteket and Informatikkbiblioteket. Case insensitive. Warning: ebooks will be excluded when setting `library` since ebooks are not linked to a library code anymore (except for a few thousand errors…).",
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "name": "start",
                         "in": "query",
                         "description": "First document to retrieve, starts at 1.",
-                        "type": "integer"
+                        "schema": {
+                            "type": "integer",
+                            "minimum": 1
+                        }
                     },
                     {
                         "name": "limit",
                         "in": "query",
                         "description": "Number of documents to retrieve, defaults to 10, maximum is 50.",
-                        "type": "integer"
+                        "schema": {
+                            "type": "integer",
+                            "maximum": 50,
+                            "minimum": 1
+                        }
                     },
                     {
                         "name": "sort",
                         "in": "query",
                         "description": "Sort field, defaults to relevance.",
-                        "type": "string",
-                        "default": "relevance",
-                        "enum": [
-                            "relevance",
-                            "popularity",
-                            "date",
-                            "author",
-                            "title"
-                        ]
+                        "schema": {
+                            "type": "string",
+                            "default": "relevance",
+                            "enum": [
+                                "relevance",
+                                "popularity",
+                                "date",
+                                "author",
+                                "title"
+                            ]
+                        }
                     },
                     {
                         "name": "repr",
                         "in": "query",
                         "description": "Result representation format. `compact=repr` returns a more simplifed representation, suitable for e.g. limited bandwidth. `compact=full` includes more information. This parameter has no effect on groups, only records.",
-                        "type": "string",
-                        "default": "compact",
-                        "enum": [
-                            "compact",
-                            "full"
-                        ]
+                        "schema": {
+                            "type": "string",
+                            "default": "compact",
+                            "enum": [
+                                "compact",
+                                "full"
+                            ]
+                        }
                     },
                     {
                         "name": "expand_groups",
                         "in": "query",
                         "description": "Expand all groups. Note that this will substantially increase response time as we need to make one request to Primo for each group.",
-                        "type": "boolean",
-                        "default": "false"
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success",
+                        "content": {
+                            "application/json": {}
+                        }
+                    },
+                    "400": {
+                        "description": "error",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/PrimoSearchErrorResponse"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/primo/search-v2": {
+            "get": {
+                "tags": [
+                    "Primo"
+                ],
+                "summary": "Search Primo records using the new Primo Search REST API",
+                "description": "Search using the 'new' Primo REST API.",
+                "operationId": "App\\Http\\Controllers\\PrimoController::searchV2",
+                "parameters": [
+                    {
+                        "name": "q",
+                        "in": "query",
+                        "description": "Query string",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "any,contains,origin of species"
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "description": "The offset of the results from which to start displaying the results, defaults to 0.",
+                        "schema": {
+                            "type": "integer",
+                            "default": 0,
+                            "minimum": 0
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Number of documents to retrieve, defaults to 10, maximum is 50.",
+                        "schema": {
+                            "type": "integer",
+                            "default": 10,
+                            "maximum": 50,
+                            "minimum": 1
+                        }
+                    },
+                    {
+                        "name": "sort",
+                        "in": "query",
+                        "description": "Sort field, defaults to relevance.",
+                        "schema": {
+                            "type": "string",
+                            "default": "relevance",
+                            "enum": [
+                                "relevance",
+                                "popularity",
+                                "date",
+                                "date2",
+                                "author",
+                                "title"
+                            ]
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "success"
-                    },
-                    "400": {
-                        "description": "error",
-                        "schema": {
-                            "$ref": "#/definitions/PrimoSearchErrorResponse"
-                        }
                     }
                 }
             }
@@ -228,25 +338,27 @@
                 "tags": [
                     "Primo"
                 ],
+                "summary": "Find Primo record by PNX ID",
                 "description": "Get details about a single record",
-                "produces": [
-                    "application/json",
-                    "application/xml"
-                ],
+                "operationId": "App\\Http\\Controllers\\PrimoController::getRecord",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
                         "description": "Primo PNX ID",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "name": "raw",
                         "in": "query",
                         "description": "Set to true to return the raw PNX record.",
-                        "type": "boolean",
-                        "default": "false"
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
                     }
                 ],
                 "responses": {
@@ -261,17 +373,18 @@
                 "tags": [
                     "Primo"
                 ],
+                "summary": "Find Primo records belonging to some FRBR group",
                 "description": "Get a list of records belonging to a record group.",
-                "produces": [
-                    "application/json"
-                ],
+                "operationId": "App\\Http\\Controllers\\PrimoController::getGroup",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
                         "description": "FRBR group id",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
@@ -286,17 +399,18 @@
                 "tags": [
                     "Primo"
                 ],
+                "summary": "Find cover image for a given Primo record",
                 "description": "Get cover image data for a given record.",
-                "produces": [
-                    "image"
-                ],
+                "operationId": "App\\Http\\Controllers\\PrimoController::getCover",
                 "parameters": [
                     {
                         "name": "id",
                         "in": "path",
                         "description": "Primo PNX ID",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     }
                 ],
                 "responses": {
@@ -311,93 +425,111 @@
                 "tags": [
                     "Authorities"
                 ],
+                "summary": "Search authority records using the Skosmos API",
                 "description": "Search for terms, optionally filtered by vocabulary and concept type.",
-                "produces": [
-                    "application/json"
-                ],
+                "operationId": "App\\Http\\Controllers\\SubjectsController::search",
                 "parameters": [
                     {
                         "name": "query",
                         "in": "query",
                         "description": "Case-insensitive search term. Use * at the beginning and/or end to truncate.",
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "name": "parent",
                         "in": "query",
                         "description": "Only search children of this concept, specified by URI.",
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "name": "group",
                         "in": "query",
                         "description": "Only search children of this group, specified by URI.",
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "name": "fields",
                         "in": "query",
                         "description": "Space-separated list of extra fields to include in the results. Supported values: 'broader'",
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "name": "unique",
                         "in": "query",
                         "description": "Boolean flag to indicate that each concept should be returned only once, instead of returning all the different ways it could match (for example both via prefLabel and altLabel).",
-                        "type": "boolean",
-                        "default": "true"
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
                     },
                     {
                         "name": "lang",
                         "in": "query",
                         "description": "Search language.",
-                        "type": "string",
-                        "enum": [
-                            "nb",
-                            "nn",
-                            "en"
-                        ]
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "nb",
+                                "nn",
+                                "en"
+                            ]
+                        }
                     },
                     {
                         "name": "labellang",
                         "in": "query",
                         "description": "Language used to format results.",
-                        "type": "string",
-                        "enum": [
-                            "nb",
-                            "nn",
-                            "en"
-                        ]
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "nb",
+                                "nn",
+                                "en"
+                            ]
+                        }
                     },
                     {
                         "name": "vocab",
                         "in": "query",
                         "description": "Subject vocabulary. Leave blank to search all subject vocabularies.",
-                        "type": "string",
-                        "enum": [
-                            "realfagstermer",
-                            "humord",
-                            "tekord",
-                            "mrtermer",
-                            "usvd",
-                            "lskjema"
-                        ]
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "realfagstermer",
+                                "humord",
+                                "tekord",
+                                "mrtermer",
+                                "usvd",
+                                "lskjema",
+                                "ddc"
+                            ]
+                        }
                     },
                     {
                         "name": "type",
                         "in": "query",
                         "description": "All resources have type `Concept`or `Facet`. Concepts are further subdivided into `Topic`, `Place`, `Time`, `CompoundConcept`, `VirtualCompoundConcept` and `NonIndexable`.",
-                        "type": "string",
-                        "enum": [
-                            "Concept",
-                            "Facet",
-                            "Topic",
-                            "Place",
-                            "Time",
-                            "CompoundConcept",
-                            "VirtualCompoundConcept",
-                            "NonIndexable"
-                        ]
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "Concept",
+                                "Facet",
+                                "Topic",
+                                "Place",
+                                "Time",
+                                "CompoundConcept",
+                                "VirtualCompoundConcept",
+                                "NonIndexable"
+                            ]
+                        }
                     }
                 ],
                 "responses": {
@@ -412,39 +544,43 @@
                 "tags": [
                     "Authorities"
                 ],
-                "description": "Get a single subject by ID.",
-                "produces": [
-                    "application/json"
-                ],
+                "summary": "Find authority record by ID",
+                "operationId": "App\\Http\\Controllers\\SubjectsController::show",
                 "parameters": [
                     {
                         "name": "vocab",
                         "in": "path",
                         "description": "Subject vocabulary. Leave blank to search all subject vocabularies.",
                         "required": true,
-                        "type": "string",
-                        "enum": [
-                            "realfagstermer",
-                            "humord",
-                            "tekord",
-                            "mrtermer",
-                            "usvd",
-                            "lskjema"
-                        ]
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "realfagstermer",
+                                "humord",
+                                "tekord",
+                                "mrtermer",
+                                "usvd",
+                                "lskjema"
+                            ]
+                        }
                     },
                     {
                         "name": "id",
                         "in": "path",
                         "description": "Local ID, e.g. `c006445`.",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "name": "expand_mappings",
                         "in": "query",
                         "description": "If set to false, you'll only get the URIs for mapped concepts. If set to true, you will get data for one level of mappings.",
-                        "type": "boolean",
-                        "default": "false"
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
                     }
                 ],
                 "responses": {
@@ -459,55 +595,62 @@
                 "tags": [
                     "Authorities"
                 ],
+                "summary": "Find authority record by index term value",
                 "description": "Get a single subject by term value.",
-                "produces": [
-                    "application/json"
-                ],
+                "operationId": "App\\Http\\Controllers\\SubjectsController::lookup",
                 "parameters": [
                     {
                         "name": "vocab",
                         "in": "query",
                         "description": "Subject vocabulary. Leave blank to search all subject vocabularies.",
                         "required": true,
-                        "type": "string",
-                        "enum": [
-                            "realfagstermer",
-                            "humord",
-                            "tekord",
-                            "mrtermer",
-                            "usvd",
-                            "lskjema"
-                        ]
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "realfagstermer",
+                                "humord",
+                                "tekord",
+                                "mrtermer",
+                                "usvd",
+                                "lskjema"
+                            ]
+                        }
                     },
                     {
                         "name": "query",
                         "in": "query",
                         "description": "Term, e.g. `Fisker`.",
                         "required": true,
-                        "type": "string"
+                        "schema": {
+                            "type": "string"
+                        }
                     },
                     {
                         "name": "type",
                         "in": "query",
-                        "description": "Example: Set type to \u2019Place\u2019 if you want the place \u2018Java\u2019, \u2018Topic\u2019 if you want the programming language. ",
-                        "type": "string",
-                        "enum": [
-                            "Concept",
-                            "Facet",
-                            "Topic",
-                            "Place",
-                            "Time",
-                            "CompoundConcept",
-                            "VirtualCompoundConcept",
-                            "NonIndexable"
-                        ]
+                        "description": "Example: Set type to ’Place’ if you want the place ‘Java’, ‘Topic’ if you want the programming language. ",
+                        "schema": {
+                            "type": "string",
+                            "enum": [
+                                "Concept",
+                                "Facet",
+                                "Topic",
+                                "Place",
+                                "Time",
+                                "CompoundConcept",
+                                "VirtualCompoundConcept",
+                                "NonIndexable"
+                            ]
+                        }
                     },
                     {
                         "name": "expand_mappings",
                         "in": "query",
                         "description": "If set to false, you'll only get the URIs for mapped concepts. If set to true, you will get data for one level of mappings.",
-                        "type": "boolean",
-                        "default": "false"
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
                     }
                 ],
                 "responses": {
@@ -518,28 +661,12 @@
             }
         }
     },
-    "definitions": {
-        "Document": {
-            "properties": {
-                "name": {
-                    "description": "The product name",
-                    "type": "string"
-                }
-            }
-        },
-        "PrimoSearchErrorResponse": {
-            "required": [
-                "error"
-            ],
-            "properties": {
-                "error": {
-                    "description": "Error message.",
-                    "type": "string"
-                },
-                "source": {
-                    "description": "URL for the Primo Brief Search API call.",
-                    "type": "string"
-                }
+    "components": {
+        "schemas": {
+            "PrimoSearchErrorResponse": {
+                "required": [
+                    "error"
+                ]
             }
         }
     },

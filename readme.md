@@ -7,9 +7,9 @@ Setup:
     composer install
     php artisan vendor:publish
 
-Update swagger documentation:
+Update OpenAPI documentation for Swagger UI:
 
-    ./vendor/bin/swagger app -o public/swagger.json
+    ./vendor/bin/openapi app -o public/swagger.json
 
 Example nginx site config:
 

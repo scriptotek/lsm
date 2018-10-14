@@ -4,6 +4,12 @@ namespace App\Http;
 
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
+/**
+ * @OA\Info(
+ *   title="University of Oslo Library Services Middleware (LSM)",
+ *   version="0.2.0"
+ * )
+ */
 class Kernel extends HttpKernel
 {
     /**
