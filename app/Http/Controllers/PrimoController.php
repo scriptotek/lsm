@@ -226,6 +226,46 @@ class PrimoController extends Controller
      *     )
      *   ),
      *   @OA\Parameter(
+     *     name="scope",
+     *     in="query",
+     *     description="Search scope, defaults to config default value.",
+     *     @OA\Schema(
+     *       type="string"
+     *     )
+     *   ),
+     *   @OA\Parameter(
+     *     name="inst",
+     *     in="query",
+     *     description="Primo institution, defaults to config default value.",
+     *     @OA\Schema(
+     *       type="string"
+     *     )
+     *   ),
+     *   @OA\Parameter(
+     *     name="vid",
+     *     in="query",
+     *     description="View id, defaults to config default value.",
+     *     @OA\Schema(
+     *       type="string"
+     *     )
+     *   ),
+     *   @OA\Parameter(
+     *     name="lang",
+     *     in="query",
+     *     description="Language, defaults to config default value.",
+     *     @OA\Schema(
+     *       type="string"
+     *     )
+     *   ),
+     *   @OA\Parameter(
+     *     name="tab",
+     *     in="query",
+     *     description="Search tab, defaults to config default value.",
+     *     @OA\Schema(
+     *       type="string"
+     *     )
+     *   ),
+     *   @OA\Parameter(
      *     name="offset",
      *     in="query",
      *     description="The offset of the results from which to start displaying the results, defaults to 0.",
