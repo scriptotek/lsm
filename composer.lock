@@ -1,10 +1,10 @@
 {
     "_readme": [
         "This file locks the dependencies of your project to a known state",
-        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "d31717b4d0b2ee3ce9b0a0fbb208c5e9",
+    "content-hash": "7e8050877a1c5b4c0779de4b2bab62da",
     "packages": [
         {
             "name": "aacotroneo/laravel-saml2",
@@ -1264,16 +1264,16 @@
         },
         {
             "name": "league/flysystem",
-            "version": "1.0.47",
+            "version": "1.0.48",
             "source": {
                 "type": "git",
                 "url": "https://github.com/thephpleague/flysystem.git",
-                "reference": "a11e4a75f256bdacf99d20780ce42d3b8272975c"
+                "reference": "a6ded5b2f6055e2db97b4b859fdfca2b952b78aa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/a11e4a75f256bdacf99d20780ce42d3b8272975c",
-                "reference": "a11e4a75f256bdacf99d20780ce42d3b8272975c",
+                "url": "https://api.github.com/repos/thephpleague/flysystem/zipball/a6ded5b2f6055e2db97b4b859fdfca2b952b78aa",
+                "reference": "a6ded5b2f6055e2db97b4b859fdfca2b952b78aa",
                 "shasum": ""
             },
             "require": {
@@ -1344,7 +1344,7 @@
                 "sftp",
                 "storage"
             ],
-            "time": "2018-09-14T15:30:29+00:00"
+            "time": "2018-10-15T13:53:10+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -2628,25 +2628,26 @@
         },
         {
             "name": "scriptotek/marc",
-            "version": "v1.0.1",
+            "version": "dev-master",
             "source": {
                 "type": "git",
                 "url": "https://github.com/scriptotek/php-marc.git",
-                "reference": "84e9b0cc1f62c7e7ba0d97acd3c3bdc55ef0d6d1"
+                "reference": "5853089d7b737b08a8f260a5e1afc0565fb73971"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/scriptotek/php-marc/zipball/84e9b0cc1f62c7e7ba0d97acd3c3bdc55ef0d6d1",
-                "reference": "84e9b0cc1f62c7e7ba0d97acd3c3bdc55ef0d6d1",
+                "url": "https://api.github.com/repos/scriptotek/php-marc/zipball/5853089d7b737b08a8f260a5e1afc0565fb73971",
+                "reference": "5853089d7b737b08a8f260a5e1afc0565fb73971",
                 "shasum": ""
             },
             "require": {
-                "ck/file_marc_reference": "^1.0",
+                "ck/file_marc_reference": "^1.2",
                 "pear/file_marc": "^1.1",
                 "php": ">=5.6"
             },
             "require-dev": {
-                "phpunit/phpunit": "^5.7 | ^6.0"
+                "phpunit/phpunit": "^5.7 | ^6.0",
+                "squizlabs/php_codesniffer": "^3.3"
             },
             "type": "library",
             "autoload": {
@@ -2654,7 +2655,11 @@
                     "Scriptotek\\Marc\\": "src/"
                 }
             },
-            "notification-url": "https://packagist.org/downloads/",
+            "scripts": {
+                "test": [
+                    "phpunit"
+                ]
+            },
             "license": [
                 "MIT"
             ],
@@ -2668,7 +2673,11 @@
             "keywords": [
                 "marc"
             ],
-            "time": "2017-10-02T18:07:45+00:00"
+            "support": {
+                "source": "https://github.com/scriptotek/php-marc/tree/v2.0.0-dev3",
+                "issues": "https://github.com/scriptotek/php-marc/issues"
+            },
+            "time": "2018-06-16T18:46:30+00:00"
         },
         {
             "name": "scriptotek/primo-search",

@@ -21,6 +21,10 @@
         {
             "type": "vcs",
             "url": "https://github.com/scriptotek/php-primo-search"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/scriptotek/php-marc"
         }
     ],
     "require": {
@@ -39,7 +43,7 @@
         "php-http/message": "^1.5",
         "php-http/message-factory": "^1.0",
         "scriptotek/alma-client": "@dev",
-        "scriptotek/marc": "@dev",
+        "scriptotek/marc": "dev-master@dev",
         "scriptotek/primo-search": "@dev",
         "sentry/sentry-laravel": "^0.8",
         "zircote/swagger-php": "^3.0"
