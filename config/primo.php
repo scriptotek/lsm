@@ -10,8 +10,8 @@ return [
     'host' => env('PRIMO_HOST'),
     'baseUrl' => env('PRIMO_BASE_URL'),
     'searchUrl' => env('PRIMO_SEARCH_URL'),
-    'vid' => env('PRIMO_VID'),
-    'inst' => env('PRIMO_INST'),
+    'view' => env('PRIMO_VID'),
+    'institution' => env('PRIMO_INST'),
     'scope' => env('PRIMO_SCOPE'),
     'indices' => env('PRIMO_INDICES', [
         'ddc' => '10',
@@ -27,5 +27,9 @@ return [
         'avdeling' => '41',
         'avdelingsamling' => '51',
     ]),
-
+    'institutions' => [
+        'UBO' => [
+            'view' => 'UIO',
+        ]
+    ],
 ];
