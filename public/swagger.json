@@ -268,7 +268,7 @@
                 }
             }
         },
-        "/primo/search-v2": {
+        "/primo/v2/search": {
             "get": {
                 "tags": [
                     "Primo"
@@ -364,6 +364,70 @@
                                 "title"
                             ]
                         }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    }
+                }
+            }
+        },
+        "/primo/v2/configuration": {
+            "get": {
+                "tags": [
+                    "Primo"
+                ],
+                "summary": "Get Primo configuration",
+                "description": "Get Primo configuration for a given view (VID).",
+                "operationId": "App\\Http\\Controllers\\PrimoController::configuration",
+                "parameters": [
+                    {
+                        "name": "vid",
+                        "in": "query",
+                        "description": "View ID (VID)",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "UIO"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "success"
+                    }
+                }
+            }
+        },
+        "/primo/v2/translations": {
+            "get": {
+                "tags": [
+                    "Primo"
+                ],
+                "summary": "Get Primo translations",
+                "description": "Get Primo translations for a given view (VID) and language.",
+                "operationId": "App\\Http\\Controllers\\PrimoController::translations",
+                "parameters": [
+                    {
+                        "name": "vid",
+                        "in": "query",
+                        "description": "View ID (VID)",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "UIO"
+                    },
+                    {
+                        "name": "lang",
+                        "in": "query",
+                        "description": "Language code",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "example": "no_NO"
                     }
                 ],
                 "responses": {

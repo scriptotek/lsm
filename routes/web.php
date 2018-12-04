@@ -26,7 +26,9 @@ Route::get('/', 'HomeController@index');
 Route::get('primo/search', 'PrimoController@search');
 // Returns a list of PrimoRecord and PrimoRecordGroup
 
-Route::get('primo/search-v2', 'PrimoController@searchV2');
+Route::get('primo/v2/search', 'PrimoController@searchV2');
+Route::get('primo/v2/configuration', 'PrimoController@configuration');
+Route::get('primo/v2/translations', 'PrimoController@translations');
 
 Route::get('primo/groups/{id}', 'PrimoController@getGroup');
 // Returns a list of PrimoRecord belonging to a PrimoRecordGroup

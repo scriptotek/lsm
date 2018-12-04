@@ -207,7 +207,7 @@ class PrimoController extends Controller
 
     /**
      * @OA\Get(
-     *   path="/primo/search-v2",
+     *   path="/primo/v2/search",
      *   summary="Search Primo records using the new Primo Search REST API",
      *   description="Search using the 'new' Primo REST API.",
      *   tags={"Primo"},
@@ -298,10 +298,80 @@ class PrimoController extends Controller
      *   )
      * )
      */
-    public function searchV2(PrimoSearchV2 $search, Request $request)
+    public function searchV2(PrimoSearchV2 $primo, Request $request)
     {
-        return $this->handleErrors(function () use ($search, $request) {
-            return $search->search($request->input());
+        return $this->handleErrors(function () use ($primo, $request) {
+            return $primo->search($request->input());
+        });
+    }
+
+    /**
+     * @OA\Get(
+     *   path="/primo/v2/configuration",
+     *   summary="Get Primo configuration",
+     *   description="Get Primo configuration for a given view (VID).",
+     *   tags={"Primo"},
+     *   @OA\Response(
+     *     response=200,
+     *     description="success"
+     *   ),
+     *   @OA\Parameter(
+     *     name="vid",
+     *     in="query",
+     *     description="View ID (VID)",
+     *     example="UIO",
+     *     required=false,
+     *     @OA\Schema(
+     *       type="string"
+     *     )
+     *   )
+     * )
+     */
+    public function configuration(PrimoSearchV2 $primo, Request $request)
+    {
+        $primo->setVid($request->vid);
+        return $this->handleErrors(function () use ($primo, $request) {
+            return $primo->configuration();
+        });
+    }
+
+    /**
+     * @OA\Get(
+     *   path="/primo/v2/translations",
+     *   summary="Get Primo translations",
+     *   description="Get Primo translations for a given view (VID) and language.",
+     *   tags={"Primo"},
+     *   @OA\Response(
+     *     response=200,
+     *     description="success"
+     *   ),
+     *   @OA\Parameter(
+     *     name="vid",
+     *     in="query",
+     *     description="View ID (VID)",
+     *     example="UIO",
+     *     required=false,
+     *     @OA\Schema(
+     *       type="string"
+     *     )
+     *   ),
+     *   @OA\Parameter(
+     *     name="lang",
+     *     in="query",
+     *     description="Language code",
+     *     example="no_NO",
+     *     required=true,
+     *     @OA\Schema(
+     *       type="string"
+     *     )
+     *   )
+     * )
+     */
+    public function translations(PrimoSearchV2 $primo, Request $request)
+    {
+        $primo->setVid($request->vid);
+        return $this->handleErrors(function () use ($primo, $request) {
+            return $primo->translations($request->lang);
         });
     }
 
