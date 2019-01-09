@@ -42,9 +42,9 @@
         "php-http/httplug": "^1.1",
         "php-http/message": "^1.5",
         "php-http/message-factory": "^1.0",
-        "scriptotek/alma-client": "@dev",
+        "scriptotek/alma-client": "dev-master@dev",
         "scriptotek/marc": "dev-master@dev",
-        "scriptotek/primo-search": "@dev",
+        "scriptotek/primo-search": "dev-master@dev",
         "sentry/sentry-laravel": "^0.8",
         "zircote/swagger-php": "^3.0"
     },

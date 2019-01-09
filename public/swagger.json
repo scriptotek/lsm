@@ -40,6 +40,15 @@
                             "maximum": 50,
                             "minimum": 1
                         }
+                    },
+                    {
+                        "name": "expand_items",
+                        "in": "query",
+                        "description": "Set to true to return information about all items.",
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
                     }
                 ],
                 "responses": {
@@ -56,7 +65,7 @@
                 ],
                 "summary": "Find Alma Bib record by MMS ID.",
                 "description": "Get details about a single record",
-                "operationId": "App\\Http\\Controllers\\AlmaController::getRecord",
+                "operationId": "App\\Http\\Controllers\\AlmaController::bib",
                 "parameters": [
                     {
                         "name": "id",
@@ -75,11 +84,81 @@
                             "type": "boolean",
                             "default": false
                         }
+                    },
+                    {
+                        "name": "expand_items",
+                        "in": "query",
+                        "description": "Set to true to return information about all items.",
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
                     }
                 ],
                 "responses": {
                     "200": {
                         "description": "An AlmaRecord"
+                    }
+                }
+            }
+        },
+        "/alma/records/{id}/holdings": {
+            "get": {
+                "tags": [
+                    "Alma"
+                ],
+                "summary": "Get list of holding records for a given Bib record.",
+                "description": "Get list of holding records for a given Bib record",
+                "operationId": "App\\Http\\Controllers\\AlmaController::holdings",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Alma record ID (MMS ID)",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Holdings"
+                    }
+                }
+            }
+        },
+        "/alma/records/{id}/holdings/{holding_id}": {
+            "get": {
+                "tags": [
+                    "Alma"
+                ],
+                "summary": "Get list of items for a given holding.",
+                "description": "Get list of items for a given holding",
+                "operationId": "App\\Http\\Controllers\\AlmaController::items",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Alma MMS ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "holding_id",
+                        "in": "path",
+                        "description": "Alma holding ID",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Items"
                     }
                 }
             }

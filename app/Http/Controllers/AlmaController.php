@@ -46,6 +46,15 @@ class AlmaController extends Controller
      *       minimum=1,
      *       maximum=50
      *     )
+     *   ),
+     *   @OA\Parameter(
+     *     name="expand_items",
+     *     in="query",
+     *     description="Set to true to return information about all items.",
+     *     @OA\Schema(
+     *       type="boolean",
+     *       default=false
+     *     )
      *   )
      * )
      *
@@ -63,8 +72,11 @@ class AlmaController extends Controller
         $t0 = microtime(true);
         $response = $alma->sru->search($cql, $start, $limit);
         $t1 = microtime(true);
+
+        $expand = ($request->get('expand_items') && substr($request->get('expand_items'), 0, 1) !== 'f');
         foreach ($response->records as $record) {
-            $results[] = (new AlmaRecord(Bib::fromSruRecord($record, $alma)) )->jsonSerialize();
+            $bib = Bib::fromSruRecord($record, $alma);
+            $results[] = $this->serializeBibRecord($bib, $expand);
         }
         $t2 = microtime(true);
 
@@ -115,6 +127,15 @@ class AlmaController extends Controller
      *       type="boolean",
      *       default=false
      *     )
+     *   ),
+     *   @OA\Parameter(
+     *     name="expand_items",
+     *     in="query",
+     *     description="Set to true to return information about all items.",
+     *     @OA\Schema(
+     *       type="boolean",
+     *       default=false
+     *     )
      *   )
      * )
      *
@@ -123,14 +144,14 @@ class AlmaController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function getRecord(AlmaClient $alma, Request $request, $id)
+    public function bib(AlmaClient $alma, Request $request, $id)
     {
         $t0 = microtime(true);
         if (strlen($id) >= 18) {
             $bib_data = $alma->getXML("/bibs/${id}", [
-                'expand' => 'p_avail'
+                'expand' => 'p_avail,e_avail,d_avail'
             ]);
-            $bib = new Bib($alma, $id, null, $bib_data);
+            $bib = (new Bib($alma, $id))->setMarcRecord($bib_data->asXML());
             $api = 'alma_bib_request';
         } else {
             $bib = $alma->bibs->search("alma.all_for_ui=$id")->current();
@@ -148,12 +169,14 @@ class AlmaController extends Controller
             return response()->json(['error' => 'not found'], Response::HTTP_NOT_FOUND);
         }
 
-        if ($request->get('raw')) {
+        if ($request->get('raw') && substr($request->get('raw'), 0, 1) !== 'f') {
             return response($bib->record->toXML(), Response::HTTP_OK)
                 ->header('Content-Type', 'application/xml');
         }
 
-        $data = (new AlmaRecord($bib))->jsonSerialize();
+        $expand = ($request->get('expand_items') && substr($request->get('expand_items'), 0, 1) !== 'f');
+        $data = $this->serializeBibRecord($bib, $expand);
+
         $t2 = microtime(true);
 
         $data['timing'] = [
@@ -162,5 +185,92 @@ class AlmaController extends Controller
         ];
 
         return response()->json($data);
+    }
+
+    protected function serializeBibRecord(Bib $bib, bool $expand)
+    {
+        $data = (new AlmaRecord($bib))->jsonSerialize();
+        if ($expand) {
+            foreach ($data['holdings'] as &$holding) {
+                $holding_id = $holding['holding_id'];
+                $holding['items'] = [];
+                foreach ($bib->holdings[$holding_id]->items as $item) {
+                    $holding['items'][] = $item->item_data;
+                }
+            }
+        }
+        return $data;
+    }
+
+    /**
+     * @OA\Get(
+     *   path="/alma/records/{id}/holdings",
+     *   summary="Get list of holding records for a given Bib record.",
+     *   description="Get list of holding records for a given Bib record",
+     *   tags={"Alma"},
+     *   @OA\Response(
+     *     response=200,
+     *     description="Holdings"
+     *   ),
+     *   @OA\Parameter(
+     *     name="id",
+     *     in="path",
+     *     description="Alma record ID (MMS ID)",
+     *     required=true,
+     *     @OA\Schema(
+     *       type="string"
+     *     )
+     *   )
+     * )
+     */
+    public function holdings(AlmaClient $alma, Request $request, $id)
+    {
+        $out = [];
+        foreach ($alma->bibs[$id]->holdings as $holding) {
+            $out[] = $holding;
+        }
+
+        return response()->json(['holdings' => $out]);
+    }
+
+    /**
+     * @OA\Get(
+     *   path="/alma/records/{id}/holdings/{holding_id}",
+     *   summary="Get list of items for a given holding.",
+     *   description="Get list of items for a given holding",
+     *   tags={"Alma"},
+     *   @OA\Response(
+     *     response=200,
+     *     description="Items"
+     *   ),
+     *   @OA\Parameter(
+     *     name="id",
+     *     in="path",
+     *     description="Alma MMS ID",
+     *     required=true,
+     *     @OA\Schema(
+     *       type="string"
+     *     )
+     *   ),
+     *   @OA\Parameter(
+     *     name="holding_id",
+     *     in="path",
+     *     description="Alma holding ID",
+     *     required=true,
+     *     @OA\Schema(
+     *       type="string"
+     *     )
+     *   )
+     * )
+     */
+    public function items(AlmaClient $alma, Request $request, $id, $holding_id)
+    {
+        $out = [];
+        foreach ($alma->bibs[$id]->holdings[$holding_id]->items as $item) {
+            $out[] = $item->item_data;
+        }
+        $t1 = microtime(true);
+
+        return response()->json(['items' => $out]);
     }
 }

@@ -16,12 +16,15 @@ class AlmaRecord implements \JsonSerializable
     protected function getHoldings()
     {
         $avaMap = [
+            '8' => 'holding_id',
             'a' => 'institution',
             'b' => 'library',
             'c' => 'location',
             'd' => 'callcode',
             'x' => 'public_note',
             'e' => 'availability',
+            'f' => 'total_items',
+            'g' => 'unavailable_items',
         ];
 
         $holdings = [];

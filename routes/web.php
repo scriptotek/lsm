@@ -51,7 +51,9 @@ Route::get('subjects/lookup', 'SubjectsController@lookup');
 Route::get('alma/search', ['as' => 'alma.search', 'uses' => 'AlmaController@search']);
 // Returns a single AlmaRecord
 
-Route::get('alma/records/{id}', ['as' => 'alma.get', 'uses' => 'AlmaController@getRecord']);
+Route::get('alma/records/{id}/holdings/{holding_id}', ['as' => 'alma.items', 'uses' => 'AlmaController@items']);
+Route::get('alma/records/{id}/holdings', ['as' => 'alma.holdings', 'uses' => 'AlmaController@holdings']);
+Route::get('alma/records/{id}', ['as' => 'alma.get', 'uses' => 'AlmaController@bib']);
 // Returns a single AlmaRecord
 
 
