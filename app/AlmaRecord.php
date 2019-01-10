@@ -16,22 +16,60 @@ class AlmaRecord implements \JsonSerializable
     protected function getHoldings()
     {
         $avaMap = [
-            '8' => 'holding_id',
+            '8' => 'id',
             'a' => 'institution',
             'b' => 'library',
+            'q' => 'library_name',
             'c' => 'location',
             'd' => 'callcode',
             'x' => 'public_note',
-            'e' => 'availability',
+            'e' => 'availability',  // available, unavailable, or check_holdings
             'f' => 'total_items',
             'g' => 'unavailable_items',
         ];
 
-        $holdings = [];
+        $out = [];
         foreach ($this->bib->record->query('AVA') as $field) {
-            $holdings[] = $field->mapSubFields($avaMap);
+            $out[] = $field->mapSubFields($avaMap);
         }
-        return $holdings;
+        return $out;
+    }
+
+    protected function getPortfolios()
+    {
+        $aveMap = [
+            '8' => 'id',
+            'e' => 'activation',
+            'c' => 'collection_id',
+            'm' => 'collection_name',
+            'n' => 'public_note',
+            't' => 'interface_name',
+            's' => 'coverage',
+            'u' => 'service_url',
+        ];
+
+        $out = [];
+        foreach ($this->bib->record->query('AVE') as $field) {
+            $out[] = $field->mapSubFields($aveMap);
+        }
+        return $out;
+    }
+
+    protected function getRepresentations()
+    {
+        $avdMap = [
+            'b' => 'id',
+            'e' => 'label',
+            'd' => 'repository_name',
+            'f' => 'public_note',
+            'h' => 'full_text_link',
+        ];
+
+        $out = [];
+        foreach ($this->bib->record->query('AVD') as $field) {
+            $out[] = $field->mapSubFields($avdMap);
+        }
+        return $out;
     }
 
     protected function getCover()
@@ -84,6 +122,8 @@ class AlmaRecord implements \JsonSerializable
 
         if ($includeHoldings) {
             $out['holdings'] = $this->getHoldings();
+            $out['portfolios'] = $this->getPortfolios();
+            $out['representations'] = $this->getRepresentations();
         }
 
         return $out;

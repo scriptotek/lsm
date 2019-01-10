@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "22984f5102593eee12b57ecbf08ad257",
+    "content-hash": "ee4666e9dbffc1b022c5141aa22f2a37",
     "packages": [
         {
             "name": "aacotroneo/laravel-saml2",
@@ -887,16 +887,16 @@
         },
         {
             "name": "fideloper/proxy",
-            "version": "4.0.0",
+            "version": "4.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/fideloper/TrustedProxy.git",
-                "reference": "cf8a0ca4b85659b9557e206c90110a6a4dba980a"
+                "reference": "177c79a2d1f9970f89ee2fb4c12b429af38b6dfb"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/fideloper/TrustedProxy/zipball/cf8a0ca4b85659b9557e206c90110a6a4dba980a",
-                "reference": "cf8a0ca4b85659b9557e206c90110a6a4dba980a",
+                "url": "https://api.github.com/repos/fideloper/TrustedProxy/zipball/177c79a2d1f9970f89ee2fb4c12b429af38b6dfb",
+                "reference": "177c79a2d1f9970f89ee2fb4c12b429af38b6dfb",
                 "shasum": ""
             },
             "require": {
@@ -937,7 +937,7 @@
                 "proxy",
                 "trusted proxy"
             ],
-            "time": "2018-02-07T20:20:57+00:00"
+            "time": "2019-01-10T14:06:47+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -2834,12 +2834,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/scriptotek/php-alma-client.git",
-                "reference": "804c7f54ffca81cc06349d5476f3e75475269d83"
+                "reference": "1d2ba70ed189a8e6f27c77acd26b4a57102292a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/scriptotek/php-alma-client/zipball/804c7f54ffca81cc06349d5476f3e75475269d83",
-                "reference": "804c7f54ffca81cc06349d5476f3e75475269d83",
+                "url": "https://api.github.com/repos/scriptotek/php-alma-client/zipball/1d2ba70ed189a8e6f27c77acd26b4a57102292a3",
+                "reference": "1d2ba70ed189a8e6f27c77acd26b4a57102292a3",
                 "shasum": ""
             },
             "require": {
@@ -2897,7 +2897,7 @@
             "keywords": [
                 "alma"
             ],
-            "time": "2019-01-09T23:54:08+00:00"
+            "time": "2019-01-10T22:45:25+00:00"
         },
         {
             "name": "scriptotek/marc",

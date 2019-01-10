@@ -50,7 +50,7 @@ class AlmaController extends Controller
      *   @OA\Parameter(
      *     name="expand_items",
      *     in="query",
-     *     description="Set to true to return information about all items.",
+     *     description="Set to true to return information about all holding items and representation files.",
      *     @OA\Schema(
      *       type="boolean",
      *       default=false
@@ -131,7 +131,7 @@ class AlmaController extends Controller
      *   @OA\Parameter(
      *     name="expand_items",
      *     in="query",
-     *     description="Set to true to return information about all items.",
+     *     description="Set to true to return information about all holding items and representation files.",
      *     @OA\Schema(
      *       type="boolean",
      *       default=false
@@ -191,11 +191,16 @@ class AlmaController extends Controller
     {
         $data = (new AlmaRecord($bib))->jsonSerialize();
         if ($expand) {
-            foreach ($data['holdings'] as &$holding) {
-                $holding_id = $holding['holding_id'];
-                $holding['items'] = [];
-                foreach ($bib->holdings[$holding_id]->items as $item) {
-                    $holding['items'][] = $item->item_data;
+            foreach ($data['holdings'] as &$el) {
+                $el['items'] = [];
+                foreach ($bib->holdings[$el['id']]->items as $item) {
+                    $el['items'][] = $item->item_data;
+                }
+            }
+            foreach ($data['representations'] as &$el) {
+                $el['files'] = [];
+                foreach ($bib->representations[$el['id']]->files as $file) {
+                    $el['files'][] = $file;
                 }
             }
         }
