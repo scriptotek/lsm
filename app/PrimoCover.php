@@ -21,7 +21,7 @@ class PrimoCover extends PrimoSearch
     protected function coverFromGoogleBooks($isbn)
     {
         $url = 'https://www.googleapis.com/books/v1/volumes?' . http_build_query([
-                'q' => $isbn,
+                'q' => 'isbn:' . $isbn,
                 'country' => 'NO',
             ]);
         $request = $this->messageFactory->createRequest('GET', $url);
