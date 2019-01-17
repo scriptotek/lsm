@@ -44,7 +44,16 @@
                     {
                         "name": "expand_items",
                         "in": "query",
-                        "description": "Set to true to return information about all items.",
+                        "description": "Set to true to return information about all holding items and representation files.",
+                        "schema": {
+                            "type": "boolean",
+                            "default": false
+                        }
+                    },
+                    {
+                        "name": "nz",
+                        "in": "query",
+                        "description": "Set to true to search network zone.",
                         "schema": {
                             "type": "boolean",
                             "default": false
@@ -88,7 +97,7 @@
                     {
                         "name": "expand_items",
                         "in": "query",
-                        "description": "Set to true to return information about all items.",
+                        "description": "Set to true to return information about all holding items and representation files.",
                         "schema": {
                             "type": "boolean",
                             "default": false

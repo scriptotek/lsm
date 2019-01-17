@@ -55,6 +55,15 @@ class AlmaController extends Controller
      *       type="boolean",
      *       default=false
      *     )
+     *   ),
+     *   @OA\Parameter(
+     *     name="nz",
+     *     in="query",
+     *     description="Set to true to search network zone.",
+     *     @OA\Schema(
+     *       type="boolean",
+     *       default=false
+     *     )
      *   )
      * )
      *
@@ -67,13 +76,17 @@ class AlmaController extends Controller
         $cql = $request->query('query');
         $start = $request->query('start', '1');
         $limit = $request->query('limit', '10');
-        $results = [];
+        $nz = ($request->get('nz') && substr($request->get('nz'), 0, 1) !== 'f');
+        $expand = ($request->get('expand_items') && substr($request->get('expand_items'), 0, 1) !== 'f');
 
         $t0 = microtime(true);
+        if ($nz) {
+            $alma = $alma->nz;
+        }
         $response = $alma->sru->search($cql, $start, $limit);
         $t1 = microtime(true);
 
-        $expand = ($request->get('expand_items') && substr($request->get('expand_items'), 0, 1) !== 'f');
+        $results = [];
         foreach ($response->records as $record) {
             $bib = Bib::fromSruRecord($record, $alma);
             $results[] = $this->serializeBibRecord($bib, $expand);
