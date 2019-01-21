@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "ee4666e9dbffc1b022c5141aa22f2a37",
+    "content-hash": "80800874c9ab472d2144959942005701",
     "packages": [
         {
             "name": "aacotroneo/laravel-saml2",
@@ -1124,16 +1124,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.7.20",
+            "version": "v5.7.21",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "10cd20294b5668f90ba91996236834e71f7ff670"
+                "reference": "25f74458a242b61cc9e9c09d31f94fb13ed805f3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/10cd20294b5668f90ba91996236834e71f7ff670",
-                "reference": "10cd20294b5668f90ba91996236834e71f7ff670",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/25f74458a242b61cc9e9c09d31f94fb13ed805f3",
+                "reference": "25f74458a242b61cc9e9c09d31f94fb13ed805f3",
                 "shasum": ""
             },
             "require": {
@@ -1266,7 +1266,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2019-01-08T14:39:11+00:00"
+            "time": "2019-01-15T15:20:32+00:00"
         },
         {
             "name": "laravel/nexmo-notification-channel",
@@ -1714,12 +1714,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/onelogin/php-saml.git",
-                "reference": "920c2240e48c9a74aad4129720f48fbf3d5fee47"
+                "reference": "4712de5bd45d4932077cfe8f9952f5e44553e36b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/onelogin/php-saml/zipball/920c2240e48c9a74aad4129720f48fbf3d5fee47",
-                "reference": "920c2240e48c9a74aad4129720f48fbf3d5fee47",
+                "url": "https://api.github.com/repos/onelogin/php-saml/zipball/4712de5bd45d4932077cfe8f9952f5e44553e36b",
+                "reference": "4712de5bd45d4932077cfe8f9952f5e44553e36b",
                 "shasum": ""
             },
             "require": {
@@ -1756,20 +1756,20 @@
                 "onelogin",
                 "saml"
             ],
-            "time": "2018-10-02T16:02:37+00:00"
+            "time": "2019-01-14T14:32:17+00:00"
         },
         {
             "name": "opis/closure",
-            "version": "3.1.3",
+            "version": "3.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/opis/closure.git",
-                "reference": "5e9095ce871a425ab87a854b285b7766de38a7d9"
+                "reference": "41f5da65d75cf473e5ee582df8fc7f2c733ce9d6"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/opis/closure/zipball/5e9095ce871a425ab87a854b285b7766de38a7d9",
-                "reference": "5e9095ce871a425ab87a854b285b7766de38a7d9",
+                "url": "https://api.github.com/repos/opis/closure/zipball/41f5da65d75cf473e5ee582df8fc7f2c733ce9d6",
+                "reference": "41f5da65d75cf473e5ee582df8fc7f2c733ce9d6",
                 "shasum": ""
             },
             "require": {
@@ -1817,7 +1817,7 @@
                 "serialization",
                 "serialize"
             ],
-            "time": "2019-01-06T22:07:38+00:00"
+            "time": "2019-01-14T14:45:33+00:00"
         },
         {
             "name": "packfire/php5.3-compat",
@@ -2834,12 +2834,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/scriptotek/php-alma-client.git",
-                "reference": "1d2ba70ed189a8e6f27c77acd26b4a57102292a3"
+                "reference": "7dd4671eb79579b47e0150ee5cac133de7091f66"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/scriptotek/php-alma-client/zipball/1d2ba70ed189a8e6f27c77acd26b4a57102292a3",
-                "reference": "1d2ba70ed189a8e6f27c77acd26b4a57102292a3",
+                "url": "https://api.github.com/repos/scriptotek/php-alma-client/zipball/7dd4671eb79579b47e0150ee5cac133de7091f66",
+                "reference": "7dd4671eb79579b47e0150ee5cac133de7091f66",
                 "shasum": ""
             },
             "require": {
@@ -2849,20 +2849,19 @@
                 "php-http/client-common": "^1.5",
                 "php-http/client-implementation": "^1.0",
                 "php-http/discovery": "^1.0",
-                "php-http/httplug": "^1.1",
+                "php-http/httplug": "^1.1 || ^2.0",
                 "php-http/message-factory": "^1.0",
                 "psr/http-message": "^1.0",
-                "scriptotek/marc": "^1.0 || dev-master",
+                "scriptotek/marc": "^2.0 || dev-master",
                 "scriptotek/sru-client": "^0.6"
             },
             "require-dev": {
-                "bossa/phpspec2-expect": "^2.1",
+                "bossa/phpspec2-expect": "^2.1 || ^3.0",
                 "guzzlehttp/psr7": "^1.0",
-                "leanphp/phpspec-code-coverage": "~3.1",
-                "php-http/guzzle6-adapter": "^1.1",
+                "php-http/guzzle6-adapter": "^1.1 || ^2.0",
                 "php-http/message": "^1.0",
                 "php-http/mock-client": "^1.0",
-                "phpspec/phpspec": "^3.4",
+                "phpspec/phpspec": "^3.4 || ^4.0 || ^5.0",
                 "squizlabs/php_codesniffer": "^3.3",
                 "wp-cli/php-cli-tools": "^0.11.1"
             },
@@ -2897,7 +2896,7 @@
             "keywords": [
                 "alma"
             ],
-            "time": "2019-01-10T22:45:25+00:00"
+            "time": "2019-01-15T17:26:11+00:00"
         },
         {
             "name": "scriptotek/marc",
@@ -2905,12 +2904,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/scriptotek/php-marc.git",
-                "reference": "558b2682df801125a32d79d9a6eb409f5f6ce362"
+                "reference": "ba20a6deadc9402bb65807cd63e33797d2893dea"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/scriptotek/php-marc/zipball/558b2682df801125a32d79d9a6eb409f5f6ce362",
-                "reference": "558b2682df801125a32d79d9a6eb409f5f6ce362",
+                "url": "https://api.github.com/repos/scriptotek/php-marc/zipball/ba20a6deadc9402bb65807cd63e33797d2893dea",
+                "reference": "ba20a6deadc9402bb65807cd63e33797d2893dea",
                 "shasum": ""
             },
             "require": {
@@ -2948,10 +2947,10 @@
                 "marc"
             ],
             "support": {
-                "source": "https://github.com/scriptotek/php-marc/tree/v2.0.1",
+                "source": "https://github.com/scriptotek/php-marc/tree/master",
                 "issues": "https://github.com/scriptotek/php-marc/issues"
             },
-            "time": "2019-01-09T22:33:34+00:00"
+            "time": "2019-01-15T22:53:39+00:00"
         },
         {
             "name": "scriptotek/primo-search",
@@ -3140,32 +3139,33 @@
         },
         {
             "name": "sentry/sentry-laravel",
-            "version": "0.8.0",
+            "version": "0.11.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/getsentry/sentry-laravel.git",
-                "reference": "4ca94ed3ba6d79ad049957be574a738a3478f94c"
+                "reference": "21329406001006ffa5736ee08222e7ffae9e1dcf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/getsentry/sentry-laravel/zipball/4ca94ed3ba6d79ad049957be574a738a3478f94c",
-                "reference": "4ca94ed3ba6d79ad049957be574a738a3478f94c",
+                "url": "https://api.github.com/repos/getsentry/sentry-laravel/zipball/21329406001006ffa5736ee08222e7ffae9e1dcf",
+                "reference": "21329406001006ffa5736ee08222e7ffae9e1dcf",
                 "shasum": ""
             },
             "require": {
-                "illuminate/support": "4.*|5.*",
-                "php": ">=5.3.0",
-                "sentry/sentry": ">=1.7.0"
+                "illuminate/support": "5.0.*|5.1.*|5.2.*|5.3.*|5.4.*|5.5.*|5.6.*|5.7.*",
+                "php": "^5.4||^7.0",
+                "sentry/sentry": "^1.9.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^1.8.0",
-                "orchestra/testbench": "3.*",
-                "phpunit/phpunit": "^4.6.6"
+                "friendsofphp/php-cs-fixer": "2.7.*",
+                "laravel/framework": "5.7.*",
+                "orchestra/testbench": "3.7.*",
+                "phpunit/phpunit": "7.3.*"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.8.x-dev"
+                    "dev-master": "0.11.x-dev"
                 },
                 "laravel": {
                     "providers": [
@@ -3199,7 +3199,7 @@
                 "logging",
                 "sentry"
             ],
-            "time": "2017-08-11T17:29:14+00:00"
+            "time": "2018-11-01T12:52:14+00:00"
         },
         {
             "name": "swiftmailer/swiftmailer",
@@ -5271,16 +5271,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "7.5.1",
+            "version": "7.5.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "c23d78776ad415d5506e0679723cb461d71f488f"
+                "reference": "7c89093bd00f7d5ddf0ab81dee04f801416b4944"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/c23d78776ad415d5506e0679723cb461d71f488f",
-                "reference": "c23d78776ad415d5506e0679723cb461d71f488f",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/7c89093bd00f7d5ddf0ab81dee04f801416b4944",
+                "reference": "7c89093bd00f7d5ddf0ab81dee04f801416b4944",
                 "shasum": ""
             },
             "require": {
@@ -5351,7 +5351,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2018-12-12T07:20:32+00:00"
+            "time": "2019-01-15T08:19:08+00:00"
         },
         {
             "name": "sebastian/code-unit-reverse-lookup",
