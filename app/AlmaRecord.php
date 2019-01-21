@@ -90,12 +90,16 @@ class AlmaRecord implements \JsonSerializable
     protected function getDescription()
     {
         foreach ($this->bib->record->getFields('856') as $field) {
-            if (in_array($field->sf('3'), ['Beskrivelse fra forlaget (lang)'])) {
+            if (in_array($field->sf('3'), ['Beskrivelse fra forlaget (kort)', 'Beskrivelse fra forlaget (lang)'])) {
                 return $field->sf('u');
             }
         }
+    }
+
+    protected function getFulltextLink()
+    {
         foreach ($this->bib->record->getFields('856') as $field) {
-            if (in_array($field->sf('3'), ['Beskrivelse fra forlaget (kort)'])) {
+            if (in_array($field->sf('3'), ['Fulltekst'])) {
                 return $field->sf('u');
             }
         }
@@ -119,6 +123,7 @@ class AlmaRecord implements \JsonSerializable
 
         $out['cover'] = $this->getCover();
         $out['description'] = $this->getDescription();
+        $out['fulltext'] = $this->getFulltextLink();
 
         if ($includeHoldings) {
             $out['holdings'] = $this->getHoldings();
