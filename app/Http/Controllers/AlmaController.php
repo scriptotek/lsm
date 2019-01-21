@@ -206,6 +206,10 @@ class AlmaController extends Controller
         if ($expand) {
             foreach ($data['holdings'] as &$el) {
                 $el['items'] = [];
+                if (!isset($el['id'])) {
+                    // Temporary location
+                    continue;
+                }
                 foreach ($bib->holdings[$el['id']]->items as $item) {
                     $el['items'][] = $item->item_data;
                 }
