@@ -254,11 +254,11 @@ class PrimoResult
         $this->full['subjects']['ubo'] = $this->extractArray($record, './p:search/p:lsr18');
         $this->full['subjects']['msc'] = $this->extractArray($record, './p:search/p:lsr18'); // alias
 
-        $this->full['subjects']['mrtermer'] = $this->extractSubjects($record, 'NOUBOMR');
-        $this->full['subjects']['mesh'] = $this->extractSubjects($record, 'MESH');
-        $this->full['subjects']['tekord'] = $this->extractSubjects($record, 'TEKORD');
-        $this->full['subjects']['humord'] = $this->extractSubjects($record, 'HUMORD');
-        $this->full['subjects']['realfagstermer'] = $this->extractSubjects($record, 'NOUBOMN');
+        $this->full['subjects']['mrtermer'] = $this->extractSubjects($record, 'noubomr');
+        $this->full['subjects']['mesh'] = $this->extractSubjects($record, 'mesh');
+        $this->full['subjects']['tekord'] = $this->extractSubjects($record, 'tekord');
+        $this->full['subjects']['humord'] = $this->extractSubjects($record, 'humord');
+        $this->full['subjects']['realfagstermer'] = $this->extractSubjects($record, 'noubomn');
         $controlled_terms = array_merge(
             $this->full['subjects']['mrtermer'],
             $this->full['subjects']['tekord'],
