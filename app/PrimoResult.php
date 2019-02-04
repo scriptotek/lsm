@@ -73,10 +73,10 @@ class PrimoResult
         $result = [];
 
         foreach ($subjects as $subject) {
-            if (array_get($subject, 'vocabulary') != $vocabulary) {
+            if (strtolower(array_get($subject, 'vocabulary')) != $vocabulary) {
                 continue;
             }
-            if (strpos(array_get($subject, 'preferred', ''), 'N') !== false) {
+            if (strpos(strtolower(array_get($subject, 'preferred', '')), 'n') !== false) {
                 continue;
             }
             $result[] = str_replace(' -- ', ' : ', array_get($subject, 'term'));
