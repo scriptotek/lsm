@@ -18,6 +18,20 @@ class PrimoSearch
     public $alma;
     public $indices;
 
+    // Error codes that are not really errors, but rather informational messages or warnings.
+    public $ignoreErrors = [
+        // Controlled Vocabulary Expansion
+        'controlled.vocabulary',
+        'controlled.voc.synonym',
+
+        // Search expansion
+        'search.message.ui.expansion.pc',
+        'search.message.ui.expansion',
+
+        // Too many wildcards, search results might be incomplete
+        'search.error.wildcards.toomanyclauses',
+    ];
+
     public function __construct(PrimoServices $primo, HttpClient $http, MessageFactory $messageFactory)
     {
         $this->primo = $primo;
@@ -129,7 +143,9 @@ class PrimoSearch
         $root->registerXPathNamespace('p', 'http://www.exlibrisgroup.com/xsd/primo/primo_nm_bib');
 
         $error = $root->first('/s:SEGMENTS/s:JAGROOT/s:RESULT/s:ERROR');
-        if ($error) {
+
+        // Ignore errors that are not really errors, caused by Controlled Vocabulary Expansion.
+        if ($error && !in_array($error->attr('CODE'), $this->ignoreErrors)) {
             throw new PrimoException($error->attr('MESSAGE'), 0, null, $url);
         }
 
