@@ -149,6 +149,15 @@ class AlmaController extends Controller
      *       type="boolean",
      *       default=false
      *     )
+     *   ),
+     *   @OA\Parameter(
+     *     name="nz",
+     *     in="query",
+     *     description="Set to true to use network zone.",
+     *     @OA\Schema(
+     *       type="boolean",
+     *       default=false
+     *     )
      *   )
      * )
      *
@@ -160,6 +169,10 @@ class AlmaController extends Controller
     public function bib(AlmaClient $alma, Request $request, $id)
     {
         $t0 = microtime(true);
+        $nz = ($request->get('nz') && substr($request->get('nz'), 0, 1) !== 'f');
+        if ($nz) {
+            $alma = $alma->nz;
+        }
         if (strlen($id) >= 18) {
             $bib_data = $alma->getXML("/bibs/${id}", [
                 'expand' => 'p_avail,e_avail,d_avail'
