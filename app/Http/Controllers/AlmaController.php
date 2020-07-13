@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Scriptotek\Alma\Bibs\Bib;
 use Scriptotek\Alma\Client as AlmaClient;
+use Scriptotek\Sru\Exceptions\SruErrorException;
 
 class AlmaController extends Controller
 {
@@ -83,7 +84,14 @@ class AlmaController extends Controller
         if ($nz) {
             $alma = $alma->nz;
         }
-        $response = $alma->sru->search($cql, $start, $limit);
+        try {
+            $response = $alma->sru->search($cql, $start, $limit);
+        } catch (SruErrorException $ex) {
+            return response()->json([
+                'error' => $ex->getMessage(),
+                'url' => $ex->uri,
+            ], 400);
+        }
         $t1 = microtime(true);
 
         $results = [];
