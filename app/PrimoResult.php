@@ -5,6 +5,7 @@ namespace App;
 use BCLib\PrimoServices\DeepLink;
 use BCLib\PrimoServices\QueryTerm;
 use Danmichaelo\QuiteSimpleXMLElement\QuiteSimpleXMLElement;
+use Illuminate\Support\Arr;
 
 class PrimoResult
 {
@@ -22,10 +23,10 @@ class PrimoResult
         $this->deeplinkProvider = $deeplinkProvider;
         $this->brief = ['type' => ($this instanceof PrimoRecordGroup) ? 'group' : 'record'];
         $this->full = [];
-        $this->primoInst = strtoupper(array_get($options, 'primo_inst', null));
-        $this->primoView = strtoupper(array_get($options, 'primo_view', '??'));
-        $this->primoHost = array_get($options, 'primo_host', null);
-        $this->almaInst = strtoupper(array_get($options, 'alma_inst', null));
+        $this->primoInst = strtoupper(Arr::get($options, 'primo_inst', null));
+        $this->primoView = strtoupper(Arr::get($options, 'primo_view', '??'));
+        $this->primoHost = Arr::get($options, 'primo_host', null);
+        $this->almaInst = strtoupper(Arr::get($options, 'alma_inst', null));
     }
 
     public function toArray($fullRepr = false)
@@ -50,7 +51,7 @@ class PrimoResult
 
     public function jsonSerialize()
     {
-        return toArray('full');
+        return $this->toArray(true);
     }
 
     protected function extractArray(QuiteSimpleXMLElement $group, $xpath)
@@ -73,13 +74,13 @@ class PrimoResult
         $result = [];
 
         foreach ($subjects as $subject) {
-            if (strtolower(array_get($subject, 'vocabulary')) != $vocabulary) {
+            if (strtolower(Arr::get($subject, 'vocabulary')) != $vocabulary) {
                 continue;
             }
-            if (strpos(strtolower(array_get($subject, 'preferred', '')), 'n') !== false) {
+            if (strpos(strtolower(Arr::get($subject, 'preferred', '')), 'n') !== false) {
                 continue;
             }
-            $result[] = str_replace(' -- ', ' : ', array_get($subject, 'term'));
+            $result[] = str_replace(' -- ', ' : ', Arr::get($subject, 'term'));
         }
         return $result;
     }
@@ -114,7 +115,7 @@ class PrimoResult
 
             foreach (explode('$$', $ava) as $el) {
                 if (strlen($el)) {
-                    $code = array_get($codelist, substr($el, 0, 1), substr($el, 0, 1));
+                    $code = Arr::get($codelist, substr($el, 0, 1), substr($el, 0, 1));
                     $o[$code] = trim(substr($el, 1));
                 }
             }
@@ -128,22 +129,22 @@ class PrimoResult
 
         // Add urls for Alma-E, Online Resource and Alma-D
         foreach ($this->extractGetIts($getits) as $getit) {
-            if (array_get($getit, 'category') == 'Online Resource') {
+            if (Arr::get($getit, 'category') == 'Online Resource') {
                 // Jeg trooor dette alltid er åpne ressurser
                 $urls[$getit['url1']] = ['type' => 'Online Resource', 'description' => 'E-book'];
-            } else if (array_get($getit, 'category') == 'Alma-E') {
+            } else if (Arr::get($getit, 'category') == 'Alma-E') {
                 // Disse derimot...
 
                 $urls[$getit['url1']] = ['type' => 'Alma-E', 'access' => [], 'description' => 'E-book'];
 
                 foreach ($this->extractMarcArray($record, './p:delivery/p:delcategory') as $k) {
-                    $alma_cat = array_get($k, 'V');
-                    $inst = array_get($k, 'institution');
+                    $alma_cat = Arr::get($k, 'V');
+                    $inst = Arr::get($k, 'institution');
                     if ($alma_cat == 'Alma-E') {
                         $urls[$getit['url1']]['access'][] = $inst;
                     }
                 }
-            } elseif (array_get($getit, 'category') == 'Alma-D') {
+            } elseif (Arr::get($getit, 'category') == 'Alma-D') {
                 // Eksempel: https://ub-lsm.uio.no/primo/records/BIBSYS_ILS71503149490002201?raw=true
                 // Kun tilgjengelig fra NB
 
@@ -154,8 +155,8 @@ class PrimoResult
                 // }
 
                 foreach ($this->extractMarcArray($record, './p:delivery/p:delcategory') as $k) {
-                    $alma_cat = array_get($k, 'V');
-                    $inst = array_get($k, 'institution');
+                    $alma_cat = Arr::get($k, 'V');
+                    $inst = Arr::get($k, 'institution');
                     if ($alma_cat == 'Alma-D') {
                         $urls[$getit['url1']]['access'][] = $inst;
                     }
@@ -166,7 +167,7 @@ class PrimoResult
         // Add link descriptions for online resources
         $links = $this->extractMarcArray($record, './p:links/p:linktorsrc');
         foreach ($links as $link) {
-            $urls[$link['url']]['description'] = array_get($link, 'description', 'Available online');
+            $urls[$link['url']]['description'] = Arr::get($link, 'description', 'Available online');
         }
 
         $out = [];

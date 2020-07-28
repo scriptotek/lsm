@@ -4,6 +4,7 @@ namespace App;
 
 use BCLib\PrimoServices\DeepLink;
 use Danmichaelo\QuiteSimpleXMLElement\QuiteSimpleXMLElement;
+use Illuminate\Support\Arr;
 
 class PrimoRecord extends PrimoResult implements \JsonSerializable
 {
@@ -96,7 +97,7 @@ class PrimoRecord extends PrimoResult implements \JsonSerializable
     public function hasPrint($x)
     {
         return array_reduce($x['components'], function ($carry, $item) {
-            $x = array_get($item, 'category') == 'Alma-P' && array_get($item, 'alma_id');
+            $x = Arr::get($item, 'category') == 'Alma-P' && Arr::get($item, 'alma_id');
             return $carry || $x;
         }, false);
     }
@@ -104,7 +105,7 @@ class PrimoRecord extends PrimoResult implements \JsonSerializable
     public function hasElectronic($x)
     {
         return array_reduce($x['components'], function ($carry, $item) {
-            $x = in_array(array_get($item, 'category'), ['Alma-E', 'Online Resource']) && array_get($item, 'alma_id');
+            $x = in_array(Arr::get($item, 'category'), ['Alma-E', 'Online Resource']) && Arr::get($item, 'alma_id');
             return $carry || $x;
         }, false);
     }
@@ -112,7 +113,7 @@ class PrimoRecord extends PrimoResult implements \JsonSerializable
     public function hasDigital($x)
     {
         return array_reduce($x['components'], function ($carry, $item) {
-            $x = in_array(array_get($item, 'category'), ['Alma-D']) && array_get($item, 'alma_id');
+            $x = in_array(Arr::get($item, 'category'), ['Alma-D']) && Arr::get($item, 'alma_id');
             return $carry || $x;
         }, false);
     }
@@ -124,27 +125,27 @@ class PrimoRecord extends PrimoResult implements \JsonSerializable
         $components = array_map(function ($x) use ($record) {
             return [
                 'id' => $x['V'],
-                'fid' => array_get($x, 'id'),
+                'fid' => Arr::get($x, 'id'),
             ];
         }, $this->extractMarcArray($record, './p:control/p:sourcerecordid'));
 
         // Add delivery
         foreach ($this->extractMarcArray($record, './p:delivery/p:delcategory') as $k) {
-            $component =& $this->getComponent($components, array_get($k, 'id'));
+            $component =& $this->getComponent($components, Arr::get($k, 'id'));
 
             // @TODO: Beware: This limitaion means results with no local holdings will end up with no category.
             //        See below.
-            //if (array_get($k, 'institution', $this->primoInst) == $this->primoInst) {
-            array_set($component, 'category', $k['V']);
+            //if (Arr::get($k, 'institution', $this->primoInst) == $this->primoInst) {
+            Arr::set($component, 'category', $k['V']);
             //}
         }
 
         // Add Alma holdings IDs.
         $alma_ids = [];
         foreach ($this->extractMarcArray($record, './p:control/p:almaid') as $k) {
-            $component =& $this->getComponent($components, array_get($k, 'id'));
+            $component =& $this->getComponent($components, Arr::get($k, 'id'));
             list($inst, $id) = explode(':', $k['V']);
-            array_set($component, 'alma_holdings.' . $inst, $id);
+            Arr::set($component, 'alma_holdings.' . $inst, $id);
         }
 
         // Add availability
@@ -152,24 +153,24 @@ class PrimoRecord extends PrimoResult implements \JsonSerializable
         $keys = [];
 
         foreach ($this->extractMarcArray($record, './p:display/p:availlibrary') as $k) {
-            $component =& $this->getComponent($components, array_get($k, 'id'));
+            $component =& $this->getComponent($components, Arr::get($k, 'id'));
 
             // @TODO: Beware: This limitaion means some results will end up with on holdings
             // if ($k['institution'] != $this->primoInst) {
             //     continue;
             // }
 
-            $key = array_get($k, 'library') . $k['collectionCode'] . array_get($k, 'callcode');
+            $key = Arr::get($k, 'library') . $k['collectionCode'] . Arr::get($k, 'callcode');
             if (in_array($key, $keys)) {
                 continue;  // Skip duplicates
             }
             $keys[] = $key;
 
             $holding = [
-                'library' => array_get($k, 'library'),
+                'library' => Arr::get($k, 'library'),
                 'collection_name' => $k['collection'],
                 'collection_code' => $k['collectionCode'],
-                'callcode' => array_get($k, 'callcode'),
+                'callcode' => Arr::get($k, 'callcode'),
                 'status' => $k['status'],
                 'alma_instance' => $k['institutionCode'],
             ];

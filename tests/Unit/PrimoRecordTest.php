@@ -5,6 +5,7 @@ namespace Tests\Unit;
 use App\PrimoRecord;
 use BCLib\PrimoServices\DeepLink;
 use Danmichaelo\QuiteSimpleXMLElement\QuiteSimpleXMLElement;
+use Illuminate\Support\Arr;
 use Tests\TestCase;
 
 class PrimoRecordTest extends TestCase
@@ -29,12 +30,12 @@ class PrimoRecordTest extends TestCase
 
         $this->assertSetsEqual(
             ['engelsk', 'toefl', 'språktester', 'testen', 'språkbruk', 'øvingsbøker'],
-            array_get($record, 'subjects.keyword')
+            Arr::get($record, 'subjects.keyword')
         );
 
         $this->assertSetsEqual(
             [],
-            array_get($record, 'subjects.subject')
+            Arr::get($record, 'subjects.subject')
         );
     }
 
@@ -44,7 +45,7 @@ class PrimoRecordTest extends TestCase
 
         $this->assertSetsEqual(
             ['Nordpolen', 'Arktis', 'Russland'],
-            array_get($record, 'subjects.place')
+            Arr::get($record, 'subjects.place')
         );
     }
 }

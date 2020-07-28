@@ -7,6 +7,7 @@ use Aacotroneo\Saml2\Events\Saml2LogoutEvent;
 use App\Integration;
 use App\User;
 use Illuminate\Events\Dispatcher;
+use Illuminate\Support\Arr;
 
 class Saml2EventSubscriber
 {
@@ -28,7 +29,7 @@ class Saml2EventSubscriber
         $uid = $data->getUserId();
         $attrs = $data->getAttributes();
 
-        $feideId = array_get($attrs, 'eduPersonPrincipalName.0');
+        $feideId = Arr::get($attrs, 'eduPersonPrincipalName.0');
 
         if (!$feideId) {
             \Log::notice('No uid returned in SAML2 login event.');

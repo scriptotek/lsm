@@ -6,13 +6,13 @@
 |--------------------------------------------------------------------------
 */
 
-$this->get('saml2/error', 'Auth\LoginController@error');
+Route::get('saml2/error', 'Auth\LoginController@error');
 
 Route::group(['middleware' => ['session', 'auth']], function () {
-    $this->post('logout', 'Auth\LoginController@samlLogout')->name('logout');
+    Route::post('logout', 'Auth\LoginController@samlLogout')->name('logout');
 });
 
-$this->get('account', 'Auth\LoginController@account')->name('account');
+Route::get('account', 'Auth\LoginController@account')->name('account');
 
 /*
 |--------------------------------------------------------------------------

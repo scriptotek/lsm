@@ -24,23 +24,23 @@
         }
     ],
     "require": {
-        "php": "^7.1.3",
-        "aacotroneo/laravel-saml2": "^1.0.0",
-        "barryvdh/laravel-cors": "^0.11.0",
+        "php": "^7.2.5",
+        "aacotroneo/laravel-saml2": "^2.1.0",
+        "fruitcake/laravel-cors": "^2.0",
         "bclibraries/primo-services": "dev-dev",
         "danmichaelo/quitesimplexmlelement": "^1.0",
         "digitalbazaar/json-ld": "~0.4",
         "fideloper/proxy": "^4.0",
         "http-interop/http-factory-guzzle": "^1.0",
-        "laravel/framework": "5.7.*",
+        "laravel/framework": "7.*",
         "php-http/guzzle6-adapter": "^2.0",
         "scriptotek/alma-client": "dev-master@dev",
         "scriptotek/marc": "dev-master@dev",
         "scriptotek/primo-search": "dev-master@dev",
-        "sentry/sentry-laravel": "^1.0"
+        "sentry/sentry-laravel": "^1.7"
     },
     "require-dev": {
-        "phpunit/phpunit": "^7.0",
+        "phpunit/phpunit": "^8.5",
         "fzaninotto/faker": "^1.4",
         "zircote/swagger-php": "^3.0"
     },

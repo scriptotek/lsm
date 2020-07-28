@@ -8,6 +8,7 @@ use BCLib\PrimoServices\QueryTerm;
 use Http\Client\HttpClient;
 use Http\Message\MessageFactory;
 use Danmichaelo\QuiteSimpleXMLElement\QuiteSimpleXMLElement;
+use Illuminate\Support\Arr;
 
 class PrimoSearch
 {
@@ -47,20 +48,20 @@ class PrimoSearch
         $queryObj->local($opts['primo_scope']);
         $queryObj->onCampus(true);
 
-        if (array_has($options, 'institution')) {
+        if (Arr::has($options, 'institution')) {
             $queryTerm = new QueryTerm();
-            $queryTerm->set('facet_local4', QueryTerm::EXACT, array_get($options, 'institution'));
+            $queryTerm->set('facet_local4', QueryTerm::EXACT, Arr::get($options, 'institution'));
             $queryObj->addTerm($queryTerm);
         }
 
-        if (array_has($options, 'library')) {
-            $library = explode(',', array_get($options, 'library'));
+        if (Arr::has($options, 'library')) {
+            $library = explode(',', Arr::get($options, 'library'));
             $queryTerm = new QueryTerm();
             $queryTerm->set('facet_library', QueryTerm::EXACT, $library);
             $queryObj->includeTerm($queryTerm);
         }
 
-        if (array_has($options, 'material')) {
+        if (Arr::has($options, 'material')) {
             $queryTerm = new QueryTerm();
 
             /**
@@ -68,7 +69,7 @@ class PrimoSearch
              *
              *    $queryTerm->set('rtype',
              *       QueryTerm::EXACT,
-             *       explode(',', array_get($options, 'material'))
+             *       explode(',', Arr::get($options, 'material'))
              *    );
              *
              * sometimes resulted in fewer results than expected. E.g. for the
@@ -79,15 +80,15 @@ class PrimoSearch
             $queryTerm->set(
                 'facet_rtype',
                 QueryTerm::EXACT,
-                explode(',', array_get($options, 'material'))
+                explode(',', Arr::get($options, 'material'))
             );
 
             $queryObj->includeTerm($queryTerm);
         }
 
-        $start = array_get($options, 'start', 1);
-        $limit = array_get($options, 'limit', 10);
-        $sort = array_get($options, 'sort', 'relevance');
+        $start = Arr::get($options, 'start', 1);
+        $limit = Arr::get($options, 'limit', 10);
+        $sort = Arr::get($options, 'sort', 'relevance');
         if ($sort != 'relevance') {
             $queryObj->sortField($sort);
         }
@@ -101,13 +102,13 @@ class PrimoSearch
     public function getRecordOptions($options)
     {
         $institutions = config('primo.institutions');
-        $inst = array_get($options, 'institution', config('primo.institution'));
+        $inst = Arr::get($options, 'institution', config('primo.institution'));
         return [
-            'primo_host' => array_get($options, 'host', config('primo.host')),
+            'primo_host' => Arr::get($options, 'host', config('primo.host')),
             'primo_inst' => $inst,
-            'primo_view' => array_get($institutions, "{$inst}.view", $inst),
-            'primo_scope' => array_get($options, 'scope', config('primo.scope')),
-            'alma_inst' => array_get($options, 'alma', config('alma.institution')),
+            'primo_view' => Arr::get($institutions, "{$inst}.view", $inst),
+            'primo_scope' => Arr::get($options, 'scope', config('primo.scope')),
+            'alma_inst' => Arr::get($options, 'alma', config('alma.institution')),
         ];
     }
 
@@ -134,7 +135,7 @@ class PrimoSearch
         $request = $this->messageFactory->createRequest('GET', $url);
         $body = (string) $this->http->sendRequest($request)->getBody();
 
-        if (array_get($options, 'raw') == 'true') {
+        if (Arr::get($options, 'raw') == 'true') {
             return $body;
         }
 
@@ -158,7 +159,7 @@ class PrimoSearch
         }
 
         $facets = [];
-        $vocab = array_get($options, 'vocabulary');
+        $vocab = Arr::get($options, 'vocabulary');
         if (isset($this->indices[$vocab])) {
             $facets[$vocab] = $this->parseFacet($root, 'local' . $this->indices[$vocab]);
         }
@@ -171,10 +172,10 @@ class PrimoSearch
             $next = null;
         }
 
-        if (array_get($options, 'expand_groups')) {
+        if (Arr::get($options, 'expand_groups')) {
             foreach ($out as &$o) {
                 if ($o['type'] == 'group') {
-                    $o['records'] = array_get($this->getGroup($o['id'], []), 'result.records');
+                    $o['records'] = Arr::get($this->getGroup($o['id'], []), 'result.records');
                 }
             }
         }
@@ -258,7 +259,7 @@ class PrimoSearch
         $queryObj->addTerm($queryTerm);
 
         $res = $this->processQuery($queryObj, true, true, $options);
-        if (array_get($options, 'raw') == 'true') {
+        if (Arr::get($options, 'raw') == 'true') {
             return $res;
         }
         return [
@@ -286,7 +287,7 @@ class PrimoSearch
         $request = $this->messageFactory->createRequest('GET', $url);
         $body = (string) $this->http->sendRequest($request)->getBody();
 
-        if (array_get($options, 'raw') == 'true') {
+        if (Arr::get($options, 'raw') == 'true') {
             return $body;
         }
 

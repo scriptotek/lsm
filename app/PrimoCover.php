@@ -6,6 +6,7 @@ use BCLib\PrimoServices\PrimoServices;
 use Http\Client\HttpClient;
 use Http\Message\MessageFactory;
 use Illuminate\Http\Request;
+use Illuminate\Support\Arr;
 
 class PrimoCover extends PrimoSearch
 {
@@ -28,7 +29,7 @@ class PrimoCover extends PrimoSearch
         $response = $this->http->sendRequest($request)->getBody();
         $response = json_decode((string) $response, true);
 
-        $thumb_url = array_get($response, 'items.0.volumeInfo.imageLinks.smallThumbnail');
+        $thumb_url = Arr::get($response, 'items.0.volumeInfo.imageLinks.smallThumbnail');
         if ($thumb_url) {
             $thumb_url = str_replace('&edge=curl', '', $thumb_url);
             $thumb_url = str_replace('http://', 'https://', $thumb_url);
@@ -44,12 +45,12 @@ class PrimoCover extends PrimoSearch
 
     public function coverFromRecord($record)
     {
-        $bsCover = array_get($record, 'thumbnails.bibsys');
+        $bsCover = Arr::get($record, 'thumbnails.bibsys');
         if ($bsCover) {
             $bsCover = str_replace('mini', 'stor', $bsCover);
             return $bsCover;
         }
-        $isbns = array_get($record, 'isbns', []);
+        $isbns = Arr::get($record, 'isbns', []);
         if (!count($isbns)) {
             return $this->defaultCover;
         }
