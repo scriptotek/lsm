@@ -23,10 +23,10 @@ return [
 
         // Base URL for institution zone. This only needs to be specified if you
         // use a proxy or other non-standard URL.
-        'baseUrl' => 'https://gw-uio.intark.uh-it.no/alma/v1',
+        'entrypoint' => 'https://gw-uio.intark.uh-it.no/alma/v1',
 
         // Optional list of extra headers to send with each request.
-        'extraHeaders' => [
+        'headers' => [
             'X-Gravitee-Api-Key' => env('ALMA_IZ_GRAVITEE_KEY'),
         ],
     ],
@@ -45,10 +45,10 @@ return [
 
         // Base URL for institution zone. This only needs to be specified if you
         // use a proxy or other non-standard URL.
-        'baseUrl' => 'https://gw-uio.intark.uh-it.no/alma/v1',
+        'entrypoint' => 'https://gw-uio.intark.uh-it.no/alma/v1',
 
         // Optional list of extra headers to send with each request.
-        'extraHeaders' => [
+        'headers' => [
             'X-Gravitee-Api-Key' => env('ALMA_NZ_GRAVITEE_KEY'),
         ],
     ],
